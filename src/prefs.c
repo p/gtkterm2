@@ -36,6 +36,7 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->termX = 80;
 	pref->termY = 25;
 	pref->login_shell = FALSE;
+	pref->fullscreen = FALSE;
 
 	pref->fore[0].red =   0xcccc;
 	pref->fore[0].green = 0xcccc;

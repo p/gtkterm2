@@ -190,7 +190,7 @@ create_window (gtkTermPref* pref)
                     NULL);
   g_signal_connect ((gpointer) full_screen, "activate",
                     G_CALLBACK (on_full_screen_activate),
-                    NULL);
+                    pref);
   g_signal_connect ((gpointer) hide_menu, "activate",
                     G_CALLBACK (on_hide_menu_activate),
                     NULL);
