@@ -21,6 +21,26 @@
   g_object_set_data_full (G_OBJECT (component), name, \
     gtk_widget_ref (widget), (GDestroyNotify) gtk_widget_unref)
 
+void help(char *argv[])
+{
+	printf("\n%s [OPTIONS]\n\n", argv[0]);
+	printf("Options\t\tLong option\t\tmeaning\n");
+	printf(" -a\t\t --beep:\t\tbeep\n");
+	printf(" -b\t\t --blink:\t\tblink in shell\n");
+	printf(" -h\t\t --help:\t\tthis help text\n");
+	printf(" -v\t\t --version:\t\tversion informations\n");
+	printf(" -l\t\t --loginshell:\t\tstart gtkterm2 with a login shell\n");
+	printf(" -x xxx\t\t --win-pos-x xxx:\tSet window position to xxx pixel from upper side\n");
+	printf(" -y xxx\t\t --win-pos-y xxx:\tSet window position to xxx pixel from left side\n");
+	printf(" -X xxx\t\t --win-width xxx:\tSet window width to xxx chars\n");
+	printf(" -Y xxx\t\t --win-height xxx:\tSet window height to xxx chars\n");
+	printf(" -t\t\t --transparent:\t\tBackground is transparent\n");
+	printf(" -o\t\t --opacity:\t\tSet opacity by Percent (0 - 100)\n");
+	printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
+	printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
+	exit(0);
+}
+
 int
 main (int argc, char *argv[])
 {
@@ -93,29 +113,22 @@ main (int argc, char *argv[])
 				pref->stealth = TRUE;
 			break;
 			case 'o':
-				pref->opacity = atoi(optarg);
+				if(atoi(optarg) < 0 || atoi(optarg) >100)
+				{
+					printf("ERROR: -o only allowed values from 0 to 100\n\n");
+					help(argv);
+				}
+				else
+				{
+					pref->opacity = (float) atoi(optarg)/100;
+				}
 			break;
 			case 'v':
 				printf("gtkterm2 version: %s\n", VERSION);
 				exit(0);
 			break;
 			case 'h':
-				printf("\n%s [OPTIONS]\n\n", argv[0]);
-				printf("Options\t\tLong option\t\tmeaning\n");
-				printf(" -a\t\t --beep:\t\tbeep\n");
-				printf(" -b\t\t --blink:\t\tblink in shell\n");
-				printf(" -h\t\t --help:\t\tthis help text\n");
-				printf(" -v\t\t --version:\t\tversion informations\n");
-				printf(" -l\t\t --loginshell:\t\tstart gtkterm2 with a login shell\n");
-				printf(" -x xxx\t\t --win-pos-x xxx:\tSet window position to xxx pixel from upper side\n");
-				printf(" -y xxx\t\t --win-pos-y xxx:\tSet window position to xxx pixel from left side\n");
-				printf(" -X xxx\t\t --win-width xxx:\tSet window width to xxx chars\n");
-				printf(" -Y xxx\t\t --win-height xxx:\tSet window height to xxx chars\n");
-				printf(" -t\t\t --transparent:\t\tBackground is transparent\n");
-				printf(" -o\t\t --opacity:\t\tSet opacity by Percent\n");
-				printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
-				printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
-				exit(0);
+				help(argv);
 			break;
 		}
 	}
