@@ -37,6 +37,7 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->termY = 25;
 	pref->winPosX = 0;
 	pref->winPosY = 0;
+	pref->opacity = 0;
 	pref->transparent = FALSE;
 	pref->stealth = FALSE;
 	pref->login_shell = FALSE;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2004-06-08 14:38+0200\n"
+"POT-Creation-Date: 2004-06-08 15:11+0200\n"
 "PO-Revision-Date: 2004-06-08 14:45+0200\n"
 "Last-Translator: Oliver Feige <ofeige@gmx.de>\n"
 "Language-Team: LANGUAGE <ofeige@gmx.de>\n"
@@ -16,10 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=ISO-8859-1\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: src/support.c:90 src/support.c:114
-#, c-format
-msgid "Couldn't find pixmap file: %s"
-msgstr "Kann die Bilddatei nicht finden: %s"
+#: src/callbacks.c:182
+msgid "_Full screen"
+msgstr "Vollbild"
+
+#: src/callbacks.c:188
+msgid "_Restore normal size"
+msgstr "Vollbild beenden"
 
 #: src/interface.c:70
 msgid "GTKTerm2"
@@ -98,10 +101,7 @@ msgstr ""
 msgid "Program of"
 msgstr "Programm von"
 
-#: src/callbacks.c:182
-msgid "_Full screen"
-msgstr "Vollbild"
-
-#: src/callbacks.c:188
-msgid "_Restore normal size"
-msgstr "Vollbild beenden"
+#: src/support.c:90 src/support.c:114
+#, c-format
+msgid "Couldn't find pixmap file: %s"
+msgstr "Kann die Bilddatei nicht finden: %s"

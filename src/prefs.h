@@ -41,6 +41,7 @@ struct _PREF
 	int winPosY;
 	int transparent;
 	int stealth;
+	int opacity;
 	GdkColor colors[16];
 	GdkColor fore[1];
 	GdkColor back[1];
