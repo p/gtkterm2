@@ -5,13 +5,13 @@
 ## 	Please disable it in the Anjuta project configuration
 
 # Source files
-src/callbacks.c
-src/callbacks.h
-src/interface.c
-src/interface.h
-src/main.c
-src/support.c
 src/support.h
+src/support.c
+src/main.c
+src/interface.h
+src/interface.c
+src/callbacks.h
+src/callbacks.c
 src/prefs.c
 src/prefs.h
 
