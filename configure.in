@@ -34,7 +34,7 @@ dnl Checks for library functions.
 dnl Checks for Additional stuffs.
 
 
-GETTEXT_PACKAGE=GTKTerm
+GETTEXT_PACKAGE=gtkterm2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 

@@ -1089,7 +1089,7 @@ else
 fi
 
 
-PACKAGE=GTKTerm
+PACKAGE=gtkterm2
 
 VERSION=0.2.0
 
@@ -5976,7 +5976,7 @@ echo "configure:5940: checking GTK_LIBS" >&5
 
 
 
-GETTEXT_PACKAGE=GTKTerm
+GETTEXT_PACKAGE=gtkterm2
 
 cat >> confdefs.h <<EOF
 #define GETTEXT_PACKAGE "$GETTEXT_PACKAGE"
