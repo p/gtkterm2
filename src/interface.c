@@ -85,7 +85,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (menubar);
   gtk_box_pack_start (GTK_BOX (vbox), menubar, FALSE, FALSE, 0);
 
-  menuitem1 = gtk_menu_item_new_with_mnemonic (_("Datei"));
+  menuitem1 = gtk_menu_item_new_with_mnemonic (_("File"));
   gtk_widget_set_name (menuitem1, "menuitem1");
   gtk_widget_show (menuitem1);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem1);
@@ -130,26 +130,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image14);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (close_window), image14);
 
-  menuitem2 = gtk_menu_item_new_with_mnemonic (_("Bearbeiten"));
-  gtk_widget_set_name (menuitem2, "menuitem2");
-  gtk_widget_show (menuitem2);
-  gtk_container_add (GTK_CONTAINER (menubar), menuitem2);
-
-  menuitem2_menu = gtk_menu_new ();
-  gtk_widget_set_name (menuitem2_menu, "menuitem2_menu");
-  gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem2), menuitem2_menu);
-
-/*  copy = gtk_image_menu_item_new_from_stock ("gtk-copy", accel_group);
-  gtk_widget_set_name (copy, "copy");
-  gtk_widget_show (copy);
-  gtk_container_add (GTK_CONTAINER (menuitem2_menu), copy);
-
-  paste = gtk_image_menu_item_new_from_stock ("gtk-paste", accel_group);
-  gtk_widget_set_name (paste, "paste");
-  gtk_widget_show (paste);
-  gtk_container_add (GTK_CONTAINER (menuitem2_menu), paste);
-*/
-  menuitem3 = gtk_menu_item_new_with_mnemonic (_("Ansicht"));
+  menuitem3 = gtk_menu_item_new_with_mnemonic (_("View"));
   gtk_widget_set_name (menuitem3, "menuitem3");
   gtk_widget_show (menuitem3);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem3);
@@ -173,7 +154,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (hide_menu);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), hide_menu);
 
-  menuitem4 = gtk_menu_item_new_with_mnemonic (_("Hilfe"));
+  menuitem4 = gtk_menu_item_new_with_mnemonic (_("Help"));
   gtk_widget_set_name (menuitem4, "menuitem4");
   gtk_widget_show (menuitem4);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem4);
@@ -207,12 +188,6 @@ create_window (gtkTermPref* pref)
   g_signal_connect ((gpointer) close_window, "activate",
                     G_CALLBACK (gtk_main_quit),
                     NULL);
- /* g_signal_connect ((gpointer) copy, "activate",
-                    G_CALLBACK (on_copy_activate),
-                    NULL);
-  g_signal_connect ((gpointer) paste, "activate",
-                    G_CALLBACK (on_paste_activate),
-                    NULL);*/
   g_signal_connect ((gpointer) full_screen, "activate",
                     G_CALLBACK (on_full_screen_activate),
                     NULL);
@@ -239,10 +214,6 @@ create_window (gtkTermPref* pref)
   GLADE_HOOKUP_OBJECT (window, image13, "image13");
   GLADE_HOOKUP_OBJECT (window, close_window, "close_window");
   GLADE_HOOKUP_OBJECT (window, image14, "image14");
-  GLADE_HOOKUP_OBJECT (window, menuitem2, "menuitem2");
-  GLADE_HOOKUP_OBJECT (window, menuitem2_menu, "menuitem2_menu");
-//  GLADE_HOOKUP_OBJECT (window, copy, "copy");
-//  GLADE_HOOKUP_OBJECT (window, paste, "paste");
   GLADE_HOOKUP_OBJECT (window, menuitem3, "menuitem3");
   GLADE_HOOKUP_OBJECT (window, menuitem3_menu, "menuitem3_menu");
   GLADE_HOOKUP_OBJECT (window, full_screen, "full_screen");
@@ -290,7 +261,7 @@ create_window_about (void)
   window_about = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window_about, "window_about");
   gtk_widget_set_size_request (window_about, 350, 250);
-  gtk_window_set_title (GTK_WINDOW (window_about), _("Info zu GTKTerm2"));
+  gtk_window_set_title (GTK_WINDOW (window_about), _("About GTKTerm2"));
   gtk_window_set_resizable (GTK_WINDOW (window_about), FALSE);
   window_about_icon_pixbuf = create_pixbuf ("gtkterm2.png");
   if (window_about_icon_pixbuf)
@@ -310,7 +281,7 @@ create_window_about (void)
   gtk_widget_show (notebook1);
   gtk_box_pack_start (GTK_BOX (vbox1), notebook1, TRUE, TRUE, 0);
 
-  label5 = gtk_label_new (_("GTKTerm2 (v 0.2.0)\nCopyright (c) 2003 Oliver Feige"));
+  label5 = gtk_label_new (_("GTKTerm2 (v 0.2.0)\nCopyright (c) 2004 Oliver Feige"));
   gtk_widget_set_name (label5, "label5");
   gtk_widget_show (label5);
   gtk_container_add (GTK_CONTAINER (notebook1), label5);
@@ -326,7 +297,8 @@ create_window_about (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 0), label3);
   gtk_label_set_justify (GTK_LABEL (label3), GTK_JUSTIFY_LEFT);
 
-  label6 = gtk_label_new (_("Programmiert:\nOliver Feige <ofeige@gmx.de>\n\nIdee:\nOliver Feige <ofeige@gmx.de>\nStefan Bambach <sbambach@gmx.de>"));
+  //label6 = gtk_label_new (_("Programmiert:\nOliver Feige <ofeige@gmx.de>\n\nIdee:\nOliver Feige <ofeige@gmx.de>\nStefan Bambach <sbambach@gmx.de>"));
+  label6 = gtk_label_new (_("Programmer:\nOliver Feige <ofeige@gmx.de>\n\nIdea:\nOliver Feige <ofeige@gmx.de>\nStefan Bambach <sbambach@gmx.de>"));
   gtk_widget_set_name (label6, "label6");
   gtk_widget_show (label6);
   gtk_container_add (GTK_CONTAINER (notebook1), label6);
@@ -335,7 +307,7 @@ create_window_about (void)
   GTK_WIDGET_SET_FLAGS (label6, GTK_CAN_FOCUS);
   gtk_label_set_selectable (GTK_LABEL (label6), TRUE);
 
-  label4 = gtk_label_new (_("Programm von"));
+  label4 = gtk_label_new (_("Program of"));
   gtk_widget_set_name (label4, "label4");
   gtk_widget_show (label4);
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 1), label4);

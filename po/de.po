@@ -7,7 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkterm2 0.2.0\n"
-"POT-Creation-Date: 2004-01-14 01:03+0100\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2004-02-14 18:25+0100\n"
 "PO-Revision-Date: 2004-01-14 01:03+0100\n"
 "Last-Translator: Oliver Feige <ofeige@gmx.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +21,7 @@ msgid "GTKTerm2"
 msgstr "GTKTerm2"
 
 #: src/interface.c:88
-msgid "Datei"
+msgid "File"
 msgstr "Datei"
 
 #: src/interface.c:97
@@ -36,61 +37,50 @@ msgid "Close Window"
 msgstr "Schliesse Fenster"
 
 #: src/interface.c:133
-msgid "Bearbeiten"
-msgstr "Bearbeiten"
-
-#. copy = gtk_image_menu_item_new_from_stock ("gtk-copy", accel_group);
-#. gtk_widget_set_name (copy, "copy");
-#. gtk_widget_show (copy);
-#. gtk_container_add (GTK_CONTAINER (menuitem2_menu), copy);
-#.
-#. paste = gtk_image_menu_item_new_from_stock ("gtk-paste", accel_group);
-#. gtk_widget_set_name (paste, "paste");
-#. gtk_widget_show (paste);
-#. gtk_container_add (GTK_CONTAINER (menuitem2_menu), paste);
-#.
-#: src/interface.c:152
-msgid "Ansicht"
+msgid "View"
 msgstr "Ansicht"
 
-#: src/interface.c:161
+#: src/interface.c:142
 msgid "Full Screen"
 msgstr "Vollbild"
 
-#: src/interface.c:171
+#: src/interface.c:152
 msgid "Hide menu"
 msgstr "Menu verstecken"
 
-#: src/interface.c:176
-msgid "Hilfe"
+#: src/interface.c:157
+msgid "Help"
 msgstr "Hilfe"
 
-#: src/interface.c:185
+#: src/interface.c:166
 msgid "Info"
 msgstr "Info"
 
-#: src/interface.c:293
-msgid "Info zu GTKTerm2"
+#: src/interface.c:264
+msgid "About GTKTerm2"
 msgstr "Info zu GTKTerm2"
 
-#: src/interface.c:313
+#: src/interface.c:284
+#, fuzzy
 msgid ""
 "GTKTerm2 (v 0.2.0)\n"
-"Copyright (c) 2003 Oliver Feige"
+"Copyright (c) 2004 Oliver Feige"
 msgstr ""
 "GTKTerm2 (v 0.2.0)\n"
 "Copyright (c) 2003 Oliver Feige"
 
-#: src/interface.c:323
+#: src/interface.c:294
 msgid "Information"
 msgstr "Information"
 
-#: src/interface.c:329
+#. label6 = gtk_label_new (_("Programmiert:\nOliver Feige <ofeige@gmx.de>\n\nIdee:\nOliver Feige <ofeige@gmx.de>\nStefan Bambach <sbambach@gmx.de>"));
+#: src/interface.c:301
+#, fuzzy
 msgid ""
-"Programmiert:\n"
+"Programmer:\n"
 "Oliver Feige <ofeige@gmx.de>\n"
 "\n"
-"Idee:\n"
+"Idea:\n"
 "Oliver Feige <ofeige@gmx.de>\n"
 "Stefan Bambach <sbambach@gmx.de>"
 msgstr ""
@@ -101,11 +91,15 @@ msgstr ""
 "Oliver Feige <ofeige@gmx.de>\n"
 "Stefan Bambach <sbambach@gmx.de>"
 
-#: src/interface.c:338
-msgid "Programm von"
+#: src/interface.c:310
+#, fuzzy
+msgid "Program of"
 msgstr "Programm von"
 
 #: src/support.c:90 src/support.c:114
 #, c-format
 msgid "Couldn't find pixmap file: %s"
 msgstr "Kann das Bild nicht finden: %s"
+
+#~ msgid "Bearbeiten"
+#~ msgstr "Bearbeiten"

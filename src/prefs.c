@@ -522,7 +522,6 @@ void gtkTermSetMPref(GtkWidget *term, gtkTermPref *pref, int i)
 {
 	gpointer termPref;
 
-g_print("SET PREFS");
 	if((termPref = gtk_object_get_data(GTK_OBJECT(term), "mpref")) == NULL)
 	{
 		gtk_object_set_data(GTK_OBJECT(term), "mpref", GINT_TO_POINTER(-1));
