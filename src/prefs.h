@@ -36,6 +36,7 @@ struct _PREF
 	int termX;
 	int termY;
 	int login_shell;
+	int fullscreen;
 	GdkColor colors[16];
 	GdkColor fore[1];
 	GdkColor back[1];
