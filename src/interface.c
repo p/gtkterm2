@@ -139,7 +139,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (menuitem2_menu, "menuitem2_menu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem2), menuitem2_menu);
 
-  copy = gtk_image_menu_item_new_from_stock ("gtk-copy", accel_group);
+/*  copy = gtk_image_menu_item_new_from_stock ("gtk-copy", accel_group);
   gtk_widget_set_name (copy, "copy");
   gtk_widget_show (copy);
   gtk_container_add (GTK_CONTAINER (menuitem2_menu), copy);
@@ -148,7 +148,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (paste, "paste");
   gtk_widget_show (paste);
   gtk_container_add (GTK_CONTAINER (menuitem2_menu), paste);
-
+*/
   menuitem3 = gtk_menu_item_new_with_mnemonic (_("_Ansicht"));
   gtk_widget_set_name (menuitem3, "menuitem3");
   gtk_widget_show (menuitem3);
@@ -207,12 +207,12 @@ create_window (gtkTermPref* pref)
   g_signal_connect ((gpointer) close_window, "activate",
                     G_CALLBACK (gtk_main_quit),
                     NULL);
-  g_signal_connect ((gpointer) copy, "activate",
+ /* g_signal_connect ((gpointer) copy, "activate",
                     G_CALLBACK (on_copy_activate),
                     NULL);
   g_signal_connect ((gpointer) paste, "activate",
                     G_CALLBACK (on_paste_activate),
-                    NULL);
+                    NULL);*/
   g_signal_connect ((gpointer) full_screen, "activate",
                     G_CALLBACK (on_full_screen_activate),
                     NULL);
@@ -241,8 +241,8 @@ create_window (gtkTermPref* pref)
   GLADE_HOOKUP_OBJECT (window, image14, "image14");
   GLADE_HOOKUP_OBJECT (window, menuitem2, "menuitem2");
   GLADE_HOOKUP_OBJECT (window, menuitem2_menu, "menuitem2_menu");
-  GLADE_HOOKUP_OBJECT (window, copy, "copy");
-  GLADE_HOOKUP_OBJECT (window, paste, "paste");
+//  GLADE_HOOKUP_OBJECT (window, copy, "copy");
+//  GLADE_HOOKUP_OBJECT (window, paste, "paste");
   GLADE_HOOKUP_OBJECT (window, menuitem3, "menuitem3");
   GLADE_HOOKUP_OBJECT (window, menuitem3_menu, "menuitem3_menu");
   GLADE_HOOKUP_OBJECT (window, full_screen, "full_screen");
