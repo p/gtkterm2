@@ -11,7 +11,7 @@ RunInTerminal=true
 clean before build=false
 
 [filenumbers]
-0=123
+0=1
 1=525
 2=436
 3=18
@@ -25,6 +25,9 @@ clean before build=false
 3=
 4=
 5=
+
+[filelist]
+0=/home/ofeige/cvs/gtkterm2/src/callbacks.c
 
 [Project Tree]
 0=0

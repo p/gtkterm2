@@ -64,9 +64,6 @@
 /* Define if you have the __argz_stringify function.  */
 #undef HAVE___ARGZ_STRINGIFY
 
-/* Define if you have the __fsetlocking function.  */
-#undef HAVE___FSETLOCKING
-
 /* Define if you have the feof_unlocked function.  */
 #undef HAVE_FEOF_UNLOCKED
 
@@ -167,11 +164,11 @@
 #undef GETTEXT_PACKAGE
 
 /* Define if <inttypes.h> exists, doesn't clash with <sys/types.h>,
-       and declares uintmax_t.  */
+   and declares uintmax_t.  */
 #undef HAVE_INTTYPES_H_WITH_UINTMAX
 
 /* Define if <stdint.h> exists, doesn't clash with <sys/types.h>,
-       and declares uintmax_t.  */
+   and declares uintmax_t.  */
 #undef HAVE_STDINT_H_WITH_UINTMAX
 
 /* Define if you have the unsigned long long type. */
@@ -181,11 +178,8 @@
 #undef INTDIV0_RAISES_SIGFPE
 
 /* Define to unsigned long or unsigned long long
-       if <stdint.h> and <inttypes.h> don't define. */
+   if <inttypes.h> and <stdint.h> don't define. */
 #undef uintmax_t
-
-/* Define if you have the 'uintmax_t' type in <stdint.h> or <inttypes.h>. */
-#undef HAVE_UINTMAX_T
 
 /* Define if <inttypes.h> exists and doesn't clash with <sys/types.h>. */
 #undef HAVE_INTTYPES_H

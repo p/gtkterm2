@@ -7,6 +7,6 @@
 gtkterm_pixmapsdir = $(prefix)/@NO_PREFIX_PACKAGE_PIXMAPS_DIR@
 
 gtkterm_pixmaps_DATA = \
-	gnome-term-linux2.png
+	gtkterm.png
 
 EXTRA_DIST = $(gtkterm_pixmaps_DATA)
