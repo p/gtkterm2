@@ -26,6 +26,7 @@ PKG_CHECK_MODULES(vte, [vte >= 0.11.0])
 AC_SUBST(vte_CFLAGS)
 AC_SUBST(vte_LIBS)
 
+
 dnl Checks for header files.
 
 
@@ -38,7 +39,7 @@ dnl Checks for library functions.
 dnl Checks for Additional stuffs.
 
 
-GETTEXT_PACKAGE=GTKTerm2
+GETTEXT_PACKAGE=gtkterm2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
@@ -117,4 +118,6 @@ Makefile
 intl/Makefile
 po/Makefile.in
 src/Makefile
+pixmaps/Makefile
 ])
+
