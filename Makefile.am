@@ -5,7 +5,7 @@
 
 SUBDIRS = intl po src pixmaps
 
-gtkterm2docdir = ${prefix}/doc/gtkterm2
+gtkterm2docdir = ${prefix}/doc/GTKTerm
 gtkterm2doc_DATA = \
 	README\
 	COPYING\
