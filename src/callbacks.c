@@ -16,6 +16,63 @@
 #include "support.h"
 
 
+
+static void
+set_menuitem_text (GtkWidget  *mi,
+                   const char *text,
+                   gboolean    strip_mnemonic)
+{
+  GtkWidget *child;
+
+  child = gtk_bin_get_child (GTK_BIN (mi));
+
+  if (child && GTK_IS_LABEL (child))
+    {
+      const char *label;
+      char *no_mnemonic;
+      
+      label = NULL;
+      no_mnemonic = NULL;
+      
+      if (strip_mnemonic)
+        {
+          const char *src;
+          char *dest;
+
+          no_mnemonic = g_strdup (text);
+          dest = no_mnemonic;
+          src = text;
+
+          while (*src)
+            {
+              if (*src != '_')
+                {
+                  *dest = *src;
+                  ++dest;
+                }
+              
+              ++src;
+            }
+          *dest = '\0';
+
+          label = no_mnemonic;
+        }
+      else
+        {
+          label = text;
+        }
+
+      if (strip_mnemonic)
+        gtk_label_set_text (GTK_LABEL (child), label);
+      else
+        gtk_label_set_text_with_mnemonic (GTK_LABEL (child), label);
+      
+      if (no_mnemonic)
+        g_free (no_mnemonic);
+    }
+}
+
+
 void
 on_new_window_activate                 (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
@@ -100,12 +157,37 @@ void
 on_full_screen_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-	//g_printf("Mach fullscreen");
+	gtkTermPref *pref;
+	
+	pref = (gtkTermPref *) user_data;
+
 	//wmspec_change_state (TRUE, GTK_WIDGET (menuitem)->window,
    //                    gdk_atom_intern ("_NET_WM_STATE_FULLSCREEN",
    //                                     FALSE),
    //                    GDK_NONE);
 	//gtk_window_fullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
+	
+	/*if (setting)
+	{
+		set_menuitem_text (menuitem, _("_Restore normal size"), FALSE);
+	}
+	else
+	{
+		set_menuitem_text (menuitem, _("_Full screen"), FALSE);
+	}*/
+	
+	if(pref->fullscreen == TRUE)
+	{
+		gtk_window_unfullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
+		set_menuitem_text (GTK_WIDGET(menuitem), _("_Full screen"), FALSE);
+		pref->fullscreen = FALSE;
+	}
+	else
+	{
+		gtk_window_fullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
+		set_menuitem_text (GTK_WIDGET(menuitem), _("_Restore normal size"), FALSE);
+		pref->fullscreen = TRUE;
+	}
 }
 
 
