@@ -85,7 +85,7 @@ module.source.files=\
 module.pixmap.name=pixmaps
 module.pixmap.type=
 module.pixmap.files=\
-	gnome-term-linux2.png
+	gtkterm.png
 
 module.data.name=data
 module.data.type=
