@@ -355,7 +355,7 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 
 	/* Create the terminal widget and add it to the scrolling shell. */
 	widget = vte_terminal_new();
-	// OF gtk_widget_set_double_buffered(widget, dbuffer);
+	//gtk_widget_set_double_buffered(widget, dbuffer);
 	//gtk_box_pack_start(GTK_BOX(hbox), widget, TRUE, TRUE, 0);
 
 	/* Connect to the "char_size_changed" signal to set geometry hints
