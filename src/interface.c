@@ -149,10 +149,10 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image15);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (full_screen), image15);
 
-  hide_menu = gtk_menu_item_new_with_mnemonic (_("Hide menu"));
+  /*hide_menu = gtk_menu_item_new_with_mnemonic (_("Hide menu"));
   gtk_widget_set_name (hide_menu, "hide_menu");
   gtk_widget_show (hide_menu);
-  gtk_container_add (GTK_CONTAINER (menuitem3_menu), hide_menu);
+  gtk_container_add (GTK_CONTAINER (menuitem3_menu), hide_menu);*/
 
   menuitem4 = gtk_menu_item_new_with_mnemonic (_("Help"));
   gtk_widget_set_name (menuitem4, "menuitem4");
@@ -191,9 +191,9 @@ create_window (gtkTermPref* pref)
   g_signal_connect ((gpointer) full_screen, "activate",
                     G_CALLBACK (on_full_screen_activate),
                     pref);
-  g_signal_connect ((gpointer) hide_menu, "activate",
+  /*g_signal_connect ((gpointer) hide_menu, "activate",
                     G_CALLBACK (on_hide_menu_activate),
-                    NULL);
+                    NULL);*/
   g_signal_connect ((gpointer) info, "activate",
                     G_CALLBACK (on_info_activate),
                     NULL);
@@ -218,7 +218,7 @@ create_window (gtkTermPref* pref)
   GLADE_HOOKUP_OBJECT (window, menuitem3_menu, "menuitem3_menu");
   GLADE_HOOKUP_OBJECT (window, full_screen, "full_screen");
   GLADE_HOOKUP_OBJECT (window, image15, "image15");
-  GLADE_HOOKUP_OBJECT (window, hide_menu, "hide_menu");
+//  GLADE_HOOKUP_OBJECT (window, hide_menu, "hide_menu");
   GLADE_HOOKUP_OBJECT (window, menuitem4, "menuitem4");
   GLADE_HOOKUP_OBJECT (window, menuitem4_menu, "menuitem4_menu");
   GLADE_HOOKUP_OBJECT (window, info, "info");
@@ -281,7 +281,7 @@ create_window_about (void)
   gtk_widget_show (notebook1);
   gtk_box_pack_start (GTK_BOX (vbox1), notebook1, TRUE, TRUE, 0);
 
-  label5 = gtk_label_new (_("GTKTerm2 (v 0.2.0)\nCopyright (c) 2004 Oliver Feige"));
+  label5 = gtk_label_new (_("GTKTerm2 (v 0.2.1)\nCopyright (c) 2004 Oliver Feige"));
   gtk_widget_set_name (label5, "label5");
   gtk_widget_show (label5);
   gtk_container_add (GTK_CONTAINER (notebook1), label5);
