@@ -7,8 +7,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gtkterm2 0.2.0\n"
-"POT-Creation-Date: 2004-01-06 15:56+0100\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2004-01-14 01:03+0100\n"
+"PO-Revision-Date: 2004-01-14 01:03+0100\n"
 "Last-Translator: Oliver Feige <ofeige@gmx.de>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -17,11 +17,11 @@ msgstr ""
 
 #: src/interface.c:70
 msgid "GTKTerm2"
-msgstr ""
+msgstr "GTKTerm2"
 
 #: src/interface.c:88
-msgid "_Datei"
-msgstr ""
+msgid "Datei"
+msgstr "Datei"
 
 #: src/interface.c:97
 msgid "New Tab"
@@ -29,15 +29,15 @@ msgstr "Neuer Reiter"
 
 #: src/interface.c:113
 msgid "Close Tab"
-msgstr "Reiter schliessen"
+msgstr "Schliesse Reiter"
 
 #: src/interface.c:123
 msgid "Close Window"
-msgstr "Fenster Schliessen"
+msgstr "Schliesse Fenster"
 
 #: src/interface.c:133
-msgid "_Bearbeiten"
-msgstr ""
+msgid "Bearbeiten"
+msgstr "Bearbeiten"
 
 #. copy = gtk_image_menu_item_new_from_stock ("gtk-copy", accel_group);
 #. gtk_widget_set_name (copy, "copy");
@@ -50,8 +50,8 @@ msgstr ""
 #. gtk_container_add (GTK_CONTAINER (menuitem2_menu), paste);
 #.
 #: src/interface.c:152
-msgid "_Ansicht"
-msgstr ""
+msgid "Ansicht"
+msgstr "Ansicht"
 
 #: src/interface.c:161
 msgid "Full Screen"
@@ -62,26 +62,28 @@ msgid "Hide menu"
 msgstr "Menu verstecken"
 
 #: src/interface.c:176
-msgid "_Hilfe"
-msgstr ""
+msgid "Hilfe"
+msgstr "Hilfe"
 
 #: src/interface.c:185
-msgid "_Info"
-msgstr ""
+msgid "Info"
+msgstr "Info"
 
 #: src/interface.c:293
 msgid "Info zu GTKTerm2"
-msgstr ""
+msgstr "Info zu GTKTerm2"
 
 #: src/interface.c:313
 msgid ""
 "GTKTerm2 (v 0.2.0)\n"
 "Copyright (c) 2003 Oliver Feige"
 msgstr ""
+"GTKTerm2 (v 0.2.0)\n"
+"Copyright (c) 2003 Oliver Feige"
 
 #: src/interface.c:323
 msgid "Information"
-msgstr ""
+msgstr "Information"
 
 #: src/interface.c:329
 msgid ""
@@ -92,10 +94,16 @@ msgid ""
 "Oliver Feige <ofeige@gmx.de>\n"
 "Stefan Bambach <sbambach@gmx.de>"
 msgstr ""
+"Programmiert:\n"
+"Oliver Feige <ofeige@gmx.de>\n"
+"\n"
+"Idee:\n"
+"Oliver Feige <ofeige@gmx.de>\n"
+"Stefan Bambach <sbambach@gmx.de>"
 
 #: src/interface.c:338
 msgid "Programm von"
-msgstr ""
+msgstr "Programm von"
 
 #: src/support.c:90 src/support.c:114
 #, c-format
