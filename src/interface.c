@@ -85,7 +85,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (menubar);
   gtk_box_pack_start (GTK_BOX (vbox), menubar, FALSE, FALSE, 0);
 
-  menuitem1 = gtk_menu_item_new_with_mnemonic (_("_Datei"));
+  menuitem1 = gtk_menu_item_new_with_mnemonic (_("Datei"));
   gtk_widget_set_name (menuitem1, "menuitem1");
   gtk_widget_show (menuitem1);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem1);
@@ -130,7 +130,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image14);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (close_window), image14);
 
-  menuitem2 = gtk_menu_item_new_with_mnemonic (_("_Bearbeiten"));
+  menuitem2 = gtk_menu_item_new_with_mnemonic (_("Bearbeiten"));
   gtk_widget_set_name (menuitem2, "menuitem2");
   gtk_widget_show (menuitem2);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem2);
@@ -149,7 +149,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (paste);
   gtk_container_add (GTK_CONTAINER (menuitem2_menu), paste);
 */
-  menuitem3 = gtk_menu_item_new_with_mnemonic (_("_Ansicht"));
+  menuitem3 = gtk_menu_item_new_with_mnemonic (_("Ansicht"));
   gtk_widget_set_name (menuitem3, "menuitem3");
   gtk_widget_show (menuitem3);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem3);
@@ -173,7 +173,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (hide_menu);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), hide_menu);
 
-  menuitem4 = gtk_menu_item_new_with_mnemonic (_("_Hilfe"));
+  menuitem4 = gtk_menu_item_new_with_mnemonic (_("Hilfe"));
   gtk_widget_set_name (menuitem4, "menuitem4");
   gtk_widget_show (menuitem4);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem4);
@@ -182,7 +182,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (menuitem4_menu, "menuitem4_menu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem4), menuitem4_menu);
 
-  info = gtk_image_menu_item_new_with_mnemonic (_("_Info"));
+  info = gtk_image_menu_item_new_with_mnemonic (_("Info"));
   gtk_widget_set_name (info, "info");
   gtk_widget_show (info);
   gtk_container_add (GTK_CONTAINER (menuitem4_menu), info);
