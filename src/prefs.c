@@ -447,7 +447,7 @@ gtkTermPref* gtkTermPref_get (void)
 			}
 			if(strstr(tmp, "terminalFont"))
 			{
-				sscanf(tmp + 13, "%s", pref->terminalFont);
+				sscanf(tmp + 13, "%[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ]", pref->terminalFont);
 			}
 			if(strstr(tmp, "worldClass"))
 			{
