@@ -10,7 +10,8 @@ one window and some nice features. It´s available for GTK 2.x.<PROJECT_DESCRIPT
 PKG_CHECK_MODULES(vte, [vte >= 0.11.0])
 
 AC_SUBST(vte_CFLAGS)
-AC_SUBST(vte_LIBS)<CONFIG_LIBS_END>
+AC_SUBST(vte_LIBS)
+<CONFIG_LIBS_END>
 <CONFIG_HEADERS_START>
 <CONFIG_HEADERS_END>
 <CONFIG_CHARACTERISTICS_START>
@@ -29,7 +30,7 @@ props.file.type=project
 anjuta.version=1.2.2
 anjuta.compatibility.level=1
 
-project.name=GTKTerm2
+project.name=gtkterm2
 project.type=GTK 2.0
 project.target.type=EXECUTABLE
 project.version=0.2.2
@@ -87,7 +88,8 @@ module.source.files=\
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
-module.pixmap.files=
+module.pixmap.files=\
+	gtkterm2.png
 
 module.data.name=data
 module.data.type=
@@ -101,7 +103,8 @@ module.doc.name=doc
 module.doc.type=
 module.doc.files=
 
-module.po.files=
+module.po.files=\
+	de.po
 
 compiler.options.supports=
 compiler.options.include.paths=

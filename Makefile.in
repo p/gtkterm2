@@ -111,9 +111,9 @@ VERSION = @VERSION@
 vte_CFLAGS = @vte_CFLAGS@
 vte_LIBS = @vte_LIBS@
 
-SUBDIRS = intl po src
+SUBDIRS = intl po src pixmaps
 
-gtkterm2docdir = ${prefix}/doc/GTKTerm2
+gtkterm2docdir = ${prefix}/doc/gtkterm2
 gtkterm2doc_DATA =  	README 	COPYING 	AUTHORS 	ChangeLog 	INSTALL 	NEWS 	TODO 	ABOUT-NLS
 
 
