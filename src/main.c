@@ -67,11 +67,11 @@ main (int argc, char *argv[])
 				pref->login_shell = TRUE;
 			break;
 			case 'v':
-				printf("gtkterm version: %s\n", VERSION);
+				printf("gtkterm2 version: %s\n", VERSION);
 				exit(0);
 			break;
 			case 'h':
-				printf("\ngtkterm [-abhvl]\n\n\ta --beep:\tbeep\n\tb --blink:\tblink in shell\n\th --help:\tthis help text\n\tv --version:\tversion informations\n\tl --loginshell:\tstart gtkterm with a login shell\n\n");
+				printf("\ngtkterm2 [-abhvl]\n\n\ta --beep:\tbeep\n\tb --blink:\tblink in shell\n\th --help:\tthis help text\n\tv --version:\tversion informations\n\tl --loginshell:\tstart gtkterm2 with a login shell\n\n");
 				exit(0);
 			break;
 		}
