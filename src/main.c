@@ -37,6 +37,8 @@ main (int argc, char *argv[])
 		{"beep", 0, 0, 'a'},
 		{"win-pos-x", 1, 0, 'x'},
 		{"win-pos-y", 1, 0, 'y'},
+		{"win-width", 1, 0, 'X'},
+		{"win-height", 1, 0, 'Y'},
 		{"transparent", 0, 0, 't'},
 		{"stealth", 0, 0, 's'},
 		{0, 0, 0, 0}
@@ -58,7 +60,7 @@ main (int argc, char *argv[])
 	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");	
 	add_pixmap_directory (PACKAGE_SOURCE_DIR "/pixmaps");
 
-	while((c=getopt_long(argc, argv, "hvlx:y:ts", long_options, NULL)) != EOF)
+	while((c=getopt_long(argc, argv, "hvlx:y:X:Y:ts", long_options, NULL)) != EOF)
 	{
 		switch (c)
 		{
@@ -80,6 +82,12 @@ main (int argc, char *argv[])
 			case 'y':
 				pref->winPosY = atoi(optarg);
 			break;
+			case 'X':
+				pref->termX = atoi(optarg);
+			break;
+			case 'Y':
+				pref->termY = atoi(optarg);
+			break;
 			case 's':
 				pref->stealth = TRUE;
 			break;
@@ -97,6 +105,8 @@ main (int argc, char *argv[])
 				printf(" -l\t\t --loginshell:\t\tstart gtkterm2 with a login shell\n");
 				printf(" -x xxx\t\t --win-pos-x xxx:\tSet window position to xxx pixel from upper side\n");
 				printf(" -y xxx\t\t --win-pos-y xxx:\tSet window position to xxx pixel from left side\n");
+				printf(" -X xxx\t\t --win-width xxx:\tSet window width to xxx chars\n");
+				printf(" -Y xxx\t\t --win-height xxx:\tSet window height to xxx chars\n");
 				printf(" -t\t\t --transparent:\t\tBackground is transparent\n");
 				printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
 				printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
