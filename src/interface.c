@@ -74,12 +74,23 @@ create_window (gtkTermPref* pref)
       gtk_window_set_icon (GTK_WINDOW (window), window_icon_pixbuf);
       gdk_pixbuf_unref (window_icon_pixbuf);
     }
-
+	
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (vbox, "vbox");
   gtk_widget_show (vbox);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
+  if(pref->winPosX>0 || pref->winPosY>0)
+  {
+	  gtk_window_move(GTK_WINDOW (window), pref->winPosX, pref->winPosY);
+  }
+  if(pref->stealth==TRUE)
+  {
+	  gtk_window_set_decorated(GTK_WINDOW (window), FALSE);
+	  gtk_window_set_has_frame(GTK_WINDOW(window), FALSE);
+	  gtk_window_set_skip_taskbar_hint(GTK_WINDOW(window), TRUE);
+  }	
+	
   menubar = gtk_menu_bar_new ();
   gtk_widget_set_name (menubar, "menubar");
   gtk_widget_show (menubar);
@@ -200,6 +211,9 @@ create_window (gtkTermPref* pref)
   g_signal_connect ((gpointer) window, "key-press-event",
                     G_CALLBACK (nb_handle_key),
                     pref);
+	/* Connect to the "status-line-changed" signal. */
+	/*g_signal_connect(G_OBJECT(widget), "status-line-changed",
+			 G_CALLBACK(status_line_changed), widget);*/
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (window, window, "window");
@@ -233,6 +247,7 @@ create_window (gtkTermPref* pref)
     {
       gtk_notebook_set_show_tabs (GTK_NOTEBOOK (notebook), FALSE);
     }
+	gtk_notebook_set_show_border(GTK_NOTEBOOK (notebook), FALSE);
   gtk_notebook_set_scrollable(GTK_NOTEBOOK(notebook), TRUE);
   gtk_widget_show (notebook);
   gtk_box_pack_start (GTK_BOX (vbox), notebook, TRUE, TRUE, 0);
@@ -242,6 +257,12 @@ create_window (gtkTermPref* pref)
 
   gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
 
+	
+	if(pref->stealth==TRUE)
+	{
+		gtk_widget_hide(menubar);
+	}
+	
   return window;
 }
 
@@ -349,7 +370,7 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	//window = lookup_widget(GTK_WIDGET(notebook), "window");
 		
 	/* Create a box to hold everything. */
-	hbox = gtk_hbox_new(0, FALSE);
+	hbox = gtk_hbox_new(0, 0);
 	//gtk_container_add(GTK_CONTAINER(notebook), hbox);
 	gtk_notebook_append_page(GTK_NOTEBOOK (notebook), hbox, NULL);
 
@@ -371,6 +392,9 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	g_signal_connect(G_OBJECT(widget), "window-title-changed",
 			 G_CALLBACK(window_title_changed), pref);
 
+	//g_signal_connect(G_OBJECT(widget), "commit",
+	//		 G_CALLBACK(commit), pref);			 
+			 
 	/* Connect to the "eof" signal to quit when the session ends. */
 	g_signal_connect(G_OBJECT(widget), "eof",
 			 G_CALLBACK(destroy_and_quit_eof), pref);
@@ -413,7 +437,7 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	g_signal_connect(G_OBJECT(widget), "decrease-font-size",
 			 G_CALLBACK(decrease_font_size), window);
 
-	if (pref->terminalScrollbar == 0 || pref->maxScrollbackBuffer == 0)
+	if (pref->terminalScrollbar == 0 || pref->maxScrollbackBuffer == 0 || pref->stealth == TRUE)
 	{
 		gtk_box_pack_start (GTK_BOX (hbox), widget, TRUE, TRUE, 0);
 	}
@@ -448,10 +472,11 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	// OF 	vte_terminal_set_background_image_file(VTE_TERMINAL(widget),
 	// OF 					       background);
 	// OF }
-	// OF if (transparent) {
-	// OF 	vte_terminal_set_background_transparent(VTE_TERMINAL(widget),
-	// OF 						TRUE);
-	// OF }
+	if (pref->transparent)
+	{
+		vte_terminal_set_background_transparent(VTE_TERMINAL(widget), TRUE);
+		vte_terminal_set_background_saturation(VTE_TERMINAL(widget), TRUE);
+	}
 	// OF vte_terminal_set_background_tint_color(VTE_TERMINAL(widget), &tint);
 	vte_terminal_set_colors(VTE_TERMINAL(widget), &pref->fore[0], &pref->back[0], pref->colors, 16);
 	// OF if (terminal != NULL) {

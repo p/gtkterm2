@@ -35,6 +35,10 @@ main (int argc, char *argv[])
 		{"loginshell", 0, 0, 'l'},
 		{"blink", 0, 0, 'b'},
 		{"beep", 0, 0, 'a'},
+		{"win-pos-x", 1, 0, 'x'},
+		{"win-pos-y", 1, 0, 'y'},
+		{"transparent", 0, 0, 't'},
+		{"stealth", 0, 0, 's'},
 		{0, 0, 0, 0}
 	};
 
@@ -51,10 +55,10 @@ main (int argc, char *argv[])
 	pref = gtkTermPref_get();
 
 	add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
-	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");
+	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");	
 	add_pixmap_directory (PACKAGE_SOURCE_DIR "/pixmaps");
 
-	while((c=getopt_long(argc, argv, "hvl", long_options, NULL)) != EOF)
+	while((c=getopt_long(argc, argv, "hvlx:y:ts", long_options, NULL)) != EOF)
 	{
 		switch (c)
 		{
@@ -67,17 +71,41 @@ main (int argc, char *argv[])
 			case 'l':
 				pref->login_shell = TRUE;
 			break;
+			case 't':
+				pref->transparent = TRUE;
+			break;
+			case 'x':
+				pref->winPosX = atoi(optarg);
+			break;
+			case 'y':
+				pref->winPosY = atoi(optarg);
+			break;
+			case 's':
+				pref->stealth = TRUE;
+			break;
 			case 'v':
 				printf("gtkterm2 version: %s\n", VERSION);
 				exit(0);
 			break;
 			case 'h':
-				printf("\ngtkterm2 [-abhvl]\n\n\ta --beep:\tbeep\n\tb --blink:\tblink in shell\n\th --help:\tthis help text\n\tv --version:\tversion informations\n\tl --loginshell:\tstart gtkterm2 with a login shell\n\n");
+				printf("\n%s [OPTIONS]\n\n", argv[0]);
+				printf("Options\t\tLong option\t\tmeaning\n");
+				printf(" -a\t\t --beep:\t\tbeep\n");
+				printf(" -b\t\t --blink:\t\tblink in shell\n");
+				printf(" -h\t\t --help:\t\tthis help text\n");
+				printf(" -v\t\t --version:\t\tversion informations\n");
+				printf(" -l\t\t --loginshell:\t\tstart gtkterm2 with a login shell\n");
+				printf(" -x xxx\t\t --win-pos-x xxx:\tSet window position to xxx pixel from upper side\n");
+				printf(" -y xxx\t\t --win-pos-y xxx:\tSet window position to xxx pixel from left side\n");
+				printf(" -t\t\t --transparent:\t\tBackground is transparent\n");
+				printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
+				printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
 				exit(0);
 			break;
 		}
 	}
 
+	
   /*
    * The following code was added by Glade to create one of each component
    * (except popup menus), just so that you see something after building

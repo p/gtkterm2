@@ -35,6 +35,10 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->beep = TRUE;
 	pref->termX = 80;
 	pref->termY = 25;
+	pref->winPosX = 0;
+	pref->winPosY = 0;
+	pref->transparent = FALSE;
+	pref->stealth = FALSE;
 	pref->login_shell = FALSE;
 	pref->fullscreen = FALSE;
 
