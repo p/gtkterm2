@@ -477,7 +477,7 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	if (pref->transparent)
 	{
 		vte_terminal_set_background_transparent(VTE_TERMINAL(widget), TRUE);
-		vte_terminal_set_background_saturation(VTE_TERMINAL(widget), TRUE);
+		vte_terminal_set_background_saturation(VTE_TERMINAL(widget), (double) pref->opacity);
 	}
 	// OF vte_terminal_set_background_tint_color(VTE_TERMINAL(widget), &tint);
 	vte_terminal_set_colors(VTE_TERMINAL(widget), &pref->fore[0], &pref->back[0], pref->colors, 16);

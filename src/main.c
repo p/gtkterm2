@@ -40,6 +40,7 @@ main (int argc, char *argv[])
 		{"win-width", 1, 0, 'X'},
 		{"win-height", 1, 0, 'Y'},
 		{"transparent", 0, 0, 't'},
+		{"opacity", 1, 0, 'o'},
 		{"stealth", 0, 0, 's'},
 		{0, 0, 0, 0}
 	};
@@ -60,7 +61,7 @@ main (int argc, char *argv[])
 	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");	
 	add_pixmap_directory (PACKAGE_SOURCE_DIR "/pixmaps");
 
-	while((c=getopt_long(argc, argv, "hvlx:y:X:Y:ts", long_options, NULL)) != EOF)
+	while((c=getopt_long(argc, argv, "hvlx:y:X:Y:o:ts", long_options, NULL)) != EOF)
 	{
 		switch (c)
 		{
@@ -91,6 +92,9 @@ main (int argc, char *argv[])
 			case 's':
 				pref->stealth = TRUE;
 			break;
+			case 'o':
+				pref->opacity = atoi(optarg);
+			break;
 			case 'v':
 				printf("gtkterm2 version: %s\n", VERSION);
 				exit(0);
@@ -108,6 +112,7 @@ main (int argc, char *argv[])
 				printf(" -X xxx\t\t --win-width xxx:\tSet window width to xxx chars\n");
 				printf(" -Y xxx\t\t --win-height xxx:\tSet window height to xxx chars\n");
 				printf(" -t\t\t --transparent:\t\tBackground is transparent\n");
+				printf(" -o\t\t --opacity:\t\tSet opacity by Percent\n\n");
 				printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
 				printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
 				exit(0);
