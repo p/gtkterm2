@@ -5,8 +5,8 @@
 
 SUBDIRS = intl po src pixmaps
 
-gtktermdocdir = ${prefix}/doc/GTKTerm
-gtktermdoc_DATA = \
+gtkterm2docdir = ${prefix}/doc/gtkterm2
+gtkterm2doc_DATA = \
 	README\
 	COPYING\
 	AUTHORS\
@@ -16,7 +16,9 @@ gtktermdoc_DATA = \
 	TODO\
 	ABOUT-NLS
 
-EXTRA_DIST = $(gtktermdoc_DATA)
+EXTRA_DIST = $(gtkterm2doc_DATA)
+
+
 
 # Copy all the spec files. Of cource, only one is actually used.
 dist-hook:
