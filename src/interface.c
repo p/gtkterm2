@@ -45,22 +45,22 @@ create_window (gtkTermPref* pref)
   GtkWidget *image13;
   GtkWidget *close_window;
   GtkWidget *image14;
-  GtkWidget *menuitem2;
-  GtkWidget *menuitem2_menu;
-  GtkWidget *copy;
-  GtkWidget *paste;
+  //GtkWidget *menuitem2;
+  //GtkWidget *menuitem2_menu;
+  //GtkWidget *copy;
+  //GtkWidget *paste;
   GtkWidget *menuitem3;
   GtkWidget *menuitem3_menu;
   GtkWidget *full_screen;
   GtkWidget *image15;
-  GtkWidget *hide_menu;
+  //GtkWidget *hide_menu;
   GtkWidget *menuitem4;
   GtkWidget *menuitem4_menu;
   GtkWidget *info;
   GtkWidget *image16;
   GtkWidget *notebook;
-  GtkWidget *empty_notebook_page;
-  GtkWidget *label;
+  //GtkWidget *empty_notebook_page;
+  //GtkWidget *label;
   GtkAccelGroup *accel_group;
 
   accel_group = gtk_accel_group_new ();
@@ -302,7 +302,7 @@ create_window_about (void)
   gtk_widget_show (notebook1);
   gtk_box_pack_start (GTK_BOX (vbox1), notebook1, TRUE, TRUE, 0);
 
-  label5 = gtk_label_new (_("GTKTerm2 (v 0.2.1)\nCopyright (c) 2004 Oliver Feige"));
+  label5 = gtk_label_new (_("GTKTerm2 (v " VERSION ")\nCopyright (c) 2004 Oliver Feige"));
   gtk_widget_set_name (label5, "label5");
   gtk_widget_show (label5);
   gtk_container_add (GTK_CONTAINER (notebook1), label5);
@@ -379,6 +379,8 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	//gtk_widget_set_double_buffered(widget, dbuffer);
 	//gtk_box_pack_start(GTK_BOX(hbox), widget, TRUE, TRUE, 0);
 
+	gtk_container_set_focus_child(GTK_CONTAINER(notebook), widget);
+	
 	/* Connect to the "char_size_changed" signal to set geometry hints
 	 * whenever the font used by the terminal is changed. */
 	// OF if (geometry) {
