@@ -7,6 +7,8 @@
 #include <gdk/gdkx.h>
 #include <gdk/gdkkeysyms.h> 
 #include <vte/vte.h>
+#include <gtk/gtkwindow.h>
+
 
 #include "prefs.h"
 #include "callbacks.h"
@@ -98,7 +100,12 @@ void
 on_full_screen_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
-
+	//g_printf("Mach fullscreen");
+	//wmspec_change_state (TRUE, GTK_WIDGET (menuitem)->window,
+   //                    gdk_atom_intern ("_NET_WM_STATE_FULLSCREEN",
+   //                                     FALSE),
+   //                    GDK_NONE);
+	//gtk_window_fullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
 }
 
 
