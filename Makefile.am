@@ -3,9 +3,9 @@
 ## If you don't want it to overwrite it,
 ## 	Please disable it in the Anjuta project configuration
 
-SUBDIRS = intl po src pixmaps
+SUBDIRS = intl po src
 
-gtkterm2docdir = ${prefix}/doc/GTKTerm
+gtkterm2docdir = ${prefix}/doc/GTKTerm2
 gtkterm2doc_DATA = \
 	README\
 	COPYING\

@@ -1,12 +1,16 @@
-# Anjuta Version 1.2.0 
+# Anjuta Version 1.2.2 
 Compatibility Level: 1 
 
 <PROJECT_DESCRIPTION_START>
-Ein kleines multitab terminal<PROJECT_DESCRIPTION_END>
+GTKTerm is a small graphical shell like XTerm. It provides serveral terminals in 
+one window and some nice features. It´s available for GTK 2.x.<PROJECT_DESCRIPTION_END>
 <CONFIG_PROGS_START>
 <CONFIG_PROGS_END>
 <CONFIG_LIBS_START>
-<CONFIG_LIBS_END>
+PKG_CHECK_MODULES(vte, [vte >= 0.11.0])
+
+AC_SUBST(vte_CFLAGS)
+AC_SUBST(vte_LIBS)<CONFIG_LIBS_END>
 <CONFIG_HEADERS_START>
 <CONFIG_HEADERS_END>
 <CONFIG_CHARACTERISTICS_START>
@@ -22,47 +26,46 @@ Ein kleines multitab terminal<PROJECT_DESCRIPTION_END>
 
 props.file.type=project
 
-anjuta.version=1.2.0
+anjuta.version=1.2.2
 anjuta.compatibility.level=1
 
-project.name=GTKTerm
+project.name=GTKTerm2
 project.type=GTK 2.0
 project.target.type=EXECUTABLE
-project.version=0.2.1
+project.version=0.2.2
 project.author=Oliver Feige
 project.source.target=gtkterm2
 project.has.gettext=1
 project.gui.command=
 project.programming.language=C
-project.excluded.modules=intl pixmaps po
+project.excluded.modules=intl
 
 project.config.extra.modules.before=
 project.config.extra.modules.after=
 project.config.blocked=0
-project.config.disable.overwriting=1 0 0 0 0 0 0 0 1 
+project.config.disable.overwriting=0 0 0 0 0 0 0 0 0 
 
-project.menu.entry=GTKTerm Version 0.2
+project.menu.entry=GTKTerm2 Version 0.1
 project.menu.group=Applications
-project.menu.comment=GTKTerm Version 0.2
+project.menu.comment=GTKTerm2 Version 0.1
 project.menu.icon=
 project.menu.need.terminal=0
 
-project.configure.options=--prefix=/usr
+project.configure.options=
 anjuta.program.arguments=
 preferences.build.option.jobs=0
 preferences.build.option.silent=0
 preferences.build.option.autosave=0
-preferences.anjuta.make.options=-k
 preferences.make=make
 preferences.build.option.keep.going=1
 preferences.build.option.warn.undef=0
 preferences.autoformat.custom.style= -i8 -sc -bli0 -bl0 -cbi0 -ss
 preferences.indent.opening=0
-preferences.autoformat.disable=0
+preferences.autoformat.disable=1
 preferences.indent.automatic=1
 preferences.use.tabs=1
-preferences.indent.size=3
-preferences.tabsize=3
+preferences.indent.size=4
+preferences.tabsize=4
 preferences.indent.closing=0
 
 module.include.name=include
@@ -72,20 +75,19 @@ module.include.files=
 module.source.name=src
 module.source.type=
 module.source.files=\
-	callbacks.c\
-	callbacks.h\
-	interface.c\
-	interface.h\
-	main.c\
-	support.c\
 	support.h\
+	support.c\
+	main.c\
+	interface.h\
+	interface.c\
+	callbacks.h\
+	callbacks.c\
 	prefs.c\
 	prefs.h
 
 module.pixmap.name=pixmaps
 module.pixmap.type=
-module.pixmap.files=\
-	gtkterm2.png
+module.pixmap.files=
 
 module.data.name=data
 module.data.type=
@@ -99,8 +101,7 @@ module.doc.name=doc
 module.doc.type=
 module.doc.files=
 
-module.po.files=\
-	de.po
+module.po.files=
 
 compiler.options.supports=
 compiler.options.include.paths=
@@ -112,8 +113,8 @@ compiler.options.defines.selected=
 compiler.options.warning.buttons=0 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 
 compiler.options.optimize.buttons=1 0 0 0 
 compiler.options.other.buttons=1 0 
-compiler.options.other.c.flags=
-compiler.options.other.l.flags=
+compiler.options.other.c.flags=$(vte_CFLAGS)
+compiler.options.other.l.flags=$(vte_LIBS)
 compiler.options.other.l.libs=
 
 project.src.paths=

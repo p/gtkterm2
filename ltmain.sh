@@ -219,17 +219,6 @@ if test -n "$prevopt"; then
   exit 1
 fi
 
-# Mandrake: (gc) It's bad to link C++ code with GCC, so we need to use the compiler name if provided
-if test "$mode" = link && test -n "$archive_cmds" && test -x "/usr/bin/perl"; then
-    case $nonopt in
-    *cc | *++ | gcc* | *-gcc* | egcs*)
-	    archive_cmds=`echo $archive_cmds | perl -pe 's/^\S+\s+//'`
-	    archive_cmds="$nonopt $archive_cmds"
-	    archive_expsym_cmds=`echo $archive_expsym_cmds | perl -pe 's/^\S+\s+//'`
-	    archive_expsym_cmds="$nonopt $archive_expsym_cmds"
-    esac
-fi
-
 # If this variable is set in any of the actions, the command in it
 # will be execed at the end.  This prevents here-documents from being
 # left over by shells.

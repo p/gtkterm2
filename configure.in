@@ -4,23 +4,27 @@ dnl If you don't want it to overwrite it,
 dnl 	Please disable it in the Anjuta project configuration
 
 AC_INIT(configure.in)
-AM_INIT_AUTOMAKE(gtkterm2, 0.2.1)
+AM_INIT_AUTOMAKE(GTKTerm2, 0.2.2)
 AM_CONFIG_HEADER(config.h)
 
 AC_ISC_POSIX
-AC_SUBST(CFLAGS,$CFLAGS)
+CFLAGS=""
+AC_SUBST(CFLAGS)
 AC_PROG_CC
 AM_PROG_CC_STDC
 AC_HEADER_STDC
 AM_PROG_LIBTOOL
-PKG_CHECK_MODULES(GTK, gtk+-2.0 gdk-2.0 vte,,exit)
+PKG_CHECK_MODULES(GTK, gtk+-2.0 gdk-2.0,,exit)
 AC_SUBST(GTK_LIBS)
 AC_SUBST(GTK_CFLAGS)
 dnl Checks for programs.
 
 
 dnl Checks for libraries.
+PKG_CHECK_MODULES(vte, [vte >= 0.11.0])
 
+AC_SUBST(vte_CFLAGS)
+AC_SUBST(vte_LIBS)
 
 dnl Checks for header files.
 
@@ -34,7 +38,7 @@ dnl Checks for library functions.
 dnl Checks for Additional stuffs.
 
 
-GETTEXT_PACKAGE=gtkterm2
+GETTEXT_PACKAGE=GTKTerm2
 AC_SUBST(GETTEXT_PACKAGE)
 AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettext])
 
@@ -63,7 +67,7 @@ else
 fi
 
 dnl Set PACKAGE DATA & DOC DIR
-packagedatadir=share/${PACKAGE}
+packagedatadir=share
 packagedocdir=doc/${PACKAGE}
 
 dnl Set PACKAGE DIRS in config.h.
@@ -113,5 +117,4 @@ Makefile
 intl/Makefile
 po/Makefile.in
 src/Makefile
-pixmaps/Makefile
 ])

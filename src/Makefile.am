@@ -7,24 +7,26 @@
 INCLUDES = \
 	$(GTK_CFLAGS)
 
-gtkterm2_CFLAGS =\
+AM_CFLAGS =\
+	$(vte_CFLAGS)\
 	 -Wall\
 	 -g
 
 bin_PROGRAMS = gtkterm2
 
 gtkterm2_SOURCES = \
-	callbacks.c\
-	callbacks.h\
-	interface.c\
-	interface.h\
-	main.c\
-	support.c\
 	support.h\
+	support.c\
+	main.c\
+	interface.h\
+	interface.c\
+	callbacks.h\
+	callbacks.c\
 	prefs.c\
 	prefs.h
 
-gtkterm2_LDFLAGS = 
+gtkterm2_LDFLAGS = \
+	$(vte_LIBS)
 
 gtkterm2_LDADD =  \
 	$(GTK_LIBS)
