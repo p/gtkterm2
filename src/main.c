@@ -112,7 +112,7 @@ main (int argc, char *argv[])
 				printf(" -X xxx\t\t --win-width xxx:\tSet window width to xxx chars\n");
 				printf(" -Y xxx\t\t --win-height xxx:\tSet window height to xxx chars\n");
 				printf(" -t\t\t --transparent:\t\tBackground is transparent\n");
-				printf(" -o\t\t --opacity:\t\tSet opacity by Percent\n\n");
+				printf(" -o\t\t --opacity:\t\tSet opacity by Percent\n");
 				printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
 				printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
 				exit(0);
