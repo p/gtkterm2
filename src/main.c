@@ -51,6 +51,7 @@ main (int argc, char *argv[])
 	pref = gtkTermPref_get();
 
 	add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
+	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");
 	add_pixmap_directory (PACKAGE_SOURCE_DIR "/pixmaps");
 
 	while((c=getopt_long(argc, argv, "hvl", long_options, NULL)) != EOF)
