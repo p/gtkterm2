@@ -67,8 +67,8 @@ create_window (gtkTermPref* pref)
 
   window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window, "window");
-  gtk_window_set_title (GTK_WINDOW (window), _("GTK Term"));
-  window_icon_pixbuf = create_pixbuf ("gtkterm.png");
+  gtk_window_set_title (GTK_WINDOW (window), _("GTKTerm2"));
+  window_icon_pixbuf = create_pixbuf ("gtkterm2.png");
   if (window_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (window), window_icon_pixbuf);
@@ -290,9 +290,9 @@ create_window_about (void)
   window_about = gtk_window_new (GTK_WINDOW_TOPLEVEL);
   gtk_widget_set_name (window_about, "window_about");
   gtk_widget_set_size_request (window_about, 350, 250);
-  gtk_window_set_title (GTK_WINDOW (window_about), _("Info zu GTKTerm"));
+  gtk_window_set_title (GTK_WINDOW (window_about), _("Info zu GTKTerm2"));
   gtk_window_set_resizable (GTK_WINDOW (window_about), FALSE);
-  window_about_icon_pixbuf = create_pixbuf ("gtkterm.png");
+  window_about_icon_pixbuf = create_pixbuf ("gtkterm2.png");
   if (window_about_icon_pixbuf)
     {
       gtk_window_set_icon (GTK_WINDOW (window_about), window_about_icon_pixbuf);
@@ -310,7 +310,7 @@ create_window_about (void)
   gtk_widget_show (notebook1);
   gtk_box_pack_start (GTK_BOX (vbox1), notebook1, TRUE, TRUE, 0);
 
-  label5 = gtk_label_new (_("GTKTerm (v 0.2.0)\nCopyright (c) 2003 Oliver Feige"));
+  label5 = gtk_label_new (_("GTKTerm2 (v 0.2.0)\nCopyright (c) 2003 Oliver Feige"));
   gtk_widget_set_name (label5, "label5");
   gtk_widget_show (label5);
   gtk_container_add (GTK_CONTAINER (notebook1), label5);

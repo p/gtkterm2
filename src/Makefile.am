@@ -7,13 +7,13 @@
 INCLUDES = \
 	$(GTK_CFLAGS)
 
-gtkterm_CFLAGS =\
+gtkterm2_CFLAGS =\
 	 -Wall\
 	 -g
 
-bin_PROGRAMS = gtkterm
+bin_PROGRAMS = gtkterm2
 
-gtkterm_SOURCES = \
+gtkterm2_SOURCES = \
 	callbacks.c\
 	callbacks.h\
 	interface.c\
@@ -24,8 +24,8 @@ gtkterm_SOURCES = \
 	prefs.c\
 	prefs.h
 
-gtkterm_LDFLAGS = 
+gtkterm2_LDFLAGS = 
 
-gtkterm_LDADD =  \
+gtkterm2_LDADD =  \
 	$(GTK_LIBS)
 

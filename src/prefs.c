@@ -374,12 +374,12 @@ gtkTermPref* gtkTermPref_get (void)
 	pref = gtkTermPref_init();
 
 	gtktermrc_file = g_string_new( "hallo" );
-	g_string_sprintf(gtktermrc_file, "%s/.gtktermrc", getenv("HOME"));
+	g_string_sprintf(gtktermrc_file, "%s/.gtkterm2rc", getenv("HOME"));
 
 	gtkTermRC = fopen (gtktermrc_file->str, "r");
 	if(!gtkTermRC)
 	{
-		g_warning("GtkTerm RC File dose not exists: %s/.gtktermrc\n", getenv("HOME"));
+		g_warning("gtkterm2rc File dose not exists: %s\n", gtktermrc_file->str);
 		if(gtkTermPref_save(pref, gtktermrc_file) == FALSE)
 		{
 			gtkTermPref_free(pref);
@@ -388,7 +388,7 @@ gtkTermPref* gtkTermPref_get (void)
 		}
 		else if(!(gtkTermRC = fopen (gtktermrc_file->str, "r")))
 		{
-			g_warning("GtkTerm RC File dose not exists: %s/.gtktermrc\n", getenv("HOME"));
+			g_warning("gtkterm2rc File dose not exists: %s\n", gtktermrc_file->str);
 			exit(-1);
 		}
 	}
