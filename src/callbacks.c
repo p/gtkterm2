@@ -550,6 +550,8 @@ clipboard_get(GtkClipboard *clipboard, GtkSelectionData *selection_data,
 	return;
 }
 
+#ifdef TIOCCONS
+
 void
 take_xconsole_ownership(GtkWidget *widget, gpointer data)
 {
@@ -582,6 +584,8 @@ take_xconsole_ownership(GtkWidget *widget, gpointer data)
 				     (GtkClipboardClearFunc)gtk_main_quit,
 				     G_OBJECT(widget));
 }
+
+#endif
 
 gboolean
 nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data)
