@@ -41,9 +41,15 @@ void
 on_window_about_close_button_activate  (GtkButton       *button,
                                         gpointer         user_data);
 
-void
+/*void
 window_title_changed				   (GtkWidget *widget,
-										gpointer win);
+										gpointer win);*/
+
+void
+window_title_changed(GtkWidget *widget, gpointer pref);
+
+void
+commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data);
 
 void
 char_size_changed(GtkWidget *widget, guint width, guint height, gpointer data);
