@@ -11,12 +11,13 @@ RunInTerminal=true
 clean before build=false
 
 [filenumbers]
-0=1
-1=108
+0=69
+1=277
 2=1
-3=525
-4=192
-5=74
+3=151
+4=1
+5=40
+6=143
 
 [filemarkers]
 0=
@@ -25,13 +26,11 @@ clean before build=false
 3=
 4=
 5=
+6=
 
 [filelist]
-0=/home/ofeige/Projects/gtkterm2/src/main.c
-1=/home/ofeige/Projects/gtkterm2/src/callbacks.c
-2=/home/ofeige/Projects/gtkterm2/po/de.po
-3=/home/ofeige/Projects/gtkterm2/src/prefs.c
-4=/home/ofeige/Projects/gtkterm2/src/interface.c
+0=/home/ofeige/Projects/gtkterm2/po/de.po
+1=/home/ofeige/Projects/gtkterm2/src/interface.c
 
 [Project Tree]
 0=0
@@ -52,8 +51,8 @@ clean before build=false
 4=pref->mpref[i]->
 
 [find_text]
-0=SET
-1=].red
-2=pref->colors
-3=&colors[
-4=pref->
+0=set_menuitem_text
+1=fullscreen
+2=SET
+3=].red
+4=pref->colors

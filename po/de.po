@@ -63,10 +63,10 @@ msgstr "Info zu GTKTerm2"
 #: src/interface.c:284
 #, fuzzy
 msgid ""
-"GTKTerm2 (v 0.2.0)\n"
+"GTKTerm2 (v 0.2.1)\n"
 "Copyright (c) 2004 Oliver Feige"
 msgstr ""
-"GTKTerm2 (v 0.2.0)\n"
+"GTKTerm2 (v 0.2.1)\n"
 "Copyright (c) 2003 Oliver Feige"
 
 #: src/interface.c:294
