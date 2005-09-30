@@ -8,9 +8,7 @@ INCLUDES = \
 	$(GTK_CFLAGS)
 
 AM_CFLAGS =\
-	$(vte_CFLAGS)\
-	 -Wall\
-	 -g
+	$(vte_CFLAGS)
 
 bin_PROGRAMS = gtkterm2
 
