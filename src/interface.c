@@ -45,23 +45,26 @@ create_window (gtkTermPref* pref)
   GtkWidget *image13;
   GtkWidget *close_window;
   GtkWidget *image14;
-  //GtkWidget *menuitem2;
-  //GtkWidget *menuitem2_menu;
-  //GtkWidget *copy;
-  //GtkWidget *paste;
   GtkWidget *menuitem3;
   GtkWidget *menuitem3_menu;
   GtkWidget *full_screen;
   GtkWidget *image15;
-  //GtkWidget *hide_menu;
   GtkWidget *menuitem4;
   GtkWidget *menuitem4_menu;
   GtkWidget *info;
   GtkWidget *image16;
   GtkWidget *notebook;
-  //GtkWidget *empty_notebook_page;
-  //GtkWidget *label;
   GtkAccelGroup *accel_group;
+  
+#if 0
+  GtkWidget *menuitem2;
+  GtkWidget *menuitem2_menu;
+  GtkWidget *copy;
+  GtkWidget *paste;
+  GtkWidget *hide_menu;
+  GtkWidget *empty_notebook_page;
+  GtkWidget *label;
+#endif /* 0 */
 
   accel_group = gtk_accel_group_new ();
 
@@ -160,11 +163,6 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image15);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (full_screen), image15);
 
-  /*hide_menu = gtk_menu_item_new_with_mnemonic (_("Hide menu"));
-  gtk_widget_set_name (hide_menu, "hide_menu");
-  gtk_widget_show (hide_menu);
-  gtk_container_add (GTK_CONTAINER (menuitem3_menu), hide_menu);*/
-
   menuitem4 = gtk_menu_item_new_with_mnemonic (_("Help"));
   gtk_widget_set_name (menuitem4, "menuitem4");
   gtk_widget_show (menuitem4);
@@ -187,33 +185,27 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image16);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (info), image16);
 
-  g_signal_connect ((gpointer) menubar, "destroy",
+  g_signal_connect (menubar, "destroy",
                     G_CALLBACK (gtk_main_quit),
                     NULL);
-  g_signal_connect ((gpointer) new_tab, "activate",
+  g_signal_connect (new_tab, "activate",
                     G_CALLBACK (on_new_tab_activate),
                     pref);
-  g_signal_connect ((gpointer) close_tab, "activate",
+  g_signal_connect (close_tab, "activate",
                     G_CALLBACK (on_close_tab_activate),
                     pref);
-  g_signal_connect ((gpointer) close_window, "activate",
+  g_signal_connect (close_window, "activate",
                     G_CALLBACK (gtk_main_quit),
                     NULL);
-  g_signal_connect ((gpointer) full_screen, "activate",
+  g_signal_connect (full_screen, "activate",
                     G_CALLBACK (on_full_screen_activate),
                     pref);
-  /*g_signal_connect ((gpointer) hide_menu, "activate",
-                    G_CALLBACK (on_hide_menu_activate),
-                    NULL);*/
-  g_signal_connect ((gpointer) info, "activate",
+  g_signal_connect (info, "activate",
                     G_CALLBACK (on_info_activate),
                     NULL);
   g_signal_connect ((gpointer) window, "key-press-event",
                     G_CALLBACK (nb_handle_key),
                     pref);
-	/* Connect to the "status-line-changed" signal. */
-	/*g_signal_connect(G_OBJECT(widget), "status-line-changed",
-			 G_CALLBACK(status_line_changed), widget);*/
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (window, window, "window");
@@ -232,7 +224,6 @@ create_window (gtkTermPref* pref)
   GLADE_HOOKUP_OBJECT (window, menuitem3_menu, "menuitem3_menu");
   GLADE_HOOKUP_OBJECT (window, full_screen, "full_screen");
   GLADE_HOOKUP_OBJECT (window, image15, "image15");
-//  GLADE_HOOKUP_OBJECT (window, hide_menu, "hide_menu");
   GLADE_HOOKUP_OBJECT (window, menuitem4, "menuitem4");
   GLADE_HOOKUP_OBJECT (window, menuitem4_menu, "menuitem4_menu");
   GLADE_HOOKUP_OBJECT (window, info, "info");
@@ -253,7 +244,7 @@ create_window (gtkTermPref* pref)
   gtk_box_pack_start (GTK_BOX (vbox), notebook, TRUE, TRUE, 0);
   pref->notebook = notebook;
   GTK_WIDGET_UNSET_FLAGS (notebook, GTK_CAN_FOCUS);
-  on_new_tab_activate((gpointer) new_tab, pref);
+  on_new_tab_activate(GTK_MENU_ITEM(new_tab), pref);
 
   gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
 
@@ -318,7 +309,6 @@ create_window_about (void)
   gtk_notebook_set_tab_label (GTK_NOTEBOOK (notebook1), gtk_notebook_get_nth_page (GTK_NOTEBOOK (notebook1), 0), label3);
   gtk_label_set_justify (GTK_LABEL (label3), GTK_JUSTIFY_LEFT);
 
-  //label6 = gtk_label_new (_("Programmiert:\nOliver Feige <ofeige@gmx.de>\n\nIdee:\nOliver Feige <ofeige@gmx.de>\nStefan Bambach <sbambach@gmx.de>"));
   label6 = gtk_label_new (_("Programmer:\nOliver Feige <ofeige@gmx.de>\n\nIdea:\nOliver Feige <ofeige@gmx.de>\nStefan Bambach <sbambach@gmx.de>"));
   gtk_widget_set_name (label6, "label6");
   gtk_widget_show (label6);
@@ -340,7 +330,7 @@ create_window_about (void)
   gtk_box_pack_start (GTK_BOX (vbox1), window_about_close_button, FALSE, FALSE, 0);
   GTK_WIDGET_SET_FLAGS (window_about_close_button, GTK_CAN_DEFAULT);
 
-  g_signal_connect ((gpointer) window_about_close_button, "clicked",
+  g_signal_connect (window_about_close_button, "clicked",
                     G_CALLBACK (on_window_about_close_button_activate),
                     NULL);
 
@@ -361,42 +351,31 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 {
 	GtkWidget *hbox, *scrollbar, *widget;
 	const char *working_directory = NULL;
-	char *args[] = {"--login", NULL};
-	char *env_add[] = {"FOO=BAR", "BOO=BIZ", NULL};
-	struct passwd *pw;
-	GString *shell;
-	
-	/* Get Window from Notebook */
-	//window = lookup_widget(GTK_WIDGET(notebook), "window");
-		
+	static const char * const args[] = {"--login", NULL};
+	static const char * const env_add[] = {"FOO=BAR", "BOO=BIZ", NULL};
+	const struct passwd *pw;
+	const char *shell;
+
+
 	/* Create a box to hold everything. */
 	hbox = gtk_hbox_new(0, 0);
-	//gtk_container_add(GTK_CONTAINER(notebook), hbox);
 	gtk_notebook_append_page(GTK_NOTEBOOK (notebook), hbox, NULL);
 
 	/* Create the terminal widget and add it to the scrolling shell. */
 	widget = vte_terminal_new();
-	//gtk_widget_set_double_buffered(widget, dbuffer);
-	//gtk_box_pack_start(GTK_BOX(hbox), widget, TRUE, TRUE, 0);
-
 	gtk_container_set_focus_child(GTK_CONTAINER(notebook), widget);
 	
 	/* Connect to the "char_size_changed" signal to set geometry hints
 	 * whenever the font used by the terminal is changed. */
-	// OF if (geometry) {
-		char_size_changed(widget, 0, 0, window);
-		g_signal_connect(G_OBJECT(widget), "char-size-changed",
-				 G_CALLBACK(char_size_changed), window);
-	// OF }
+	char_size_changed(widget, 0, 0, window);
+	g_signal_connect(G_OBJECT(widget), "char-size-changed",
+			 G_CALLBACK(char_size_changed), window);
 
 	/* Connect to the "window_title_changed" signal to set the main
 	 * window's title. */
 	g_signal_connect(G_OBJECT(widget), "window-title-changed",
 			 G_CALLBACK(window_title_changed), pref);
 
-	//g_signal_connect(G_OBJECT(widget), "commit",
-	//		 G_CALLBACK(commit), pref);			 
-			 
 	/* Connect to the "eof" signal to quit when the session ends. */
 	g_signal_connect(G_OBJECT(widget), "eof",
 			 G_CALLBACK(destroy_and_quit_eof), pref);
@@ -430,8 +409,6 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 			 G_CALLBACK(resize_window), window);
 	g_signal_connect(G_OBJECT(widget), "move-window",
 			 G_CALLBACK(move_window), window);
-/*	g_signal_connect(G_OBJECT(widget), "contents-changed",
-			 G_CALLBACK(on_commit), pref);*/
 
 	/* Connect to font tweakage. */
 	g_signal_connect(G_OBJECT(widget), "increase-font-size",
@@ -460,7 +437,6 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 		gtk_widget_show (scrollbar);
 	}
 
-
 	/* Set some defaults. */
 	vte_terminal_set_audible_bell(VTE_TERMINAL(widget), pref->beep);
 	vte_terminal_set_cursor_blinks(VTE_TERMINAL(widget), pref->blink);
@@ -470,52 +446,14 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	vte_terminal_set_mouse_autohide(VTE_TERMINAL(widget), TRUE);
 	vte_terminal_set_word_chars (VTE_TERMINAL(widget), pref->worldClass);
 	vte_terminal_set_size (VTE_TERMINAL(widget), pref->termX, pref->termY);
-	// OF if (background != NULL) {
-	// OF 	vte_terminal_set_background_image_file(VTE_TERMINAL(widget),
-	// OF 					       background);
-	// OF }
-	if (pref->transparent)
-	{
-		vte_terminal_set_background_transparent(VTE_TERMINAL(widget), TRUE);
-		vte_terminal_set_background_saturation(VTE_TERMINAL(widget), (double) pref->opacity);
-	}
-	// OF vte_terminal_set_background_tint_color(VTE_TERMINAL(widget), &tint);
 	vte_terminal_set_colors(VTE_TERMINAL(widget), &pref->fore[0], &pref->back[0], pref->colors, 16);
-	// OF if (terminal != NULL) {
-	// OF 	vte_terminal_set_emulation(VTE_TERMINAL(widget), terminal);
-	// OF }
 
 	/* Mess with our fontconfig setup. */
 	mess_with_fontconfig();
 
 	/* Set the default font. */
-	// OF if (font != NULL) {
 	vte_terminal_set_font_from_string(VTE_TERMINAL(widget), pref->terminalFont);
-	// OF }
 
-	/* Match "abcdefg". */
-	//vte_terminal_match_add(VTE_TERMINAL(widget), "abcdefg");
-	// OF if (dingus) {
-	// OF if (FALSE) {
-		// OF i = vte_terminal_match_add(VTE_TERMINAL(widget), DINGUS1);
-		// OF gumby = gdk_cursor_new(GDK_GUMBY);
-		// OF vte_terminal_match_set_cursor(VTE_TERMINAL(widget), i, gumby);
-		// OF gdk_cursor_unref(gumby);
-		// OF hand = gdk_cursor_new(GDK_HAND1);
-		// OF i = vte_terminal_match_add(VTE_TERMINAL(widget), DINGUS2);
-		// OF vte_terminal_match_set_cursor(VTE_TERMINAL(widget), i, hand);
-		// OF gdk_cursor_unref(hand);
-	// OF }
-
-	// OF if (console) {
-// OF 	if (FALSE) {
-		/* Open a "console" connection. */
-// OF 		int consolefd = -1, yes = 1, watch;
-// OF 		GIOChannel *channel;
-// OF 		consolefd = open("/dev/console", O_RDONLY | O_NOCTTY);
-// OF 		if (consolefd != -1) {
-			/* Assume failure. */
-// OF 			console = FALSE;
 #ifdef TIOCCONS
 			if (ioctl(consolefd, TIOCCONS, &yes) != -1) {
 				/* Set up a listener. */
@@ -545,37 +483,32 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 				console = TRUE;
 			}
 #endif
-// OF 		} else {
-			/* Bail back to normal mode. */
-// OF 			g_warning(_("Could not open console.\n"));
-// OF 			close(consolefd);
-// OF 			console = FALSE;
-// OF 		}
-// OF 	}
 	
 			
-			
-	// OF if (!console) {
-	if (!FALSE)
+	if (pref->transparent)
 	{
-		if(pref->login_shell == TRUE)
-		{
+		vte_terminal_set_background_transparent(VTE_TERMINAL(widget), TRUE);
+		vte_terminal_set_background_saturation(VTE_TERMINAL(widget),
+			(double) pref->opacity);
+	}
+
+	if(!pref->login_shell) {
+		shell = NULL;
+	} else {
+		shell = getenv("SHELL");
+		if (!shell) {
 			pw = getpwuid (getuid ());
-			if (pw)
-			{
-				shell = g_string_new (pw->pw_shell);
-			}
-			else
-			{
-				shell = g_string_new ("/bin/sh");
-			}
-			vte_terminal_fork_command(VTE_TERMINAL(widget), shell->str, args, env_add, working_directory, TRUE, TRUE, TRUE);
+			shell = pw->pw_shell;
 		}
-		else
-		{
-			vte_terminal_fork_command(VTE_TERMINAL(widget), NULL, NULL, env_add, working_directory, TRUE, TRUE, TRUE);
+		if (!shell) {
+			shell = "/bin/sh";
 		}
 	}
+
+	vte_terminal_fork_command(VTE_TERMINAL(widget),
+		shell, shell ? (void *) args : NULL, (void *) env_add,
+		working_directory, TRUE, TRUE, TRUE);
+
 
 	/* Go for it! */
 	gtk_widget_show_all(window);
