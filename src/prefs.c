@@ -46,7 +46,7 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->fore[0].red =   0xcccc;
 	pref->fore[0].green = 0xcccc;
 	pref->fore[0].blue =  0xcccc;
-	
+
 	pref->back[0].red =   0x0000;
 	pref->back[0].green = 0x0000;
 	pref->back[0].blue =  0x0000;
@@ -58,27 +58,27 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->colors[1].red   = 0xaaaa;
 	pref->colors[1].green = 0x0000;
 	pref->colors[1].blue  = 0x0000;
-	
+
 	pref->colors[2].red   = 0x0000;
 	pref->colors[2].green = 0xaaaa;
 	pref->colors[2].blue  = 0x0000;
-	
+
 	pref->colors[3].red   = 0xaaaa;
 	pref->colors[3].green = 0x5555;
 	pref->colors[3].blue  = 0x0000;
-	
+
 	pref->colors[4].red   = 0x6666;
 	pref->colors[4].green = 0x6666;
 	pref->colors[4].blue  = 0xffff;
-	
+
 	pref->colors[5].red   = 0xaaaa;
 	pref->colors[5].green = 0x0000;
 	pref->colors[5].blue  = 0xaaaa;
-	
+
 	pref->colors[6].red   = 0x0000;
 	pref->colors[6].green = 0xaaaa;
 	pref->colors[6].blue  = 0xaaaa;
-	
+
 	pref->colors[7].red   = 0xcccc;
 	pref->colors[7].green = 0xcccc;
 	pref->colors[7].blue  = 0xcccc;
@@ -117,10 +117,10 @@ gtkTermPref* gtkTermPref_init(void)
 
 	strncpy(pref->terminalFont, "Terminal 8", MAX_LINE_LENGTH - 1);
 	strncpy(pref->worldClass, "-A-Za-z0-9/_:.,?+%=", MAX_LINE_LENGTH - 1);
-	
+
 	pref->mprefSize = 0;
 	pref->mpref = NULL;
-	
+
 	gtkTermMPref_init(pref);
 
 	return pref;
@@ -142,11 +142,11 @@ gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref)
 	pref->mpref[pref->mprefSize]->fore[0].red =   0xcccc;
 	pref->mpref[pref->mprefSize]->fore[0].green = 0xcccc;
 	pref->mpref[pref->mprefSize]->fore[0].blue =  0xcccc;
-	
+
 	pref->mpref[pref->mprefSize]->back[0].red =   0x0000;
 	pref->mpref[pref->mprefSize]->back[0].green = 0x0000;
 	pref->mpref[pref->mprefSize]->back[0].blue =  0x0000;
-	
+
 	pref->mpref[pref->mprefSize]->colors[0].red   = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[0].green = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[0].blue  = 0x0000;
@@ -154,31 +154,31 @@ gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref)
 	pref->mpref[pref->mprefSize]->colors[1].red   = 0xaaaa;
 	pref->mpref[pref->mprefSize]->colors[1].green = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[1].blue  = 0x0000;
-	
+
 	pref->mpref[pref->mprefSize]->colors[2].red   = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[2].green = 0xaaaa;
 	pref->mpref[pref->mprefSize]->colors[2].blue  = 0x0000;
-	
+
 	pref->mpref[pref->mprefSize]->colors[3].red   = 0xaaaa;
 	pref->mpref[pref->mprefSize]->colors[3].green = 0x5555;
 	pref->mpref[pref->mprefSize]->colors[3].blue  = 0x0000;
-	
+
 	pref->mpref[pref->mprefSize]->colors[4].red   = 0x6666;
 	pref->mpref[pref->mprefSize]->colors[4].green = 0x6666;
 	pref->mpref[pref->mprefSize]->colors[4].blue  = 0xffff;
-	
+
 	pref->mpref[pref->mprefSize]->colors[5].red   = 0xaaaa;
 	pref->mpref[pref->mprefSize]->colors[5].green = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[5].blue  = 0xaaaa;
-	
+
 	pref->mpref[pref->mprefSize]->colors[6].red   = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[6].green = 0xaaaa;
 	pref->mpref[pref->mprefSize]->colors[6].blue  = 0xaaaa;
-	
+
 	pref->mpref[pref->mprefSize]->colors[7].red   = 0x0000;
 	pref->mpref[pref->mprefSize]->colors[7].green = 0xcccc;
 	pref->mpref[pref->mprefSize]->colors[7].blue  = 0x0000;
-	
+
 	pref->mpref[pref->mprefSize]->colors[8].red   = 0x5555;
 	pref->mpref[pref->mprefSize]->colors[8].green = 0x5555;
 	pref->mpref[pref->mprefSize]->colors[8].blue  = 0x5555;
@@ -408,7 +408,7 @@ gtkTermPref* gtkTermPref_get (void)
 	colors = (GdkColor *) &pref->colors;
 	back   = (GdkColor *) &pref->back;
 	fore   = (GdkColor *) &pref->fore;
-	
+
 	while (!feof (gtkTermRC))
 	{
 		fgets(tmp, MAX_LINE_LENGTH - 1, gtkTermRC);
@@ -426,7 +426,7 @@ gtkTermPref* gtkTermPref_get (void)
 				scrollOnOutput = &pref->mpref[i]->scrollOnOutput;
 				scrollOnKeyStroke = &pref->mpref[i]->scrollOnKeyStroke;
 				worldClass = pref->mpref[i]->worldClass;
-				
+
 				colors = (GdkColor *) &pref->mpref[i]->colors;
 				back   = (GdkColor *) &pref->mpref[i]->back;
 				fore   = (GdkColor *) &pref->mpref[i]->fore;
