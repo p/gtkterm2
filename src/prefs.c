@@ -310,11 +310,16 @@ gtkTermPref* gtkTermPref_get (void)
 	GdkColor *colors;
 	GdkColor *fore;
 	GdkColor *back;
+	char *home;
 
 	pref = gtkTermPref_init();
 
 	gtktermrc_file = g_string_new("");
-	g_string_sprintf(gtktermrc_file, "%s/.gtkterm2rc", getenv("HOME"));
+	home = getenv("HOME");
+	if (home == NULL) {
+		home = "";
+	}
+	g_string_sprintf(gtktermrc_file, "%s/.gtkterm2rc", home);
 
 	gtkTermRC = fopen (gtktermrc_file->str, "r");
 	if(!gtkTermRC)
