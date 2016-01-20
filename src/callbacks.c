@@ -622,9 +622,9 @@ nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data)
 	pref = (gtkTermPref *) user_data;
 	notebook = pref->notebook;
 
-	if (event->state & GDK_SHIFT_MASK)
+	if (event->state & GDK_CONTROL_MASK)
 	{
-		if ((event->keyval == GDK_Right) || (event->keyval == GDK_KP_Right))
+		if (event->keyval == GDK_Page_Down)
 		{
 			cur_term = gtk_notebook_get_current_page (GTK_NOTEBOOK(notebook));
 			gtk_notebook_next_page(GTK_NOTEBOOK(notebook));
@@ -640,7 +640,7 @@ nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data)
 			return TRUE;
 		}
 
-		else if ((event->keyval == GDK_Left) || (event->keyval == GDK_KP_Left))
+		else if (event->keyval == GDK_Page_Up)
 		{
 			cur_term = gtk_notebook_get_current_page (GTK_NOTEBOOK(notebook));
 			if (cur_term == 0)
@@ -657,10 +657,8 @@ nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data)
 
 			return TRUE;
 		}
-	}
-	if (event->state & GDK_CONTROL_MASK)
-	{
-		if (event->keyval == GDK_n)
+
+		else if (event->keyval == GDK_t)
 		{
 			on_new_tab_activate (GTK_MENU_ITEM(lookup_widget(GTK_WIDGET(fenster), "new_tab")), pref);
 

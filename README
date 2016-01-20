@@ -3,14 +3,14 @@ GTKTerm 0.2.0
 
 Keys for GTKTerm2 (v0.2.0)
 --------------------------
-SHIFT + RIGHT or KEYPAD RIGHT       next Terminal on the right hand
-SHIFT + LEFT or KEYPAD LEFT         next Terminal on the left hand
-CTRL + n                            new Terminal
+CTRL + Page Down or KEYPAD RIGHT    next Terminal on the right hand
+CTRL + Page Up or KEYPAD LEFT       next Terminal on the left hand
+CTRL + T                            new Terminal
 
 config ~/.gtkterm2.rc
 ---------------------
 
-You can add different section. Each seaction needs a different match. 
+You can add different section. Each seaction needs a different match.
 If you config your gtkterm2rc as follow and you su to root, all normal
 letters are green.
 
