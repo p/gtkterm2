@@ -74,7 +74,7 @@ create_window (gtkTermPref* pref)
       gtk_window_set_icon (GTK_WINDOW (window), window_icon_pixbuf);
       gdk_pixbuf_unref (window_icon_pixbuf);
     }
-	
+
   vbox = gtk_vbox_new (FALSE, 0);
   gtk_widget_set_name (vbox, "vbox");
   gtk_widget_show (vbox);
@@ -89,8 +89,8 @@ create_window (gtkTermPref* pref)
 	  gtk_window_set_decorated(GTK_WINDOW (window), FALSE);
 	  gtk_window_set_has_frame(GTK_WINDOW(window), FALSE);
 	  gtk_window_set_skip_taskbar_hint(GTK_WINDOW(window), TRUE);
-  }	
-	
+  }
+
   menubar = gtk_menu_bar_new ();
   gtk_widget_set_name (menubar, "menubar");
   gtk_widget_show (menubar);
@@ -241,7 +241,7 @@ create_window (gtkTermPref* pref)
   notebook = gtk_notebook_new ();
 
   GLADE_HOOKUP_OBJECT (window, notebook, "notebook");
-  
+
 	gtk_notebook_set_tab_pos (GTK_NOTEBOOK (notebook), pref->notebookPanel);
 	if (pref->showTabsByOneTerminal == 0)
     {
@@ -257,12 +257,12 @@ create_window (gtkTermPref* pref)
 
   gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);
 
-	
+
 	if(pref->stealth==TRUE)
 	{
 		gtk_widget_hide(menubar);
 	}
-	
+
   return window;
 }
 
@@ -365,10 +365,10 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	char *env_add[] = {"FOO=BAR", "BOO=BIZ", NULL};
 	struct passwd *pw;
 	GString *shell;
-	
+
 	/* Get Window from Notebook */
 	//window = lookup_widget(GTK_WIDGET(notebook), "window");
-		
+
 	/* Create a box to hold everything. */
 	hbox = gtk_hbox_new(0, 0);
 	//gtk_container_add(GTK_CONTAINER(notebook), hbox);
@@ -380,7 +380,7 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	//gtk_box_pack_start(GTK_BOX(hbox), widget, TRUE, TRUE, 0);
 
 	gtk_container_set_focus_child(GTK_CONTAINER(notebook), widget);
-	
+
 	/* Connect to the "char_size_changed" signal to set geometry hints
 	 * whenever the font used by the terminal is changed. */
 	// OF if (geometry) {
@@ -395,8 +395,8 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 			 G_CALLBACK(window_title_changed), pref);
 
 	//g_signal_connect(G_OBJECT(widget), "commit",
-	//		 G_CALLBACK(commit), pref);			 
-			 
+	//		 G_CALLBACK(commit), pref);
+
 	/* Connect to the "eof" signal to quit when the session ends. */
 	g_signal_connect(G_OBJECT(widget), "eof",
 			 G_CALLBACK(destroy_and_quit_eof), pref);
@@ -552,9 +552,9 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 // OF 			console = FALSE;
 // OF 		}
 // OF 	}
-	
-			
-			
+
+
+
 	// OF if (!console) {
 	if (!FALSE)
 	{
@@ -579,6 +579,6 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 
 	/* Go for it! */
 	gtk_widget_show_all(window);
-	
+
 	return widget;
 }
