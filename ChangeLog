@@ -1,3 +1,18 @@
+2016-01-21  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* m4/gettext.m4: Upgrade to gettext-0.19.6.
+	* m4/iconv.m4: Upgrade to gettext-0.19.6.
+	* m4/lib-ld.m4: New file, from gettext-0.19.6.
+	* m4/lib-link.m4: New file, from gettext-0.19.6.
+	* m4/lib-prefix.m4: New file, from gettext-0.19.6.
+	* m4/nls.m4: New file, from gettext-0.19.6.
+	* m4/po.m4: New file, from gettext-0.19.6.
+	* m4/progtest.m4: Upgrade to gettext-0.19.6.
+	* Makefile.am (SUBDIRS): Remove intl.
+	(ACLOCAL_AMFLAGS): New variable.
+	(EXTRA_DIST): Add config.rpath.
+	* configure.in (AM_GNU_GETTEXT_VERSION): Bump to 0.19.6.
+
 2004-07-30 21:54  ofeige
 
 	* po/de.gmo, po/de.po, src/interface.c, src/main.c, src/prefs.c,

@@ -3,7 +3,7 @@
 ## If you don't want it to overwrite it,
 ## 	Please disable it in the Anjuta project configuration
 
-SUBDIRS = intl po src pixmaps
+SUBDIRS = po src pixmaps
 
 gtkterm2docdir = ${prefix}/doc/gtkterm2
 gtkterm2doc_DATA = \
@@ -16,7 +16,7 @@ gtkterm2doc_DATA = \
 	TODO\
 	ABOUT-NLS
 
-EXTRA_DIST = $(gtkterm2doc_DATA)
+EXTRA_DIST = config.rpath  $(gtkterm2doc_DATA)
 
 
 
@@ -28,3 +28,5 @@ dist-hook:
 		fi \
 	done
 
+
+ACLOCAL_AMFLAGS = -I m4

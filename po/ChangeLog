@@ -1,1 +1,12 @@
+2016-01-21  gettextize  <bug-gnu-gettext@gnu.org>
+
+	* Makefile.in.in: Upgrade to gettext-0.19.6.
+	* Rules-quot: New file, from gettext-0.19.6.
+	* boldquot.sed: New file, from gettext-0.19.6.
+	* en@boldquot.header: New file, from gettext-0.19.6.
+	* en@quot.header: New file, from gettext-0.19.6.
+	* insert-header.sin: New file, from gettext-0.19.6.
+	* quot.sed: New file, from gettext-0.19.6.
+	* remove-potcdate.sin: New file, from gettext-0.19.6.
+
 Hinzufügen von SizeX / SizeY beim Startup
