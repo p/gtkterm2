@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <gtk/gtk.h>
 #include <gdk/gdkx.h>
-#include <gdk/gdkkeysyms.h> 
+#include <gdk/gdkkeysyms.h>
 #include <vte/vte.h>
 #include <gtk/gtkwindow.h>
 
@@ -30,10 +30,10 @@ set_menuitem_text (GtkWidget  *mi,
     {
       const char *label;
       char *no_mnemonic;
-      
+
       label = NULL;
       no_mnemonic = NULL;
-      
+
       if (strip_mnemonic)
         {
           const char *src;
@@ -50,7 +50,7 @@ set_menuitem_text (GtkWidget  *mi,
                   *dest = *src;
                   ++dest;
                 }
-              
+
               ++src;
             }
           *dest = '\0';
@@ -66,7 +66,7 @@ set_menuitem_text (GtkWidget  *mi,
         gtk_label_set_text (GTK_LABEL (child), label);
       else
         gtk_label_set_text_with_mnemonic (GTK_LABEL (child), label);
-      
+
       if (no_mnemonic)
         g_free (no_mnemonic);
     }
@@ -86,14 +86,14 @@ on_new_tab_activate                    (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	gtkTermPref *pref;
-	
+
 	pref = (gtkTermPref *) user_data;
-	
+
 	create_terminal(pref->notebook, lookup_widget(GTK_WIDGET(menuitem), "window"), pref);
 
 	gtk_notebook_set_current_page (GTK_NOTEBOOK(pref->notebook), pref->nbpage);
 	pref->nbpage++;
-	
+
 	if(pref->nbpage >1)
 	{
 		gtk_notebook_set_show_tabs(GTK_NOTEBOOK(pref->notebook), TRUE);
@@ -115,7 +115,7 @@ on_close_tab_activate                  (GtkMenuItem     *menuitem,
 {
 	gint pagenr;
 	gtkTermPref *pref;
-	
+
 	pref = (gtkTermPref *) user_data;
 
 	pagenr = gtk_notebook_get_current_page(GTK_NOTEBOOK(pref->notebook));
@@ -158,7 +158,7 @@ on_full_screen_activate                (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	gtkTermPref *pref;
-	
+
 	pref = (gtkTermPref *) user_data;
 
 	//wmspec_change_state (TRUE, GTK_WIDGET (menuitem)->window,
@@ -166,7 +166,7 @@ on_full_screen_activate                (GtkMenuItem     *menuitem,
    //                                     FALSE),
    //                    GDK_NONE);
 	//gtk_window_fullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
-	
+
 	/*if (setting)
 	{
 		set_menuitem_text (menuitem, _("_Restore normal size"), FALSE);
@@ -175,7 +175,7 @@ on_full_screen_activate                (GtkMenuItem     *menuitem,
 	{
 		set_menuitem_text (menuitem, _("_Full screen"), FALSE);
 	}*/
-	
+
 	if(pref->fullscreen == TRUE)
 	{
 		gtk_window_unfullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
@@ -222,7 +222,7 @@ window_title_changed(GtkWidget *widget, gpointer pref)
 	GtkWindow *window;
 
 	win = lookup_widget(GTK_WIDGET(widget), "window");
-	
+
 	g_return_if_fail(VTE_TERMINAL(widget));
 	g_return_if_fail(GTK_IS_WINDOW(win));
 	g_return_if_fail(VTE_TERMINAL(widget)->window_title != NULL);
@@ -244,9 +244,9 @@ commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data)
 {
 	char* hehe=NULL;
 	GArray *attributes;
-	
+
  	fprintf(stdout, "%c\n", arg1[0]); fflush(stdout);
-	
+
 	if(arg1[0] == 'z')
 	{
 				attributes = g_array_new (FALSE, TRUE, sizeof (VteCharAttributes));
@@ -258,7 +258,7 @@ commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data)
                                              test,
                                              NULL,
                                              attributes);
-															
+
 		fprintf(stdout, "%shehe\n", hehe); fflush(stdout);
 		if(hehe!=NULL)	free(hehe);
 	}
