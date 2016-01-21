@@ -362,7 +362,8 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	GtkWidget *hbox, *scrollbar, *widget;
 	const char *working_directory = NULL;
 	char *args[] = {"--login", NULL};
-	char *env_add[] = {"FOO=BAR", "BOO=BIZ", NULL};
+	// char *env_add[] = {"FOO=BAR", "BOO=BIZ", NULL};
+	char *env_add[] = {NULL};
 	struct passwd *pw;
 	GString *shell;
 
