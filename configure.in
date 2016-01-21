@@ -46,7 +46,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettex
 
 dnl Languages which your application supports
 ALL_LINGUAS="de"
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION([0.19.6])
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
