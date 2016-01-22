@@ -38,7 +38,7 @@ void help(char *argv[])
 	printf(" -o\t\t --opacity:\t\tSet opacity by Percent (0 - 100)\n");
 	printf(" -s\t\t --stealth:\t\tGTKTerm is in stealth modus :-)\n\n");
 	printf("Report bugs to <ofeige@gmx.de> or http://www.sourceforge.net/projects/gtkterm/.\n\n");
-	exit(EXIT_SUCCESS);
+	exit(0);
 }
 
 int
@@ -125,7 +125,7 @@ main (int argc, char *argv[])
 			break;
 			case 'v':
 				printf("gtkterm2 version: %s\n", VERSION);
-				exit(EXIT_SUCCESS);
+				exit(0);
 			break;
 			case 'h':
 				help(argv);

@@ -1,3 +1,27 @@
+2004-07-31 20:39  ofeige
+
+	* src/prefs.h: fix opacity
+
+2004-07-31 20:39  ofeige
+
+	* src/main.c: new help function (all help stuff in a function) fix
+	  opacity
+
+2004-07-31 20:23  ofeige
+
+	* src/main.c: Delete extra \n in --help
+
+2004-07-31 00:03  ofeige
+
+	* ChangeLog, GTKTerm.prj, Makefile.am, Makefile.in, config.h.in,
+	  configure, configure.in, pixmaps/Makefile.in: Update files for
+	  Anjuta
+
+2004-07-31 00:01  ofeige
+
+	* po/: GTKTerm.pot, POTFILES.in, de.gmo, de.po: Update language
+	  files
+
 2004-07-30 21:54  ofeige
 
 	* po/de.gmo, po/de.po, src/interface.c, src/main.c, src/prefs.c,
