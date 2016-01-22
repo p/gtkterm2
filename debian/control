@@ -4,7 +4,6 @@ Priority: optional
 Maintainer: Oleg Pudeyev <oleg@bsdpower.com>
 Build-Depends: debhelper (>=9),
  libatk1.0-dev,
- libc6-dev,
  libcairo2-dev,
  libfontconfig1-dev,
  libfreetype6-dev,
@@ -12,7 +11,7 @@ Build-Depends: debhelper (>=9),
  libglib2.0-dev,
  libgtk2.0-dev,
  libpango1.0-dev,
- libvte9-dev,
+ libvte-dev,
  libx11-dev,
  libxext-dev
 Standards-Version: 3.9.6
@@ -24,7 +23,6 @@ Package: gtkterm2
 Architecture: any
 Depends: ${shlibs:Depends}, ${misc:Depends},
   libatk1.0-0,
-  libc6,
   libcairo2,
   libfontconfig1,
   libfreetype6,
