@@ -74,11 +74,10 @@ set_menuitem_text (GtkWidget  *mi,
 
 
 void
-on_new_window_activate                 (GtkMenuItem     *unused_menuitem,
-                                        gpointer         unused_user_data)
+on_new_window_activate                 (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
 {
-	(void) unused_menuitem;
-	(void) unused_user_data;
+
 }
 
 
@@ -103,23 +102,21 @@ on_new_tab_activate                    (GtkMenuItem     *menuitem,
 
 
 void
-on_close_window_activate               (GtkMenuItem     *unused_menuitem,
-                                        gpointer         unused_user_data)
+on_close_window_activate               (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
 {
-	(void) unused_menuitem;
-	(void) unused_user_data;
+
 }
 
 
 void
-on_close_tab_activate                  (GtkMenuItem     *unused_menuitem,
+on_close_tab_activate                  (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
 	gint pagenr;
 	gtkTermPref *pref;
 	
-	(void) unused_menuitem;
-	pref = user_data;
+	pref = (gtkTermPref *) user_data;
 
 	pagenr = gtk_notebook_get_current_page(GTK_NOTEBOOK(pref->notebook));
 
@@ -141,20 +138,18 @@ on_close_tab_activate                  (GtkMenuItem     *unused_menuitem,
 
 
 void
-on_copy_activate                       (GtkMenuItem     *unused_menuitem,
-                                        gpointer         unused_user_data)
+on_copy_activate                       (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
 {
-	(void) unused_menuitem;
-	(void) unused_user_data;
+
 }
 
 
 void
-on_paste_activate                      (GtkMenuItem     *unused_menuitem,
-                                        gpointer         unused_user_data)
+on_paste_activate                      (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
 {
-	(void) unused_menuitem;
-	(void) unused_user_data;
+
 }
 
 
@@ -164,8 +159,23 @@ on_full_screen_activate                (GtkMenuItem     *menuitem,
 {
 	gtkTermPref *pref;
 	
-	pref = user_data;
+	pref = (gtkTermPref *) user_data;
 
+	//wmspec_change_state (TRUE, GTK_WIDGET (menuitem)->window,
+   //                    gdk_atom_intern ("_NET_WM_STATE_FULLSCREEN",
+   //                                     FALSE),
+   //                    GDK_NONE);
+	//gtk_window_fullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
+	
+	/*if (setting)
+	{
+		set_menuitem_text (menuitem, _("_Restore normal size"), FALSE);
+	}
+	else
+	{
+		set_menuitem_text (menuitem, _("_Full screen"), FALSE);
+	}*/
+	
 	if(pref->fullscreen == TRUE)
 	{
 		gtk_window_unfullscreen (GTK_WINDOW(lookup_widget(GTK_WIDGET(menuitem), "window")));
@@ -182,28 +192,25 @@ on_full_screen_activate                (GtkMenuItem     *menuitem,
 
 
 void
-on_hide_menu_activate                  (GtkMenuItem     *unused_menuitem,
-                                        gpointer         unused_user_data)
+on_hide_menu_activate                  (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
 {
-	(void) unused_menuitem;
-	(void) unused_user_data;
+
 }
 
 
 void
 on_info_activate                       (GtkMenuItem     *menuitem,
-                                        gpointer         unused_user_data)
+                                        gpointer         user_data)
 {
-	(void) unused_user_data;
 	gtk_widget_show(lookup_widget(GTK_WIDGET(menuitem), "window_about"));
 }
 
 
 void
 on_window_about_close_button_activate  (GtkButton       *button,
-                                        gpointer         unused_user_data)
+                                        gpointer         user_data)
 {
-	(void) unused_user_data;
 	gtk_widget_hide(lookup_widget(GTK_WIDGET(button), "window_about"));
 }
 
@@ -226,50 +233,45 @@ window_title_changed(GtkWidget *widget, gpointer pref)
 	gtk_window_set_title(window, VTE_TERMINAL (widget)->window_title);
 }
 
-gboolean test (VteTerminal *unused_terminal,
-	glong column, glong row, gpointer unused_data)
+gboolean test (VteTerminal *terminal,glong column,glong row,gpointer data)
 {
-	(void) unused_terminal;
-	(void) unused_data;
-	(void) column;
-	(void) row;
-
+	//printf("%dx%d", column, row);
 	return TRUE;
 }
 
 void
-commit(GtkWidget *widget, gchar *arg1,
-	guint unused_arg2, gpointer unused_user_data)
+commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data)
 {
-	char* hehe;
+	char* hehe=NULL;
 	GArray *attributes;
 	
-	(void) unused_arg2;
-	(void) unused_user_data;
-
  	fprintf(stdout, "%c\n", arg1[0]); fflush(stdout);
 	
 	if(arg1[0] == 'z')
 	{
-		attributes = g_array_new (FALSE, TRUE, sizeof (VteCharAttributes));
-		hehe = vte_terminal_get_text( VTE_TERMINAL (widget), test, NULL, attributes);
+				attributes = g_array_new (FALSE, TRUE, sizeof (VteCharAttributes));
+		      hehe = vte_terminal_get_text     ( VTE_TERMINAL (widget),
+													//		1,
+													//		1,
+													//		10,
+													//		10,
+                                             test,
+                                             NULL,
+                                             attributes);
 															
 		fprintf(stdout, "%shehe\n", hehe); fflush(stdout);
 		if(hehe!=NULL)	free(hehe);
 	}
+	//fprintf(stdout, "%s\n", arg1); fflush(stdout);
 }
 
 void
-char_size_changed(GtkWidget *widget,
-	guint unused_width, guint unused_height, gpointer data)
+char_size_changed(GtkWidget *widget, guint width, guint height, gpointer data)
 {
 	VteTerminal *terminal;
 	GtkWindow *window;
 	GdkGeometry geometry;
 	int xpad, ypad;
-
-	(void) unused_height;
-	(void) unused_width;
 
 	g_return_if_fail(GTK_IS_WINDOW(data));
 	g_return_if_fail(VTE_IS_TERMINAL(widget));
@@ -304,23 +306,24 @@ destroy_and_quit(GtkWidget *widget, gpointer data)
 }
 
 void
-destroy_and_quit_eof(GtkWidget *unused_widget, gpointer data)
+destroy_and_quit_eof(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
+	//g_print("Detected EOF.\n");
+	//destroy_and_quit(widget, data);
 	on_close_tab_activate(NULL, data);
 }
 
 void
-destroy_and_quit_exited(GtkWidget *unused_widget, gpointer data)
+destroy_and_quit_exited(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
+	//g_print("Detected child exit.\n");
+	//destroy_and_quit(widget, data);
 	on_close_tab_activate(NULL, data);
 }
 
 void
-status_line_changed(GtkWidget *widget, gpointer unused_data)
+status_line_changed(GtkWidget *widget, gpointer data)
 {
-	(void) unused_data;
 	g_print("Status = `%s'.\n",
 		vte_terminal_get_status_line(VTE_TERMINAL(widget)));
 }
@@ -359,10 +362,8 @@ button_pressed(GtkWidget *widget, GdkEventButton *event, gpointer data)
 }
 
 void
-iconify_window(GtkWidget *unused_widget, gpointer data)
+iconify_window(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_iconify((GTK_WIDGET(data))->window);
@@ -371,10 +372,8 @@ iconify_window(GtkWidget *unused_widget, gpointer data)
 }
 
 void
-deiconify_window(GtkWidget *unused_widget, gpointer data)
+deiconify_window(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_deiconify((GTK_WIDGET(data))->window);
@@ -383,10 +382,8 @@ deiconify_window(GtkWidget *unused_widget, gpointer data)
 }
 
 void
-raise_window(GtkWidget *unused_widget, gpointer data)
+raise_window(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_raise((GTK_WIDGET(data))->window);
@@ -395,10 +392,8 @@ raise_window(GtkWidget *unused_widget, gpointer data)
 }
 
 void
-lower_window(GtkWidget *unused_widget, gpointer data)
+lower_window(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_lower((GTK_WIDGET(data))->window);
@@ -407,10 +402,8 @@ lower_window(GtkWidget *unused_widget, gpointer data)
 }
 
 void
-maximize_window(GtkWidget *unused_widget, gpointer data)
+maximize_window(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_maximize((GTK_WIDGET(data))->window);
@@ -419,10 +412,8 @@ maximize_window(GtkWidget *unused_widget, gpointer data)
 }
 
 void
-restore_window(GtkWidget *unused_widget, gpointer data)
+restore_window(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_unmaximize((GTK_WIDGET(data))->window);
@@ -431,12 +422,9 @@ restore_window(GtkWidget *unused_widget, gpointer data)
 }
 
 void
-refresh_window(GtkWidget *unused_widget, gpointer data)
+refresh_window(GtkWidget *widget, gpointer data)
 {
 	GdkRectangle rect;
-
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			rect.x = rect.y = 0;
@@ -453,7 +441,6 @@ resize_window(GtkWidget *widget, guint width, guint height, gpointer data)
 {
 	VteTerminal *terminal;
 	gint owidth, oheight;
-
 	if ((GTK_IS_WINDOW(data)) && (width >= 2) && (height >= 2)) {
 		terminal = VTE_TERMINAL(widget);
 		/* Take into account padding and border overhead. */
@@ -466,10 +453,8 @@ resize_window(GtkWidget *widget, guint width, guint height, gpointer data)
 }
 
 void
-move_window(GtkWidget *unused_widget, guint x, guint y, gpointer data)
+move_window(GtkWidget *widget, guint x, guint y, gpointer data)
 {
-	(void) unused_widget;
-
 	if (GTK_IS_WIDGET(data)) {
 		if ((GTK_WIDGET(data))->window) {
 			gdk_window_move((GTK_WIDGET(data))->window, x, y);
@@ -536,14 +521,11 @@ mess_with_fontconfig(void)
 }
 
 gboolean
-read_and_feed(GIOChannel *source, GIOCondition unused_condition, gpointer data)
+read_and_feed(GIOChannel *source, GIOCondition condition, gpointer data)
 {
 	char buf[2048];
 	gsize size;
 	GIOStatus status;
-
-	(void) unused_condition;
-
 	g_return_val_if_fail(VTE_IS_TERMINAL(data), FALSE);
 	status = g_io_channel_read_chars(source, buf, sizeof(buf),
 					 &size, NULL);
@@ -555,22 +537,16 @@ read_and_feed(GIOChannel *source, GIOCondition unused_condition, gpointer data)
 }
 
 void
-disconnect_watch(GtkWidget *unused_widget, gpointer data)
+disconnect_watch(GtkWidget *widget, gpointer data)
 {
-	(void) unused_widget;
 	g_source_remove(GPOINTER_TO_INT(data));
 }
 
 void
-clipboard_get(GtkClipboard *unused_clipboard,
-	GtkSelectionData *unused_selection_data,
-	guint unused_info, gpointer unused_owner)
+clipboard_get(GtkClipboard *clipboard, GtkSelectionData *selection_data,
+	      guint info, gpointer owner)
 {
 	/* No-op. */
-	(void) unused_clipboard;
-	(void) unused_selection_data;
-	(void) unused_info;
-	(void) unused_owner;
 	return;
 }
 
@@ -584,7 +560,7 @@ take_xconsole_ownership(GtkWidget *widget, gpointer data)
 	Atom xatom;
 	GdkAtom atom;
 	GtkClipboard *clipboard;
-	static const GtkTargetEntry targets[] = {
+	GtkTargetEntry targets[] = {
 		{"UTF8_STRING", 0, 0},
 		{"COMPOUND_TEXT", 0, 0},
 		{"TEXT", 0, 0},
@@ -674,9 +650,7 @@ nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data)
 	return FALSE;
 }
 
-void on_commit (VteTerminal *vteterminal, gpointer unused_user_data)
+void on_commit (VteTerminal *vteterminal, gpointer user_data)
 {
-	(void) unused_user_data;
-
 	printf("Commit; %s\n", vteterminal->icon_title);fflush(stdout);
 }

@@ -2,7 +2,6 @@
 #  include <config.h>
 #endif
 
-#include <errno.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -21,7 +20,7 @@ gtkTermPref* gtkTermPref_init(void)
 {
 	gtkTermPref* pref;
 
-	pref = malloc(sizeof *pref);
+	pref = (gtkTermPref*) malloc(sizeof(gtkTermPref));
 
 	pref->notebook = NULL;
 	pref->nbpage = 0;
@@ -130,8 +129,8 @@ gtkTermPref* gtkTermPref_init(void)
 gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref)
 {
 	pref->mprefSize++;
-	pref->mpref = realloc(pref->mpref, sizeof *pref->mpref * (pref->mprefSize + 1));
-	pref->mpref[pref->mprefSize] = malloc(sizeof **pref->mpref);
+	pref->mpref = (gtkTermMPref**) realloc(pref->mpref, sizeof(gtkTermMPref*) * (pref->mprefSize + 1));
+	pref->mpref[pref->mprefSize] = (gtkTermMPref*) malloc(sizeof(gtkTermMPref));
 
 	pref->mpref[pref->mprefSize]->match[0] = '\0';
 	pref->mpref[pref->mprefSize]->scrollOnKeyStroke = TRUE;
@@ -212,6 +211,64 @@ gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref)
 	pref->mpref[pref->mprefSize]->colors[15].green = 0xffff;
 	pref->mpref[pref->mprefSize]->colors[15].blue  = 0xffff;
 
+	/*
+	pref->mpref[pref->mprefSize]->red[0]  = 0x0000;
+	pref->mpref[pref->mprefSize]->red[1]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->red[2]  = 0x0000;
+	pref->mpref[pref->mprefSize]->red[3]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->red[4]  = 0x0000;
+	pref->mpref[pref->mprefSize]->red[5]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->red[6]  = 0x0000;
+	pref->mpref[pref->mprefSize]->red[7]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->red[8]  = 0x5555;
+	pref->mpref[pref->mprefSize]->red[9]  = 0xffff;
+	pref->mpref[pref->mprefSize]->red[10] = 0x5555;
+	pref->mpref[pref->mprefSize]->red[11] = 0xffff;
+	pref->mpref[pref->mprefSize]->red[12] = 0x5555;
+	pref->mpref[pref->mprefSize]->red[13] = 0xffff;
+	pref->mpref[pref->mprefSize]->red[14] = 0x5555;
+	pref->mpref[pref->mprefSize]->red[15] = 0xffff;
+	pref->mpref[pref->mprefSize]->red[16] = 0x0000;
+	pref->mpref[pref->mprefSize]->red[17] = 0x0000;
+
+	pref->mpref[pref->mprefSize]->grn[0]  = 0x0000;
+	pref->mpref[pref->mprefSize]->grn[1]  = 0x0000;
+	pref->mpref[pref->mprefSize]->grn[2]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->grn[3]  = 0x5555;
+	pref->mpref[pref->mprefSize]->grn[4]  = 0x0000;
+	pref->mpref[pref->mprefSize]->grn[5]  = 0x0000;
+	pref->mpref[pref->mprefSize]->grn[6]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->grn[7]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->grn[8]  = 0x5555;
+	pref->mpref[pref->mprefSize]->grn[9]  = 0x5555;
+	pref->mpref[pref->mprefSize]->grn[10] = 0xffff;
+	pref->mpref[pref->mprefSize]->grn[11] = 0xffff;
+	pref->mpref[pref->mprefSize]->grn[12] = 0x5555;
+	pref->mpref[pref->mprefSize]->grn[13] = 0x5555;
+	pref->mpref[pref->mprefSize]->grn[14] = 0xffff;
+	pref->mpref[pref->mprefSize]->grn[15] = 0xffff;
+	pref->mpref[pref->mprefSize]->grn[16] = 0xffff;
+	pref->mpref[pref->mprefSize]->grn[17] = 0x0000;
+
+	pref->mpref[pref->mprefSize]->blu[0]  = 0x0000;
+	pref->mpref[pref->mprefSize]->blu[1]  = 0x0000;
+	pref->mpref[pref->mprefSize]->blu[2]  = 0x0000;
+	pref->mpref[pref->mprefSize]->blu[3]  = 0x0000;
+	pref->mpref[pref->mprefSize]->blu[4]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->blu[5]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->blu[6]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->blu[7]  = 0xaaaa;
+	pref->mpref[pref->mprefSize]->blu[8]  = 0x5555;
+	pref->mpref[pref->mprefSize]->blu[9]  = 0x5555;
+	pref->mpref[pref->mprefSize]->blu[10] = 0x5555;
+	pref->mpref[pref->mprefSize]->blu[11] = 0x5555;
+	pref->mpref[pref->mprefSize]->blu[12] = 0xffff;
+	pref->mpref[pref->mprefSize]->blu[13] = 0xffff;
+	pref->mpref[pref->mprefSize]->blu[14] = 0xffff;
+	pref->mpref[pref->mprefSize]->blu[15] = 0xffff;
+	pref->mpref[pref->mprefSize]->blu[16] = 0x0000;
+	pref->mpref[pref->mprefSize]->blu[17] = 0x0000;
+*/
 	return pref->mpref[pref->mprefSize];
 }
 
@@ -255,22 +312,31 @@ int gtkTermPref_save(gtkTermPref* pref, GString *path)
 	fprintf(gtkTermRC_FP, "grn=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->back[0].green, pref->fore[0].green, pref->colors[0].green, pref->colors[1].green, pref->colors[2].green, pref->colors[3].green, pref->colors[4].green, pref->colors[5].green, pref->colors[6].green, pref->colors[7].green, pref->colors[8].green, pref->colors[9].green, pref->colors[10].green, pref->colors[11].green, pref->colors[12].green, pref->colors[13].green, pref->colors[14].green, pref->colors[15].green);
 	fprintf(gtkTermRC_FP, "blu=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n\n", pref->back[0].blue, pref->fore[0].blue, pref->colors[0].blue, pref->colors[1].blue, pref->colors[2].blue, pref->colors[3].blue, pref->colors[4].blue, pref->colors[5].blue, pref->colors[6].blue, pref->colors[7].blue, pref->colors[8].blue, pref->colors[9].blue, pref->colors[10].blue, pref->colors[11].blue, pref->colors[12].blue, pref->colors[13].blue, pref->colors[14].blue, pref->colors[15].blue);
 	fprintf(gtkTermRC_FP, "##\n# COLOR Definition\n##\n");
+	//fprintf(gtkTermRC_FP, "red=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->red[0], pref->red[1], pref->red[2], pref->red[3], pref->red[4], pref->red[5], pref->red[6], pref->red[7], pref->red[8], pref->red[9], pref->red[10], pref->red[11], pref->red[12], pref->red[13], pref->red[14], pref->red[15], pref->red[16], pref->red[17]);
+	//fprintf(gtkTermRC_FP, "grn=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->grn[0], pref->grn[1], pref->grn[2], pref->grn[3], pref->grn[4], pref->grn[5], pref->grn[6], pref->grn[7], pref->grn[8], pref->grn[9], pref->grn[10], pref->grn[11], pref->grn[12], pref->grn[13], pref->grn[14], pref->grn[15], pref->grn[16], pref->grn[17]);
+	//fprintf(gtkTermRC_FP, "blu=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n\n", pref->blu[0], pref->blu[1], pref->blu[2], pref->blu[3], pref->blu[4], pref->blu[5], pref->blu[6], pref->blu[7], pref->blu[8], pref->blu[9], pref->blu[10], pref->blu[11], pref->blu[12], pref->blu[13], pref->blu[14], pref->blu[15], pref->blu[16], pref->blu[17]);
 	fprintf(gtkTermRC_FP, "\n##\n# First section\n##\n");
 
 	if(pref->mprefSize > 0 && pref->mpref != NULL)
 	{
 		for(i=1; i<=pref->mprefSize; i++)
 		{
-			fprintf(gtkTermRC_FP, "[section]\n");
-			fprintf(gtkTermRC_FP, "match=%s\n", pref->mpref[i]->match);
-			fprintf(gtkTermRC_FP, "worldClass=%s\n", pref->mpref[i]->worldClass);
-			fprintf(gtkTermRC_FP, "scrollOnKeyStroke=%d\n", pref->mpref[i]->scrollOnKeyStroke);
-			fprintf(gtkTermRC_FP, "scrollOnOutput=%d\n", pref->mpref[i]->scrollOnOutput);
-			fprintf(gtkTermRC_FP, "beep=%d\n", pref->mpref[i]->beep);
-			fprintf(gtkTermRC_FP, "blink=%d\n", pref->mpref[i]->blink);
-			fprintf(gtkTermRC_FP, "red=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->mpref[i]->back[0].red, pref->mpref[i]->fore[0].red, pref->mpref[i]->colors[0].red,   pref->mpref[i]->colors[1].red, pref->mpref[i]->colors[2].red, pref->mpref[i]->colors[3].red, pref->mpref[i]->colors[4].red, pref->mpref[i]->colors[5].red, pref->mpref[i]->colors[6].red, pref->mpref[i]->colors[7].red, pref->mpref[i]->colors[8].red, pref->mpref[i]->colors[9].red, pref->mpref[i]->colors[10].red, pref->mpref[i]->colors[11].red, pref->mpref[i]->colors[12].red, pref->mpref[i]->colors[13].red, pref->mpref[i]->colors[14].red, pref->mpref[i]->colors[15].red);
-			fprintf(gtkTermRC_FP, "grn=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->mpref[i]->back[0].green, pref->mpref[i]->fore[0].green, pref->mpref[i]->colors[0].green, pref->mpref[i]->colors[1].green, pref->mpref[i]->colors[2].green, pref->mpref[i]->colors[3].green, pref->mpref[i]->colors[4].green, pref->mpref[i]->colors[5].green, pref->mpref[i]->colors[6].green, pref->mpref[i]->colors[7].green, pref->mpref[i]->colors[8].green, pref->mpref[i]->colors[9].green, pref->mpref[i]->colors[10].green, pref->mpref[i]->colors[11].green, pref->mpref[i]->colors[12].green, pref->mpref[i]->colors[13].green, pref->mpref[i]->colors[14].green, pref->mpref[i]->colors[15].green);
-			fprintf(gtkTermRC_FP, "blu=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n\n", pref->mpref[i]->back[0].blue, pref->mpref[i]->fore[0].blue, pref->mpref[i]->colors[0].blue, pref->mpref[i]->colors[1].blue, pref->mpref[i]->colors[2].blue, pref->mpref[i]->colors[3].blue, pref->mpref[i]->colors[4].blue, pref->mpref[i]->colors[5].blue, pref->mpref[i]->colors[6].blue, pref->mpref[i]->colors[7].blue, pref->mpref[i]->colors[8].blue, pref->mpref[i]->colors[9].blue, pref->mpref[i]->colors[10].blue, pref->mpref[i]->colors[11].blue, pref->mpref[i]->colors[12].blue, pref->mpref[i]->colors[13].blue, pref->mpref[i]->colors[14].blue, pref->mpref[i]->colors[15].blue);
+			//if(pref->mpref[i]->match[0] != '\0')
+			//{
+				fprintf(gtkTermRC_FP, "[section]\n");
+				fprintf(gtkTermRC_FP, "match=%s\n", pref->mpref[i]->match);
+				fprintf(gtkTermRC_FP, "worldClass=%s\n", pref->mpref[i]->worldClass);
+				fprintf(gtkTermRC_FP, "scrollOnKeyStroke=%d\n", pref->mpref[i]->scrollOnKeyStroke);
+				fprintf(gtkTermRC_FP, "scrollOnOutput=%d\n", pref->mpref[i]->scrollOnOutput);
+				fprintf(gtkTermRC_FP, "beep=%d\n", pref->mpref[i]->beep);
+				fprintf(gtkTermRC_FP, "blink=%d\n", pref->mpref[i]->blink);
+				fprintf(gtkTermRC_FP, "red=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->mpref[i]->back[0].red, pref->mpref[i]->fore[0].red, pref->mpref[i]->colors[0].red,   pref->mpref[i]->colors[1].red, pref->mpref[i]->colors[2].red, pref->mpref[i]->colors[3].red, pref->mpref[i]->colors[4].red, pref->mpref[i]->colors[5].red, pref->mpref[i]->colors[6].red, pref->mpref[i]->colors[7].red, pref->mpref[i]->colors[8].red, pref->mpref[i]->colors[9].red, pref->mpref[i]->colors[10].red, pref->mpref[i]->colors[11].red, pref->mpref[i]->colors[12].red, pref->mpref[i]->colors[13].red, pref->mpref[i]->colors[14].red, pref->mpref[i]->colors[15].red);
+				fprintf(gtkTermRC_FP, "grn=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->mpref[i]->back[0].green, pref->mpref[i]->fore[0].green, pref->mpref[i]->colors[0].green, pref->mpref[i]->colors[1].green, pref->mpref[i]->colors[2].green, pref->mpref[i]->colors[3].green, pref->mpref[i]->colors[4].green, pref->mpref[i]->colors[5].green, pref->mpref[i]->colors[6].green, pref->mpref[i]->colors[7].green, pref->mpref[i]->colors[8].green, pref->mpref[i]->colors[9].green, pref->mpref[i]->colors[10].green, pref->mpref[i]->colors[11].green, pref->mpref[i]->colors[12].green, pref->mpref[i]->colors[13].green, pref->mpref[i]->colors[14].green, pref->mpref[i]->colors[15].green);
+				fprintf(gtkTermRC_FP, "blu=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n\n", pref->mpref[i]->back[0].blue, pref->mpref[i]->fore[0].blue, pref->mpref[i]->colors[0].blue, pref->mpref[i]->colors[1].blue, pref->mpref[i]->colors[2].blue, pref->mpref[i]->colors[3].blue, pref->mpref[i]->colors[4].blue, pref->mpref[i]->colors[5].blue, pref->mpref[i]->colors[6].blue, pref->mpref[i]->colors[7].blue, pref->mpref[i]->colors[8].blue, pref->mpref[i]->colors[9].blue, pref->mpref[i]->colors[10].blue, pref->mpref[i]->colors[11].blue, pref->mpref[i]->colors[12].blue, pref->mpref[i]->colors[13].blue, pref->mpref[i]->colors[14].blue, pref->mpref[i]->colors[15].blue);
+				//fprintf(gtkTermRC_FP, "red=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->mpref[i]->red[0], pref->mpref[i]->red[1], pref->mpref[i]->red[2], pref->mpref[i]->red[3], pref->mpref[i]->red[4], pref->mpref[i]->red[5], pref->mpref[i]->red[6], pref->mpref[i]->red[7], pref->mpref[i]->red[8], pref->mpref[i]->red[9], pref->mpref[i]->red[10], pref->mpref[i]->red[11], pref->mpref[i]->red[12], pref->mpref[i]->red[13], pref->mpref[i]->red[14], pref->mpref[i]->red[15], pref->mpref[i]->red[16], pref->mpref[i]->red[17]);
+				//fprintf(gtkTermRC_FP, "grn=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->mpref[i]->grn[0], pref->mpref[i]->grn[1], pref->mpref[i]->grn[2], pref->mpref[i]->grn[3], pref->mpref[i]->grn[4], pref->mpref[i]->grn[5], pref->mpref[i]->grn[6], pref->mpref[i]->grn[7], pref->mpref[i]->grn[8], pref->mpref[i]->grn[9], pref->mpref[i]->grn[10], pref->mpref[i]->grn[11], pref->mpref[i]->grn[12], pref->mpref[i]->grn[13], pref->mpref[i]->grn[14], pref->mpref[i]->grn[15], pref->mpref[i]->grn[16], pref->mpref[i]->grn[17]);
+				//fprintf(gtkTermRC_FP, "blu=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n\n", pref->mpref[i]->blu[0], pref->mpref[i]->blu[1], pref->mpref[i]->blu[2], pref->mpref[i]->blu[3], pref->mpref[i]->blu[4], pref->mpref[i]->blu[5], pref->mpref[i]->blu[6], pref->mpref[i]->blu[7], pref->mpref[i]->blu[8], pref->mpref[i]->blu[9], pref->mpref[i]->blu[10], pref->mpref[i]->blu[11], pref->mpref[i]->blu[12], pref->mpref[i]->blu[13], pref->mpref[i]->blu[14], pref->mpref[i]->blu[15], pref->mpref[i]->blu[16], pref->mpref[i]->blu[17]);
+			//}
 		}
 	}
 
@@ -313,25 +379,23 @@ gtkTermPref* gtkTermPref_get (void)
 
 	pref = gtkTermPref_init();
 
-	gtktermrc_file = g_string_new("");
+	gtktermrc_file = g_string_new( "hallo" );
 	g_string_sprintf(gtktermrc_file, "%s/.gtkterm2rc", getenv("HOME"));
 
 	gtkTermRC = fopen (gtktermrc_file->str, "r");
 	if(!gtkTermRC)
 	{
-		g_warning("cannot open gtkterm2rc file \"%s\": %s\n",
-			gtktermrc_file->str, g_strerror(errno));
+		g_warning("gtkterm2rc File dose not exists: %s\n", gtktermrc_file->str);
 		if(gtkTermPref_save(pref, gtktermrc_file) == FALSE)
 		{
 			gtkTermPref_free(pref);
 			g_string_free(gtktermrc_file, TRUE);
-			exit(EXIT_FAILURE);
+			exit(-1);
 		}
 		else if(!(gtkTermRC = fopen (gtktermrc_file->str, "r")))
 		{
-			g_warning("cannot open gtkterm2rc file \"%s\": %s\n",
-				gtktermrc_file->str, g_strerror(errno));
-			exit(EXIT_FAILURE);
+			g_warning("gtkterm2rc File dose not exists: %s\n", gtktermrc_file->str);
+			exit(-1);
 		}
 	}
 
@@ -439,7 +503,7 @@ gtkTermPref* gtkTermPref_get (void)
 	{
 		gtkTermPref_free(pref);
 		g_string_free(gtktermrc_file, TRUE);
-		exit(EXIT_FAILURE);
+		exit(-1);
 	}
 	g_string_free(gtktermrc_file, TRUE);
 
