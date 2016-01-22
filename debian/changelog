@@ -1,0 +1,5 @@
+gtkterm2 (0.2.0-1) unstable; urgency=medium
+
+  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
+
+ -- Oleg Pudeyev <oleg@bsdpower.com>  Thu, 21 Jan 2016 18:46:12 -0500
