@@ -64,6 +64,8 @@ create_window (gtkTermPref* pref)
   //GtkWidget *empty_notebook_page;
   //GtkWidget *label;
   GtkAccelGroup *accel_group;
+  guint accelerator_key;
+  GdkModifierType accelerator_mods;
 
   accel_group = gtk_accel_group_new ();
 
@@ -111,8 +113,13 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (new_tab, "new_tab");
   gtk_widget_show (new_tab);
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), new_tab);
+  gtk_accelerator_parse(pref->newTabAccelerator, &accelerator_key, &accelerator_mods);
+  if (accelerator_key == 0 && accelerator_mods == 0) {
+    accelerator_key = GDK_n;
+    accelerator_mods = GDK_CONTROL_MASK;
+  }
   gtk_widget_add_accelerator (new_tab, "activate", accel_group,
-                              GDK_n, GDK_CONTROL_MASK,
+                              accelerator_key, accelerator_mods,
                               GTK_ACCEL_VISIBLE);
 
   image12 = gtk_image_new_from_stock ("gtk-new", GTK_ICON_SIZE_MENU);
@@ -159,8 +166,13 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (next_tab, "next_tab");
   gtk_widget_show (next_tab);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), next_tab);
+  gtk_accelerator_parse(pref->nextTabAccelerator, &accelerator_key, &accelerator_mods);
+  if (accelerator_key == 0 && accelerator_mods == 0) {
+    accelerator_key = GDK_Right;
+    accelerator_mods = GDK_SHIFT_MASK;
+  }
   gtk_widget_add_accelerator (next_tab, "activate", accel_group,
-                              GDK_Right, GDK_SHFIT_MASK,
+                              accelerator_key, accelerator_mods,
                               GTK_ACCEL_VISIBLE);
   if (0) gtk_widget_add_accelerator (next_tab, "activate", accel_group,
                               GDK_KP_Right, GDK_SHIFT_MASK,
@@ -170,8 +182,13 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (prev_tab, "prev_tab");
   gtk_widget_show (prev_tab);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), prev_tab);
+  gtk_accelerator_parse(pref->prevTabAccelerator, &accelerator_key, &accelerator_mods);
+  if (accelerator_key == 0 && accelerator_mods == 0) {
+    accelerator_key = GDK_Left;
+    accelerator_mods = GDK_SHIFT_MASK;
+  }
   gtk_widget_add_accelerator (prev_tab, "activate", accel_group,
-                              GDK_Left, GDK_SHIFT_MASK,
+                              accelerator_key, accelerator_mods,
                               GTK_ACCEL_VISIBLE);
   if (0) gtk_widget_add_accelerator (prev_tab, "activate", accel_group,
                               GDK_KP_Left, GDK_SHIFT_MASK,

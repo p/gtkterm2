@@ -121,6 +121,10 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->mprefSize = 0;
 	pref->mpref = NULL;
 
+        strcpy(pref->newTabAccelerator, "<Ctrl>N");
+        strcpy(pref->nextTabAccelerator, "<Shift>Right");
+        strcpy(pref->prevTabAccelerator, "<Shift>Left");
+
 	gtkTermMPref_init(pref);
 
 	return pref;
@@ -307,6 +311,12 @@ int gtkTermPref_save(gtkTermPref* pref, GString *path)
 	fprintf(gtkTermRC_FP, "beep=%d\n\n", pref->beep);
 	fprintf(gtkTermRC_FP, "##\n# x y Default Terminal Size in pix\n##\n");
 	fprintf(gtkTermRC_FP, "terminalSize=%d %d\n\n", pref->termX, pref->termY);
+	fprintf(gtkTermRC_FP, "##\n# New Tab accelerator\n##\n");
+	fprintf(gtkTermRC_FP, "newTabAccelerator=%s\n\n", pref->newTabAccelerator);
+	fprintf(gtkTermRC_FP, "##\n# Next Tab accelerator\n##\n");
+	fprintf(gtkTermRC_FP, "nextTabAccelerator=%s\n\n", pref->nextTabAccelerator);
+	fprintf(gtkTermRC_FP, "##\n# Previous Tab accelerator\n##\n");
+	fprintf(gtkTermRC_FP, "prevTabAccelerator=%s\n\n", pref->prevTabAccelerator);
 	fprintf(gtkTermRC_FP, "##\n# NEW COLOR Definition\n##\n");
 	fprintf(gtkTermRC_FP, "red=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->back[0].red, pref->fore[0].red, pref->colors[0].red, pref->colors[1].red, pref->colors[2].red, pref->colors[3].red, pref->colors[4].red, pref->colors[5].red, pref->colors[6].red, pref->colors[7].red, pref->colors[8].red, pref->colors[9].red, pref->colors[10].red, pref->colors[11].red, pref->colors[12].red, pref->colors[13].red, pref->colors[14].red, pref->colors[15].red);
 	fprintf(gtkTermRC_FP, "grn=0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x 0x%04x\n",   pref->back[0].green, pref->fore[0].green, pref->colors[0].green, pref->colors[1].green, pref->colors[2].green, pref->colors[3].green, pref->colors[4].green, pref->colors[5].green, pref->colors[6].green, pref->colors[7].green, pref->colors[8].green, pref->colors[9].green, pref->colors[10].green, pref->colors[11].green, pref->colors[12].green, pref->colors[13].green, pref->colors[14].green, pref->colors[15].green);
@@ -367,6 +377,7 @@ gtkTermPref* gtkTermPref_get (void)
 	GString* gtktermrc_file;
 	gtkTermPref* pref;
 	char tmp[MAX_LINE_LENGTH];
+	char string_value[MAX_LINE_LENGTH];
 	char* worldClass;
 	int i=0;
 	int* blink;
@@ -499,6 +510,18 @@ gtkTermPref* gtkTermPref_get (void)
 			if(strstr(tmp, "match"))
 			{
 				sscanf(tmp + 6, "%s", pref->mpref[i]->match);
+			}
+			if(strstr(tmp, "newTabAccelerator"))
+			{
+				sscanf(tmp + 18, "%s", pref->newTabAccelerator);
+			}
+			if(strstr(tmp, "nextTabAccelerator"))
+			{
+				sscanf(tmp + 19, "%s", pref->nextTabAccelerator);
+			}
+			if(strstr(tmp, "prevTabAccelerator"))
+			{
+				sscanf(tmp + 19, "%s", pref->prevTabAccelerator);
 			}
 		}
 	}
