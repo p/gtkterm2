@@ -10,6 +10,14 @@ on_new_tab_activate                    (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 
 void
+on_next_tab_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
+on_prev_tab_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data);
+
+void
 on_close_window_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data);
 

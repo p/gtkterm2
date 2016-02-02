@@ -102,6 +102,51 @@ on_new_tab_activate                    (GtkMenuItem     *menuitem,
 
 
 void
+on_next_tab_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	gtkTermPref *pref;
+	GtkWidget *notebook;
+	gint cur_term;
+	gint next_term;
+
+	pref = (gtkTermPref *) user_data;
+	notebook = pref->notebook;
+
+        cur_term = gtk_notebook_get_current_page (GTK_NOTEBOOK(notebook));
+        gtk_notebook_next_page(GTK_NOTEBOOK(notebook));
+        next_term = gtk_notebook_get_current_page (GTK_NOTEBOOK(notebook));
+        if (cur_term == next_term)
+        {
+                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), 0);
+        }
+}
+
+
+void
+on_prev_tab_activate                    (GtkMenuItem     *menuitem,
+                                        gpointer         user_data)
+{
+	gtkTermPref *pref;
+	GtkWidget *notebook;
+	gint cur_term;
+
+	pref = (gtkTermPref *) user_data;
+	notebook = pref->notebook;
+
+        cur_term = gtk_notebook_get_current_page (GTK_NOTEBOOK(notebook));
+        if (cur_term == 0)
+        {
+                gtk_notebook_set_page(GTK_NOTEBOOK(notebook), -1);
+        }
+        else
+        {
+                gtk_notebook_prev_page (GTK_NOTEBOOK(notebook));
+        }
+}
+
+
+void
 on_close_window_activate               (GtkMenuItem     *menuitem,
                                         gpointer         user_data)
 {
