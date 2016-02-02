@@ -49,6 +49,9 @@ struct _PREF
 	char worldClass[MAX_LINE_LENGTH];
 	gtkTermMPref **mpref;
 	int mprefSize;
+	char newTabAccelerator[MAX_LINE_LENGTH];
+	char nextTabAccelerator[MAX_LINE_LENGTH];
+	char prevTabAccelerator[MAX_LINE_LENGTH];
 
 	GSList* termProp;
 };
