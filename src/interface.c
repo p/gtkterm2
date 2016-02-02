@@ -51,6 +51,8 @@ create_window (gtkTermPref* pref)
   //GtkWidget *paste;
   GtkWidget *menuitem3;
   GtkWidget *menuitem3_menu;
+  GtkWidget *next_tab;
+  GtkWidget *prev_tab;
   GtkWidget *full_screen;
   GtkWidget *image15;
   //GtkWidget *hide_menu;
@@ -96,7 +98,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (menubar);
   gtk_box_pack_start (GTK_BOX (vbox), menubar, FALSE, FALSE, 0);
 
-  menuitem1 = gtk_menu_item_new_with_mnemonic (_("File"));
+  menuitem1 = gtk_menu_item_new_with_mnemonic (_("_File"));
   gtk_widget_set_name (menuitem1, "menuitem1");
   gtk_widget_show (menuitem1);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem1);
@@ -109,6 +111,9 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (new_tab, "new_tab");
   gtk_widget_show (new_tab);
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), new_tab);
+  gtk_widget_add_accelerator (new_tab, "activate", accel_group,
+                              GDK_n, GDK_CONTROL_MASK,
+                              GTK_ACCEL_VISIBLE);
 
   image12 = gtk_image_new_from_stock ("gtk-new", GTK_ICON_SIZE_MENU);
   gtk_widget_set_name (image12, "image12");
@@ -141,7 +146,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image14);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (close_window), image14);
 
-  menuitem3 = gtk_menu_item_new_with_mnemonic (_("View"));
+  menuitem3 = gtk_menu_item_new_with_mnemonic (_("_View"));
   gtk_widget_set_name (menuitem3, "menuitem3");
   gtk_widget_show (menuitem3);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem3);
@@ -149,6 +154,28 @@ create_window (gtkTermPref* pref)
   menuitem3_menu = gtk_menu_new ();
   gtk_widget_set_name (menuitem3_menu, "menuitem3_menu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem3), menuitem3_menu);
+
+  next_tab = gtk_image_menu_item_new_with_mnemonic (_("Next Tab"));
+  gtk_widget_set_name (next_tab, "next_tab");
+  gtk_widget_show (next_tab);
+  gtk_container_add (GTK_CONTAINER (menuitem3_menu), next_tab);
+  gtk_widget_add_accelerator (next_tab, "activate", accel_group,
+                              GDK_Right, GDK_SHFIT_MASK,
+                              GTK_ACCEL_VISIBLE);
+  if (0) gtk_widget_add_accelerator (next_tab, "activate", accel_group,
+                              GDK_KP_Right, GDK_SHIFT_MASK,
+                              GTK_ACCEL_VISIBLE);
+
+  prev_tab = gtk_image_menu_item_new_with_mnemonic (_("Previous Tab"));
+  gtk_widget_set_name (prev_tab, "prev_tab");
+  gtk_widget_show (prev_tab);
+  gtk_container_add (GTK_CONTAINER (menuitem3_menu), prev_tab);
+  gtk_widget_add_accelerator (prev_tab, "activate", accel_group,
+                              GDK_Left, GDK_SHIFT_MASK,
+                              GTK_ACCEL_VISIBLE);
+  if (0) gtk_widget_add_accelerator (prev_tab, "activate", accel_group,
+                              GDK_KP_Left, GDK_SHIFT_MASK,
+                              GTK_ACCEL_VISIBLE);
 
   full_screen = gtk_image_menu_item_new_with_mnemonic (_("Full Screen"));
   gtk_widget_set_name (full_screen, "full_screen");
@@ -165,7 +192,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (hide_menu);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), hide_menu);*/
 
-  menuitem4 = gtk_menu_item_new_with_mnemonic (_("Help"));
+  menuitem4 = gtk_menu_item_new_with_mnemonic (_("_Help"));
   gtk_widget_set_name (menuitem4, "menuitem4");
   gtk_widget_show (menuitem4);
   gtk_container_add (GTK_CONTAINER (menubar), menuitem4);
@@ -193,6 +220,12 @@ create_window (gtkTermPref* pref)
   g_signal_connect ((gpointer) new_tab, "activate",
                     G_CALLBACK (on_new_tab_activate),
                     pref);
+  g_signal_connect ((gpointer) next_tab, "activate",
+                    G_CALLBACK (on_next_tab_activate),
+                    pref);
+  g_signal_connect ((gpointer) prev_tab, "activate",
+                    G_CALLBACK (on_prev_tab_activate),
+                    pref);
   g_signal_connect ((gpointer) close_tab, "activate",
                     G_CALLBACK (on_close_tab_activate),
                     pref);
@@ -208,7 +241,7 @@ create_window (gtkTermPref* pref)
   g_signal_connect ((gpointer) info, "activate",
                     G_CALLBACK (on_info_activate),
                     NULL);
-  g_signal_connect ((gpointer) window, "key-press-event",
+  if(0) g_signal_connect ((gpointer) window, "key-press-event",
                     G_CALLBACK (nb_handle_key),
                     pref);
 	/* Connect to the "status-line-changed" signal. */
