@@ -1,0 +1,14 @@
+Source: gtkterm2
+Section: unknown
+Priority: optional
+Maintainer: Oleg Pudeyev <oleg@bsdpower.com>
+Build-Depends: debhelper (>=9),autotools-dev,libvte-dev
+Standards-Version: 3.9.8
+Homepage: https://github.com/p/gtkterm2
+#Vcs-Git: git://anonscm.debian.org/collab-maint/gtkterm2.git
+#Vcs-Browser: https://anonscm.debian.org/cgit/collab-maint/gtkterm2.git
+
+Package: gtkterm2
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}, libvte9
+Description: A lightweight terminal emulator based on vte terminal widget.
