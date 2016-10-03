@@ -1,0 +1,17 @@
+#!/bin/sh 
+
+set -e
+
+if [ "$1" = configure ]; then
+   xte='x-terminal-emulator'
+   binary='/usr/bin/gtkterm2'
+   xtebinary="/usr/bin/$xte"
+   #xteman="/usr/share/man/man1/$xte.1.gz"
+   #man='/usr/share/man/man1/gtkterm2.1.gz'
+   
+   update-alternatives \
+     --install $xtebinary $xte $binary 10
+     #--slave $xteman $xte.1.gz $man
+fi
+
+#DEBHELPER#

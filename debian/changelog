@@ -1,4 +1,10 @@
-gtkterm2 (0.2.3-1) unstable; urgency=medium
+gtkterm2 (0.2.3) UNRELEASED; urgency=medium
+
+  * Added postinst/prerm scripts setting x-terminal-emulator.
+
+ -- Oleg Pudeyev <oleg@bsdpower.com>  Mon, 03 Oct 2016 17:30:34 -0400
+
+gtkterm2 (0.2.3) unstable; urgency=medium
 
   * Initial Release.
 
