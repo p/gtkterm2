@@ -1,3 +1,9 @@
+gtkterm2 (0.2.3-3) unstable; urgency=medium
+
+  * Bump version for t64
+
+ -- Oleg Pudeyev <oleg@bsdpower.com>  Sat, 27 Jul 2024 22:33:22 -0400
+
 gtkterm2 (0.2.3-2) unstable; urgency=medium
 
   * Added postinst/prerm scripts setting x-terminal-emulator.
