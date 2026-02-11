@@ -40,6 +40,7 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->opacity = 0;
 	pref->transparent = FALSE;
 	pref->stealth = FALSE;
+	pref->rc_write = TRUE;
 	pref->login_shell = FALSE;
 	pref->fullscreen = FALSE;
 
@@ -281,6 +282,11 @@ int gtkTermPref_save(gtkTermPref* pref, GString *path)
 	FILE* gtkTermRC_FP;
 	int i;
 
+	if(!pref->rc_write)
+	{
+		return TRUE;
+	}
+
 	gtkTermRC_FP = fopen (path->str, "w");
 	if(!gtkTermRC_FP)
 	{
@@ -373,7 +379,7 @@ int gtkTermPref_free(gtkTermPref* pref)
 	return TRUE;
 }
 
-gtkTermPref* gtkTermPref_get (void)
+gtkTermPref* gtkTermPref_get (int rc_write)
 {
 	FILE* gtkTermRC;
 	GString* gtktermrc_file;
@@ -392,6 +398,7 @@ gtkTermPref* gtkTermPref_get (void)
 	char *home;
 
 	pref = gtkTermPref_init();
+	pref->rc_write = rc_write;
 
 	gtktermrc_file = g_string_new("");
 	home = getenv("HOME");
