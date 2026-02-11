@@ -10,6 +10,7 @@ INCLUDES = \
 AM_CFLAGS =\
 	$(vte_CFLAGS)\
 	 -Wall\
+	 -Wno-deprecated-declarations\
 	 -g
 
 bin_PROGRAMS = gtkterm2
