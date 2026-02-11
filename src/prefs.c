@@ -553,7 +553,8 @@ int gtkTermFindMPref(char *matchstr, gtkTermPref *pref)
 
 	for(i=1; i<=pref->mprefSize; i++)
 	{
-		if(strstr(matchstr, pref->mpref[i]->match))
+		/* Skip empty match strings - they would match everything */
+		if(pref->mpref[i]->match[0] != '\0' && strstr(matchstr, pref->mpref[i]->match))
 		{
 			return i;
 		}
