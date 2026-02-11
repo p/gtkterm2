@@ -2607,7 +2607,7 @@ fi
 
 PACKAGE=gtkterm2
 
-VERSION=0.2.3
+VERSION=0.3.0
 
 if test "`cd $srcdir && pwd`" != "`pwd`" && test -f $srcdir/config.status; then
   as_fn_error $? "source directory already configured; run \"make distclean\" there first" "$LINENO" 5
