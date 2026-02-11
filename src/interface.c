@@ -109,7 +109,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (menuitem1_menu, "menuitem1_menu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem1), menuitem1_menu);
 
-  new_tab = gtk_image_menu_item_new_with_mnemonic (_("New Tab"));
+  new_tab = gtk_image_menu_item_new_with_mnemonic (_("_New Tab"));
   gtk_widget_set_name (new_tab, "new_tab");
   gtk_widget_show (new_tab);
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), new_tab);
@@ -133,7 +133,7 @@ create_window (gtkTermPref* pref)
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), separatormenuitem1);
   gtk_widget_set_sensitive (separatormenuitem1, FALSE);
 
-  close_tab = gtk_image_menu_item_new_with_mnemonic (_("Close Tab"));
+  close_tab = gtk_image_menu_item_new_with_mnemonic (_("_Close Tab"));
   gtk_widget_set_name (close_tab, "close_tab");
   gtk_widget_show (close_tab);
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), close_tab);
@@ -143,7 +143,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (image13);
   gtk_image_menu_item_set_image (GTK_IMAGE_MENU_ITEM (close_tab), image13);
 
-  close_window = gtk_image_menu_item_new_with_mnemonic (_("Close Window"));
+  close_window = gtk_image_menu_item_new_with_mnemonic (_("Close _Window"));
   gtk_widget_set_name (close_window, "close_window");
   gtk_widget_show (close_window);
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), close_window);
@@ -162,7 +162,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (menuitem3_menu, "menuitem3_menu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem3), menuitem3_menu);
 
-  next_tab = gtk_image_menu_item_new_with_mnemonic (_("Next Tab"));
+  next_tab = gtk_image_menu_item_new_with_mnemonic (_("_Next Tab"));
   gtk_widget_set_name (next_tab, "next_tab");
   gtk_widget_show (next_tab);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), next_tab);
@@ -178,7 +178,7 @@ create_window (gtkTermPref* pref)
                               GDK_KP_Right, GDK_SHIFT_MASK,
                               GTK_ACCEL_VISIBLE);
 
-  prev_tab = gtk_image_menu_item_new_with_mnemonic (_("Previous Tab"));
+  prev_tab = gtk_image_menu_item_new_with_mnemonic (_("_Previous Tab"));
   gtk_widget_set_name (prev_tab, "prev_tab");
   gtk_widget_show (prev_tab);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), prev_tab);
@@ -194,7 +194,7 @@ create_window (gtkTermPref* pref)
                               GDK_KP_Left, GDK_SHIFT_MASK,
                               GTK_ACCEL_VISIBLE);
 
-  full_screen = gtk_image_menu_item_new_with_mnemonic (_("Full Screen"));
+  full_screen = gtk_image_menu_item_new_with_mnemonic (_("_Full Screen"));
   gtk_widget_set_name (full_screen, "full_screen");
   gtk_widget_show (full_screen);
   gtk_container_add (GTK_CONTAINER (menuitem3_menu), full_screen);
@@ -218,7 +218,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (menuitem4_menu, "menuitem4_menu");
   gtk_menu_item_set_submenu (GTK_MENU_ITEM (menuitem4), menuitem4_menu);
 
-  info = gtk_image_menu_item_new_with_mnemonic (_("Info"));
+  info = gtk_image_menu_item_new_with_mnemonic (_("_Info"));
   gtk_widget_set_name (info, "info");
   gtk_widget_show (info);
   gtk_container_add (GTK_CONTAINER (menuitem4_menu), info);
