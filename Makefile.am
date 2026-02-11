@@ -3,7 +3,7 @@
 ## If you don't want it to overwrite it,
 ## 	Please disable it in the Anjuta project configuration
 
-SUBDIRS = intl po src pixmaps
+SUBDIRS = po src pixmaps
 
 gtkterm2docdir = ${prefix}/doc/gtkterm2
 gtkterm2doc_DATA = \

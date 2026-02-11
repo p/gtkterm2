@@ -46,7 +46,7 @@ AC_DEFINE_UNQUOTED(GETTEXT_PACKAGE, "$GETTEXT_PACKAGE", [Package name for gettex
 
 dnl Languages which your application supports
 ALL_LINGUAS="de"
-AM_GNU_GETTEXT
+AM_GNU_GETTEXT([external])
 AM_GNU_GETTEXT_VERSION(0.10.40)
 
 dnl Set PACKAGE_LOCALE_DIR in config.h.
@@ -115,7 +115,6 @@ AC_DEFINE_UNQUOTED(PACKAGE_SOURCE_DIR, "${packagesrcdir}")
 
 AC_OUTPUT([
 Makefile
-intl/Makefile
 po/Makefile.in
 src/Makefile
 pixmaps/Makefile
