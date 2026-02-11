@@ -504,15 +504,15 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 			{
 				sscanf(tmp + 13, "%d %d", (int *) &pref->termX, (int *) &pref->termY);
 			}
-			if(strstr(tmp, "red"))
+			if(strncmp(tmp, "red=", 4) == 0)
 			{
 				sscanf(tmp + 4, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi", &back[0].red, &fore[0].red, &colors[0].red, &colors[1].red, &colors[2].red, &colors[3].red, &colors[4].red, &colors[5].red, &colors[6].red, &colors[7].red, &colors[8].red, &colors[9].red, &colors[10].red, &colors[11].red, &colors[12].red, &colors[13].red, &colors[14].red, &colors[15].red);
 			}
-			if(strstr(tmp, "grn"))
+			if(strncmp(tmp, "grn=", 4) == 0)
 			{
 				sscanf(tmp + 4, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi", &back[0].green, &fore[0].green, &colors[0].green, &colors[1].green, &colors[2].green, &colors[3].green, &colors[4].green, &colors[5].green, &colors[6].green, &colors[7].green, &colors[8].green, &colors[9].green, &colors[10].green, &colors[11].green, &colors[12].green, &colors[13].green, &colors[14].green, &colors[15].green);
 			}
-			if(strstr(tmp, "blu"))
+			if(strncmp(tmp, "blu=", 4) == 0)
 			{
 				sscanf(tmp + 4, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi", &back[0].blue, &fore[0].blue, &colors[0].blue, &colors[1].blue, &colors[2].blue, &colors[3].blue, &colors[4].blue, &colors[5].blue, &colors[6].blue, &colors[7].blue, &colors[8].blue, &colors[9].blue, &colors[10].blue, &colors[11].blue, &colors[12].blue, &colors[13].blue, &colors[14].blue, &colors[15].blue);
 			}
