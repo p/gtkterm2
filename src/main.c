@@ -108,7 +108,7 @@ main (int argc, char *argv[])
 				pref->login_shell = TRUE;
 			break;
 			case 'r':
-				pref->rc_write = FALSE;
+				/* Already handled in early scan before gtkTermPref_get() */
 			break;
 			case 't':
 				pref->transparent = TRUE;
