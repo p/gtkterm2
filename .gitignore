@@ -11,6 +11,7 @@ autom4te.cache/
 # Generated Makefiles (from .in templates)
 /po/Makefile
 /po/POTFILES
+/po/stamp-po
 /pixmaps/Makefile
 /src/Makefile
 
