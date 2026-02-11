@@ -385,7 +385,6 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 	GString* gtktermrc_file;
 	gtkTermPref* pref;
 	char tmp[MAX_LINE_LENGTH];
-	char string_value[MAX_LINE_LENGTH];
 	char* worldClass;
 	int i=0;
 	int* blink;
@@ -405,7 +404,7 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 	if (home == NULL) {
 		home = "";
 	}
-	g_string_sprintf(gtktermrc_file, "%s/.gtkterm2rc", home);
+	g_string_printf(gtktermrc_file, "%s/.gtkterm2rc", home);
 
 	gtkTermRC = fopen (gtktermrc_file->str, "r");
 	if(!gtkTermRC)
