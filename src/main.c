@@ -86,6 +86,15 @@ main (int argc, char *argv[])
 			rc_write = FALSE;
 			break;
 		}
+		/* Skip next arg if current flag takes an argument */
+		if(strcmp(argv[i], "-x") == 0 || strcmp(argv[i], "-y") == 0 ||
+		   strcmp(argv[i], "-X") == 0 || strcmp(argv[i], "-Y") == 0 ||
+		   strcmp(argv[i], "-o") == 0 || strcmp(argv[i], "--opacity") == 0 ||
+		   strcmp(argv[i], "--win-pos-x") == 0 || strcmp(argv[i], "--win-pos-y") == 0 ||
+		   strcmp(argv[i], "--win-width") == 0 || strcmp(argv[i], "--win-height") == 0)
+		{
+			i++; /* Skip the argument value */
+		}
 	}
 
 	pref = gtkTermPref_get(rc_write);
