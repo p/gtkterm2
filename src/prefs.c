@@ -180,9 +180,9 @@ gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref)
 	pref->mpref[pref->mprefSize]->colors[6].green = 0xaaaa;
 	pref->mpref[pref->mprefSize]->colors[6].blue  = 0xaaaa;
 
-	pref->mpref[pref->mprefSize]->colors[7].red   = 0x0000;
+	pref->mpref[pref->mprefSize]->colors[7].red   = 0xcccc;
 	pref->mpref[pref->mprefSize]->colors[7].green = 0xcccc;
-	pref->mpref[pref->mprefSize]->colors[7].blue  = 0x0000;
+	pref->mpref[pref->mprefSize]->colors[7].blue  = 0xcccc;
 
 	pref->mpref[pref->mprefSize]->colors[8].red   = 0x5555;
 	pref->mpref[pref->mprefSize]->colors[8].green = 0x5555;
