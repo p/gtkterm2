@@ -1,0 +1,38 @@
+# Autoconf/Automake build artifacts
+Makefile
+config.h
+config.log
+config.status
+libtool
+stamp-h1
+autom4te.cache/
+.deps/
+
+# Generated Makefiles (from .in templates)
+/po/Makefile
+/po/POTFILES
+/pixmaps/Makefile
+/src/Makefile
+
+# Compiled binaries and objects
+*.o
+*.lo
+.libs/
+src/gtkterm2
+
+# Debian build artifacts
+debian/.debhelper/
+debian/gtkterm2/
+debian/files
+debian/*.substvars
+debian/*.debhelper.log
+
+# IDE/editor files
+.claude/
+*~
+.*.swp
+.*.swo
+*.bak
+
+# Backup files
+configure~
