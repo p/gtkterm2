@@ -41,6 +41,7 @@ struct _PREF
 	int winPosY;
 	int transparent;
 	int stealth;
+	int rc_write;
 	float opacity;
 	GdkColor colors[16];
 	GdkColor fore[1];
@@ -56,7 +57,7 @@ struct _PREF
 	GSList* termProp;
 };
 
-gtkTermPref* gtkTermPref_get (void);
+gtkTermPref* gtkTermPref_get (int rc_write);
 gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref);
 int gtkTermFindMPref(char *matchstr, gtkTermPref *pref);
 void gtkTermSetMPref(GtkWidget *term, gtkTermPref *pref, int i);

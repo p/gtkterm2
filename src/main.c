@@ -30,6 +30,7 @@ void help(char *argv[])
 	printf(" -h\t\t --help:\t\tthis help text\n");
 	printf(" -v\t\t --version:\t\tversion informations\n");
 	printf(" -l\t\t --loginshell:\t\tstart gtkterm2 with a login shell\n");
+	printf(" -r\t\t --no-rc-write:\t\tdo not write settings file\n");
 	printf(" -x xxx\t\t --win-pos-x xxx:\tSet window position to xxx pixel from upper side\n");
 	printf(" -y xxx\t\t --win-pos-y xxx:\tSet window position to xxx pixel from left side\n");
 	printf(" -X xxx\t\t --win-width xxx:\tSet window width to xxx chars\n");
@@ -47,7 +48,8 @@ main (int argc, char *argv[])
 	GtkWidget *window;
 	GtkWidget *window_about;
 	gtkTermPref* pref;
-	int c;
+	int c, i;
+	int rc_write = TRUE;
 	static struct option long_options[] =
 	{
 		{"help", 0, 0, 'h'},
@@ -55,6 +57,7 @@ main (int argc, char *argv[])
 		{"loginshell", 0, 0, 'l'},
 		{"blink", 0, 0, 'b'},
 		{"beep", 0, 0, 'a'},
+		{"no-rc-write", 0, 0, 'r'},
 		{"win-pos-x", 1, 0, 'x'},
 		{"win-pos-y", 1, 0, 'y'},
 		{"win-width", 1, 0, 'X'},
@@ -74,14 +77,24 @@ main (int argc, char *argv[])
 
 	gtk_set_locale ();
 	gtk_init (&argc, &argv);
-	
-	pref = gtkTermPref_get();
+
+	/* Early scan for --no-rc-write flag */
+	for(i = 1; i < argc; i++)
+	{
+		if(strcmp(argv[i], "-r") == 0 || strcmp(argv[i], "--no-rc-write") == 0)
+		{
+			rc_write = FALSE;
+			break;
+		}
+	}
+
+	pref = gtkTermPref_get(rc_write);
 
 	add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
 	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");	
 	add_pixmap_directory (PACKAGE_SOURCE_DIR "/pixmaps");
 
-	while((c=getopt_long(argc, argv, "hvlx:y:X:Y:o:ts", long_options, NULL)) != EOF)
+	while((c=getopt_long(argc, argv, "hvlrx:y:X:Y:o:ts", long_options, NULL)) != EOF)
 	{
 		switch (c)
 		{
@@ -93,6 +106,9 @@ main (int argc, char *argv[])
 			break;
 			case 'l':
 				pref->login_shell = TRUE;
+			break;
+			case 'r':
+				pref->rc_write = FALSE;
 			break;
 			case 't':
 				pref->transparent = TRUE;
