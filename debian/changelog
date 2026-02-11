@@ -3,7 +3,10 @@ gtkterm2 (0.3.0-1) unstable; urgency=medium
   * Add color name comments to config file output
   * Fix color reset bug (empty match string matching everything)
   * Fix color parsing (use strncmp instead of strstr)
+  * Fix deprecated g_string_sprintf warning
   * Add -r/--no-rc-write command line option
+  * Switch to external gettext (add gettext build dependency)
+  * Update autotools files to modern versions
   * Bump version to 0.3.0
 
  -- Claude Assistant <noreply@anthropic.com>  Wed, 11 Feb 2026 11:55:10 -0500

@@ -4,6 +4,7 @@ Priority: optional
 Maintainer: Oleg Pudeyev <oleg@bsdpower.com>
 Build-Depends: debhelper (>=9),
  autotools-dev,
+ gettext,
  libvte-dev
 Standards-Version: 3.9.8
 Homepage: https://github.com/p/gtkterm2
