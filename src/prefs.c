@@ -16,6 +16,21 @@
 
 #include "prefs.h"
 
+/* Helper function to safely get value part of "key=value" line */
+static const char* get_config_value(const char *line, const char *key)
+{
+	const char *pos = strstr(line, key);
+	if (pos == NULL) return NULL;
+
+	pos += strlen(key);
+	/* Skip optional '=' */
+	if (*pos == '=') pos++;
+	/* Skip whitespace */
+	while (*pos == ' ' || *pos == '\t') pos++;
+
+	return pos;
+}
+
 gtkTermPref* gtkTermPref_init(void)
 {
 	gtkTermPref* pref;
@@ -472,85 +487,58 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 				back   = (GdkColor *) &pref->mpref[i]->back;
 				fore   = (GdkColor *) &pref->mpref[i]->fore;
 			}
-			if(strstr(tmp, "notebookPanel"))
 			{
-				sscanf(tmp + 14, "%d", (int *) &pref->notebookPanel);
-			}
-			if(strstr(tmp, "terminalScrollbar"))
-			{
-				sscanf(tmp + 18, "%d", (int *) &pref->terminalScrollbar);
-			}
-			if(strstr(tmp, "maxScrollbackBuffer"))
-			{
-				sscanf(tmp + 20, "%d", (int *) &pref->maxScrollbackBuffer);
-			}
-			if(strstr(tmp, "quitPRGonExitLastTerminal"))
-			{
-				sscanf(tmp + 26, "%d", (int *) &pref->quitPRGonExitLastTerminal);
-			}
-			if(strstr(tmp, "showTabsByOneTerminal"))
-			{
-				sscanf(tmp + 22, "%d", (int *) &pref->showTabsByOneTerminal);
-			}
-			if(strstr(tmp, "terminalFont"))
-			{
-				sscanf(tmp + 13, "%511[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ.-]", pref->terminalFont);
-			}
-			if(strstr(tmp, "worldClass"))
-			{
-				sscanf(tmp + 11, "%511s", worldClass);
-			}
-			if(strstr(tmp, "scrollOnOutput"))
-			{
-				sscanf(tmp + 15, "%d", scrollOnOutput);
-			}
-			if(strstr(tmp, "scrollOnKeyStroke"))
-			{
-				sscanf(tmp + 18, "%d", scrollOnKeyStroke);
-			}
-			if(strstr(tmp, "blink"))
-			{
-				sscanf(tmp +  6, "%d", blink);
-			}
-			if(strstr(tmp, "beep"))
-			{
-				sscanf(tmp +  5, "%d", beep);
-			}
-			if(strstr(tmp, "terminalSize"))
-			{
-				sscanf(tmp + 13, "%d %d", (int *) &pref->termX, (int *) &pref->termY);
+				const char *val;
+				if ((val = get_config_value(tmp, "notebookPanel")))
+					sscanf(val, "%d", (int *) &pref->notebookPanel);
+				else if ((val = get_config_value(tmp, "terminalScrollbar")))
+					sscanf(val, "%d", (int *) &pref->terminalScrollbar);
+				else if ((val = get_config_value(tmp, "maxScrollbackBuffer")))
+					sscanf(val, "%d", (int *) &pref->maxScrollbackBuffer);
+				else if ((val = get_config_value(tmp, "quitPRGonExitLastTerminal")))
+					sscanf(val, "%d", (int *) &pref->quitPRGonExitLastTerminal);
+				else if ((val = get_config_value(tmp, "showTabsByOneTerminal")))
+					sscanf(val, "%d", (int *) &pref->showTabsByOneTerminal);
+				else if ((val = get_config_value(tmp, "terminalFont")))
+					sscanf(val, "%511[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ.-]", pref->terminalFont);
+				else if ((val = get_config_value(tmp, "worldClass")))
+					sscanf(val, "%511s", worldClass);
+				else if ((val = get_config_value(tmp, "scrollOnOutput")))
+					sscanf(val, "%d", scrollOnOutput);
+				else if ((val = get_config_value(tmp, "scrollOnKeyStroke")))
+					sscanf(val, "%d", scrollOnKeyStroke);
+				else if ((val = get_config_value(tmp, "blink")))
+					sscanf(val, "%d", blink);
+				else if ((val = get_config_value(tmp, "beep")))
+					sscanf(val, "%d", beep);
+				else if ((val = get_config_value(tmp, "terminalSize")))
+					sscanf(val, "%d %d", (int *) &pref->termX, (int *) &pref->termY);
 			}
 			if(strncmp(tmp, "red=", 4) == 0)
 			{
 				sscanf(tmp + 4, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi", &back[0].red, &fore[0].red, &colors[0].red, &colors[1].red, &colors[2].red, &colors[3].red, &colors[4].red, &colors[5].red, &colors[6].red, &colors[7].red, &colors[8].red, &colors[9].red, &colors[10].red, &colors[11].red, &colors[12].red, &colors[13].red, &colors[14].red, &colors[15].red);
 			}
-			if(strncmp(tmp, "grn=", 4) == 0)
+			else if(strncmp(tmp, "grn=", 4) == 0)
 			{
 				sscanf(tmp + 4, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi", &back[0].green, &fore[0].green, &colors[0].green, &colors[1].green, &colors[2].green, &colors[3].green, &colors[4].green, &colors[5].green, &colors[6].green, &colors[7].green, &colors[8].green, &colors[9].green, &colors[10].green, &colors[11].green, &colors[12].green, &colors[13].green, &colors[14].green, &colors[15].green);
 			}
-			if(strncmp(tmp, "blu=", 4) == 0)
+			else if(strncmp(tmp, "blu=", 4) == 0)
 			{
 				sscanf(tmp + 4, "%hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi %hi", &back[0].blue, &fore[0].blue, &colors[0].blue, &colors[1].blue, &colors[2].blue, &colors[3].blue, &colors[4].blue, &colors[5].blue, &colors[6].blue, &colors[7].blue, &colors[8].blue, &colors[9].blue, &colors[10].blue, &colors[11].blue, &colors[12].blue, &colors[13].blue, &colors[14].blue, &colors[15].blue);
 			}
-			if(strstr(tmp, "match"))
+			else
 			{
-				sscanf(tmp + 6, "%511s", pref->mpref[i]->match);
-			}
-			if(strstr(tmp, "newTabAccelerator"))
-			{
-				sscanf(tmp + 18, "%511s", pref->newTabAccelerator);
-			}
-			if(strstr(tmp, "closeTabAccelerator"))
-			{
-				sscanf(tmp + 20, "%511s", pref->closeTabAccelerator);
-			}
-			if(strstr(tmp, "nextTabAccelerator"))
-			{
-				sscanf(tmp + 19, "%511s", pref->nextTabAccelerator);
-			}
-			if(strstr(tmp, "prevTabAccelerator"))
-			{
-				sscanf(tmp + 19, "%511s", pref->prevTabAccelerator);
+				const char *val;
+				if ((val = get_config_value(tmp, "match")))
+					sscanf(val, "%511s", pref->mpref[i]->match);
+				else if ((val = get_config_value(tmp, "newTabAccelerator")))
+					sscanf(val, "%511s", pref->newTabAccelerator);
+				else if ((val = get_config_value(tmp, "closeTabAccelerator")))
+					sscanf(val, "%511s", pref->closeTabAccelerator);
+				else if ((val = get_config_value(tmp, "nextTabAccelerator")))
+					sscanf(val, "%511s", pref->nextTabAccelerator);
+				else if ((val = get_config_value(tmp, "prevTabAccelerator")))
+					sscanf(val, "%511s", pref->prevTabAccelerator);
 			}
 		}
 	}
