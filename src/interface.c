@@ -632,6 +632,7 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 				shell = g_string_new ("/bin/sh");
 			}
 			vte_terminal_fork_command(VTE_TERMINAL(widget), shell->str, args, env_add, working_directory, TRUE, TRUE, TRUE);
+			g_string_free(shell, TRUE);
 		}
 		else
 		{
