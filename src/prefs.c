@@ -50,8 +50,8 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->scrollOnOutput = FALSE;
 	pref->blink = TRUE;
 	pref->beep = TRUE;
-	pref->termX = 80;
-	pref->termY = 25;
+	pref->termX = 160;
+	pref->termY = 50;
 	pref->winPosX = -1;
 	pref->winPosY = -1;
 	pref->opacity = 0;
