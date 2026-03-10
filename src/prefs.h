@@ -51,6 +51,7 @@ struct _PREF
 	gtkTermMPref **mpref;
 	int mprefSize;
 	char newTabAccelerator[MAX_LINE_LENGTH];
+	char closeTabAccelerator[MAX_LINE_LENGTH];
 	char nextTabAccelerator[MAX_LINE_LENGTH];
 	char prevTabAccelerator[MAX_LINE_LENGTH];
 

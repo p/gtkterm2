@@ -123,6 +123,7 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->mpref = NULL;
 
         strcpy(pref->newTabAccelerator, "<Ctrl>N");
+        strcpy(pref->closeTabAccelerator, "<Ctrl>W");
         strcpy(pref->nextTabAccelerator, "<Shift>Right");
         strcpy(pref->prevTabAccelerator, "<Shift>Left");
 
@@ -319,6 +320,8 @@ int gtkTermPref_save(gtkTermPref* pref, GString *path)
 	fprintf(gtkTermRC_FP, "terminalSize=%d %d\n\n", pref->termX, pref->termY);
 	fprintf(gtkTermRC_FP, "##\n# New Tab accelerator\n##\n");
 	fprintf(gtkTermRC_FP, "newTabAccelerator=%s\n\n", pref->newTabAccelerator);
+	fprintf(gtkTermRC_FP, "##\n# Close Tab accelerator\n##\n");
+	fprintf(gtkTermRC_FP, "closeTabAccelerator=%s\n\n", pref->closeTabAccelerator);
 	fprintf(gtkTermRC_FP, "##\n# Next Tab accelerator\n##\n");
 	fprintf(gtkTermRC_FP, "nextTabAccelerator=%s\n\n", pref->nextTabAccelerator);
 	fprintf(gtkTermRC_FP, "##\n# Previous Tab accelerator\n##\n");
@@ -521,6 +524,10 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 			if(strstr(tmp, "newTabAccelerator"))
 			{
 				sscanf(tmp + 18, "%s", pref->newTabAccelerator);
+			}
+			if(strstr(tmp, "closeTabAccelerator"))
+			{
+				sscanf(tmp + 20, "%s", pref->closeTabAccelerator);
 			}
 			if(strstr(tmp, "nextTabAccelerator"))
 			{
