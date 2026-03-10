@@ -12,6 +12,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <limits.h>
+#include <errno.h>
 
 #include "prefs.h"
 #include "interface.h"
@@ -20,6 +22,26 @@
 #define GLADE_HOOKUP_OBJECT(component,widget,name) \
   g_object_set_data_full (G_OBJECT (component), name, \
     gtk_widget_ref (widget), (GDestroyNotify) gtk_widget_unref)
+
+/* Safe string to int conversion with range checking */
+static int safe_atoi(const char *str, int min, int max, int *result)
+{
+	char *endptr;
+	long val;
+
+	errno = 0;
+	val = strtol(str, &endptr, 10);
+
+	if (endptr == str || *endptr != '\0') {
+		return -1; /* Not a valid number */
+	}
+	if (errno == ERANGE || val < min || val > max) {
+		return -1; /* Out of range */
+	}
+
+	*result = (int)val;
+	return 0;
+}
 
 void help(char *argv[])
 {
@@ -123,30 +145,57 @@ main (int argc, char *argv[])
 				pref->transparent = TRUE;
 			break;
 			case 'x':
-				pref->winPosX = atoi(optarg);
+			{
+				int val;
+				if (safe_atoi(optarg, 0, 10000, &val) == 0)
+					pref->winPosX = val;
+				else
+					g_warning("Invalid value for -x: %s", optarg);
+			}
 			break;
 			case 'y':
-				pref->winPosY = atoi(optarg);
+			{
+				int val;
+				if (safe_atoi(optarg, 0, 10000, &val) == 0)
+					pref->winPosY = val;
+				else
+					g_warning("Invalid value for -y: %s", optarg);
+			}
 			break;
 			case 'X':
-				pref->termX = atoi(optarg);
+			{
+				int val;
+				if (safe_atoi(optarg, 1, 1000, &val) == 0)
+					pref->termX = val;
+				else
+					g_warning("Invalid value for -X (must be 1-1000): %s", optarg);
+			}
 			break;
 			case 'Y':
-				pref->termY = atoi(optarg);
+			{
+				int val;
+				if (safe_atoi(optarg, 1, 1000, &val) == 0)
+					pref->termY = val;
+				else
+					g_warning("Invalid value for -Y (must be 1-1000): %s", optarg);
+			}
 			break;
 			case 's':
 				pref->stealth = TRUE;
 			break;
 			case 'o':
-				if(atoi(optarg) < 0 || atoi(optarg) >100)
+			{
+				int val;
+				if (safe_atoi(optarg, 0, 100, &val) == 0)
+				{
+					pref->opacity = (float) val / 100;
+				}
+				else
 				{
 					printf("ERROR: -o only allowed values from 0 to 100\n\n");
 					help(argv);
 				}
-				else
-				{
-					pref->opacity = (float) atoi(optarg)/100;
-				}
+			}
 			break;
 			case 'v':
 				printf("gtkterm2 version: %s\n", VERSION);
