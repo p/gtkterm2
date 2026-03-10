@@ -122,10 +122,10 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->mprefSize = 0;
 	pref->mpref = NULL;
 
-        strcpy(pref->newTabAccelerator, "<Ctrl>N");
-        strcpy(pref->closeTabAccelerator, "<Ctrl>W");
-        strcpy(pref->nextTabAccelerator, "<Shift>Right");
-        strcpy(pref->prevTabAccelerator, "<Shift>Left");
+        strncpy(pref->newTabAccelerator, "<Ctrl>N", MAX_LINE_LENGTH - 1);
+        strncpy(pref->closeTabAccelerator, "<Ctrl>W", MAX_LINE_LENGTH - 1);
+        strncpy(pref->nextTabAccelerator, "<Shift>Right", MAX_LINE_LENGTH - 1);
+        strncpy(pref->prevTabAccelerator, "<Shift>Left", MAX_LINE_LENGTH - 1);
 
 	gtkTermMPref_init(pref);
 
@@ -479,11 +479,11 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 			}
 			if(strstr(tmp, "terminalFont"))
 			{
-				sscanf(tmp + 13, "%[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ.-]", pref->terminalFont);
+				sscanf(tmp + 13, "%511[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ.-]", pref->terminalFont);
 			}
 			if(strstr(tmp, "worldClass"))
 			{
-				sscanf(tmp + 11, "%s", worldClass);
+				sscanf(tmp + 11, "%511s", worldClass);
 			}
 			if(strstr(tmp, "scrollOnOutput"))
 			{
@@ -519,23 +519,23 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 			}
 			if(strstr(tmp, "match"))
 			{
-				sscanf(tmp + 6, "%s", pref->mpref[i]->match);
+				sscanf(tmp + 6, "%511s", pref->mpref[i]->match);
 			}
 			if(strstr(tmp, "newTabAccelerator"))
 			{
-				sscanf(tmp + 18, "%s", pref->newTabAccelerator);
+				sscanf(tmp + 18, "%511s", pref->newTabAccelerator);
 			}
 			if(strstr(tmp, "closeTabAccelerator"))
 			{
-				sscanf(tmp + 20, "%s", pref->closeTabAccelerator);
+				sscanf(tmp + 20, "%511s", pref->closeTabAccelerator);
 			}
 			if(strstr(tmp, "nextTabAccelerator"))
 			{
-				sscanf(tmp + 19, "%s", pref->nextTabAccelerator);
+				sscanf(tmp + 19, "%511s", pref->nextTabAccelerator);
 			}
 			if(strstr(tmp, "prevTabAccelerator"))
 			{
-				sscanf(tmp + 19, "%s", pref->prevTabAccelerator);
+				sscanf(tmp + 19, "%511s", pref->prevTabAccelerator);
 			}
 		}
 	}
