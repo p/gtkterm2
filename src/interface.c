@@ -563,89 +563,23 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	vte_terminal_set_font_from_string(VTE_TERMINAL(widget), pref->terminalFont);
 	// OF }
 
-	/* Match "abcdefg". */
-	//vte_terminal_match_add(VTE_TERMINAL(widget), "abcdefg");
-	// OF if (dingus) {
-	// OF if (FALSE) {
-		// OF i = vte_terminal_match_add(VTE_TERMINAL(widget), DINGUS1);
-		// OF gumby = gdk_cursor_new(GDK_GUMBY);
-		// OF vte_terminal_match_set_cursor(VTE_TERMINAL(widget), i, gumby);
-		// OF gdk_cursor_unref(gumby);
-		// OF hand = gdk_cursor_new(GDK_HAND1);
-		// OF i = vte_terminal_match_add(VTE_TERMINAL(widget), DINGUS2);
-		// OF vte_terminal_match_set_cursor(VTE_TERMINAL(widget), i, hand);
-		// OF gdk_cursor_unref(hand);
-	// OF }
-
-	// OF if (console) {
-// OF 	if (FALSE) {
-		/* Open a "console" connection. */
-// OF 		int consolefd = -1, yes = 1, watch;
-// OF 		GIOChannel *channel;
-// OF 		consolefd = open("/dev/console", O_RDONLY | O_NOCTTY);
-// OF 		if (consolefd != -1) {
-			/* Assume failure. */
-// OF 			console = FALSE;
-#ifdef TIOCCONS
-			if (ioctl(consolefd, TIOCCONS, &yes) != -1) {
-				/* Set up a listener. */
-				channel = g_io_channel_unix_new(consolefd);
-				watch = g_io_add_watch(channel,
-						       G_IO_IN,
-						       read_and_feed,
-						       widget);
-				g_signal_connect(G_OBJECT(widget),
-						 "eof",
-						 G_CALLBACK(disconnect_watch),
-						 GINT_TO_POINTER(watch));
-				g_signal_connect(G_OBJECT(widget),
-						 "child-exited",
-						 G_CALLBACK(disconnect_watch),
-						 GINT_TO_POINTER(watch));
-				g_signal_connect(G_OBJECT(widget),
-						 "realize",
-						 G_CALLBACK(take_xconsole_ownership),
-						 NULL);
-#ifdef VTE_DEBUG
-				vte_terminal_feed(VTE_TERMINAL(widget),
-						  "Console log for ...\r\n",
-						  -1);
-#endif
-				/* Record success. */
-				console = TRUE;
-			}
-#endif
-// OF 		} else {
-			/* Bail back to normal mode. */
-// OF 			g_warning(_("Could not open console.\n"));
-// OF 			close(consolefd);
-// OF 			console = FALSE;
-// OF 		}
-// OF 	}
-
-
-
-	// OF if (!console) {
-	if (!FALSE)
+	if(pref->login_shell == TRUE)
 	{
-		if(pref->login_shell == TRUE)
+		pw = getpwuid (getuid ());
+		if (pw)
 		{
-			pw = getpwuid (getuid ());
-			if (pw)
-			{
-				shell = g_string_new (pw->pw_shell);
-			}
-			else
-			{
-				shell = g_string_new ("/bin/sh");
-			}
-			vte_terminal_fork_command(VTE_TERMINAL(widget), shell->str, args, env_add, working_directory, TRUE, TRUE, TRUE);
-			g_string_free(shell, TRUE);
+			shell = g_string_new (pw->pw_shell);
 		}
 		else
 		{
-			vte_terminal_fork_command(VTE_TERMINAL(widget), NULL, NULL, env_add, working_directory, TRUE, TRUE, TRUE);
+			shell = g_string_new ("/bin/sh");
 		}
+		vte_terminal_fork_command(VTE_TERMINAL(widget), shell->str, args, env_add, working_directory, TRUE, TRUE, TRUE);
+		g_string_free(shell, TRUE);
+	}
+	else
+	{
+		vte_terminal_fork_command(VTE_TERMINAL(widget), NULL, NULL, env_add, working_directory, TRUE, TRUE, TRUE);
 	}
 
 	/* Go for it! */

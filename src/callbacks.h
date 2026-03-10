@@ -121,19 +121,6 @@ void
 mess_with_fontconfig(void);
 
 gboolean
-read_and_feed(GIOChannel *source, GIOCondition condition, gpointer data);
-
-void
-disconnect_watch(GtkWidget *widget, gpointer data);
-
-void
-clipboard_get(GtkClipboard *clipboard, GtkSelectionData *selection_data,
-	      guint info, gpointer owner);
-
-void
-take_xconsole_ownership(GtkWidget *widget, gpointer data);
-
-gboolean
 nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data);
 
 void
