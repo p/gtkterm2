@@ -35,8 +35,8 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->beep = TRUE;
 	pref->termX = 80;
 	pref->termY = 25;
-	pref->winPosX = 0;
-	pref->winPosY = 0;
+	pref->winPosX = -1;
+	pref->winPosY = -1;
 	pref->opacity = 0;
 	pref->transparent = FALSE;
 	pref->stealth = FALSE;

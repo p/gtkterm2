@@ -84,7 +84,7 @@ create_window (gtkTermPref* pref)
   gtk_widget_show (vbox);
   gtk_container_add (GTK_CONTAINER (window), vbox);
 
-  if(pref->winPosX>0 || pref->winPosY>0)
+  if(pref->winPosX >= 0 && pref->winPosY >= 0)
   {
 	  gtk_window_move(GTK_WINDOW (window), pref->winPosX, pref->winPosY);
   }
