@@ -290,39 +290,6 @@ window_title_changed(GtkWidget *widget, gpointer pref)
 	gtk_window_set_title(window, VTE_TERMINAL (widget)->window_title);
 }
 
-gboolean test (VteTerminal *terminal,glong column,glong row,gpointer data)
-{
-	//printf("%dx%d", column, row);
-	return TRUE;
-}
-
-void
-commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data)
-{
-	char* hehe=NULL;
-	GArray *attributes;
-
- 	fprintf(stdout, "%c\n", arg1[0]); fflush(stdout);
-
-	if(arg1[0] == 'z')
-	{
-				attributes = g_array_new (FALSE, TRUE, sizeof (VteCharAttributes));
-		      hehe = vte_terminal_get_text     ( VTE_TERMINAL (widget),
-													//		1,
-													//		1,
-													//		10,
-													//		10,
-                                             test,
-                                             NULL,
-                                             attributes);
-
-		fprintf(stdout, "%shehe\n", hehe); fflush(stdout);
-		if(hehe!=NULL)	free(hehe);
-		g_array_free(attributes, TRUE);
-	}
-	//fprintf(stdout, "%s\n", arg1); fflush(stdout);
-}
-
 void
 char_size_changed(GtkWidget *widget, guint width, guint height, gpointer data)
 {
@@ -706,11 +673,6 @@ nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data)
 	}
 
 	return FALSE;
-}
-
-void on_commit (VteTerminal *vteterminal, gpointer user_data)
-{
-	printf("Commit; %s\n", vteterminal->icon_title);fflush(stdout);
 }
 
 void

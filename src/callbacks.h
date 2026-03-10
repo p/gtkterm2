@@ -62,9 +62,6 @@ void
 window_title_changed(GtkWidget *widget, gpointer pref);
 
 void
-commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data);
-
-void
 char_size_changed(GtkWidget *widget, guint width, guint height, gpointer data);
 
 void
@@ -138,8 +135,6 @@ take_xconsole_ownership(GtkWidget *widget, gpointer data);
 
 gboolean
 nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data);
-
-void on_commit (VteTerminal *vteterminal, gpointer user_data);
 
 void
 notebook_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
