@@ -433,9 +433,8 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 	back   = (GdkColor *) &pref->back;
 	fore   = (GdkColor *) &pref->fore;
 
-	while (!feof (gtkTermRC))
+	while (fgets(tmp, MAX_LINE_LENGTH - 1, gtkTermRC) != NULL)
 	{
-		fgets(tmp, MAX_LINE_LENGTH - 1, gtkTermRC);
 		if(tmp[0] != '#' && tmp[0] != '\n' && tmp[0] != ' ')
 		{
 			if(strstr(tmp, "[section]"))
@@ -477,7 +476,7 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 			}
 			if(strstr(tmp, "terminalFont"))
 			{
-				sscanf(tmp + 13, "%[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ]", pref->terminalFont);
+				sscanf(tmp + 13, "%[0123456789 abcdefghijklmnopqrstuwvxyzABCDEFGHIJKLMNOPQRSTUWVXYZ.-]", pref->terminalFont);
 			}
 			if(strstr(tmp, "worldClass"))
 			{
