@@ -318,6 +318,7 @@ commit(GtkWidget *widget, gchar *arg1, guint arg2, gpointer user_data)
 
 		fprintf(stdout, "%shehe\n", hehe); fflush(stdout);
 		if(hehe!=NULL)	free(hehe);
+		g_array_free(attributes, TRUE);
 	}
 	//fprintf(stdout, "%s\n", arg1); fflush(stdout);
 }
