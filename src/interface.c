@@ -137,6 +137,9 @@ create_window (gtkTermPref* pref)
   gtk_widget_set_name (close_tab, "close_tab");
   gtk_widget_show (close_tab);
   gtk_container_add (GTK_CONTAINER (menuitem1_menu), close_tab);
+  gtk_widget_add_accelerator (close_tab, "activate", accel_group,
+                              GDK_w, GDK_CONTROL_MASK,
+                              GTK_ACCEL_VISIBLE);
 
   image13 = gtk_image_new_from_stock ("gtk-close", GTK_ICON_SIZE_MENU);
   gtk_widget_set_name (image13, "image13");
