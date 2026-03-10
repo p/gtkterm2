@@ -144,7 +144,10 @@ gtkTermPref* gtkTermPref_init(void)
         strncpy(pref->nextTabAccelerator, "<Shift>Right", MAX_LINE_LENGTH - 1);
         strncpy(pref->prevTabAccelerator, "<Shift>Left", MAX_LINE_LENGTH - 1);
 
-	gtkTermMPref_init(pref);
+	if (gtkTermMPref_init(pref) == NULL) {
+		free(pref);
+		return NULL;
+	}
 
 	return pref;
 }
@@ -486,7 +489,11 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 				i++;
 				if(i > pref->mprefSize)
 				{
-					gtkTermMPref_init(pref);
+					if (gtkTermMPref_init(pref) == NULL) {
+						g_warning("Failed to allocate memory for config section, skipping");
+						i--;
+						continue;
+					}
 				}
 				blink = &pref->mpref[i]->blink;
 				beep  = &pref->mpref[i]->beep;

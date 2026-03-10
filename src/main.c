@@ -120,6 +120,10 @@ main (int argc, char *argv[])
 	}
 
 	pref = gtkTermPref_get(rc_write);
+	if (pref == NULL) {
+		fprintf(stderr, "Failed to load preferences, exiting\n");
+		return 1;
+	}
 
 	add_pixmap_directory (PACKAGE_DATA_DIR "/" PACKAGE "/pixmaps");
 	add_pixmap_directory (PACKAGE_DATA_DIR "/pixmaps");	
