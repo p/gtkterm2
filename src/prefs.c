@@ -134,9 +134,24 @@ gtkTermPref* gtkTermPref_init(void)
 
 gtkTermMPref* gtkTermMPref_init(gtkTermPref* pref)
 {
+	gtkTermMPref **new_mpref;
+	gtkTermMPref *new_entry;
+
+	new_mpref = (gtkTermMPref**) realloc(pref->mpref, sizeof(gtkTermMPref*) * (pref->mprefSize + 2));
+	if (new_mpref == NULL) {
+		g_warning("Failed to allocate memory for mpref array");
+		return NULL;
+	}
+	pref->mpref = new_mpref;
+
+	new_entry = (gtkTermMPref*) malloc(sizeof(gtkTermMPref));
+	if (new_entry == NULL) {
+		g_warning("Failed to allocate memory for mpref entry");
+		return NULL;
+	}
+
 	pref->mprefSize++;
-	pref->mpref = (gtkTermMPref**) realloc(pref->mpref, sizeof(gtkTermMPref*) * (pref->mprefSize + 1));
-	pref->mpref[pref->mprefSize] = (gtkTermMPref*) malloc(sizeof(gtkTermMPref));
+	pref->mpref[pref->mprefSize] = new_entry;
 
 	pref->mpref[pref->mprefSize]->match[0] = '\0';
 	pref->mpref[pref->mprefSize]->scrollOnKeyStroke = TRUE;
