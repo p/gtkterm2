@@ -367,7 +367,7 @@ int gtkTermPref_free(gtkTermPref* pref)
 {
 	int i;
 
-	for(i=0; i<pref->mprefSize; i++)
+	for(i=1; i<=pref->mprefSize; i++)
 	{
 		free(pref->mpref[i]);
 	}
