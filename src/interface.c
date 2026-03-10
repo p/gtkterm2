@@ -303,6 +303,11 @@ create_window (gtkTermPref* pref)
   gtk_box_pack_start (GTK_BOX (vbox), notebook, TRUE, TRUE, 0);
   pref->notebook = notebook;
   GTK_WIDGET_UNSET_FLAGS (notebook, GTK_CAN_FOCUS);
+
+  /* Connect to switch-page to update window title when tabs change */
+  g_signal_connect(G_OBJECT(notebook), "switch-page",
+                   G_CALLBACK(notebook_switch_page), pref);
+
   on_new_tab_activate((gpointer) new_tab, pref);
 
   gtk_window_add_accel_group (GTK_WINDOW (window), accel_group);

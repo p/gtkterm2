@@ -135,3 +135,7 @@ gboolean
 nb_handle_key (GtkWidget* fenster, GdkEventKey* event, gpointer user_data);
 
 void on_commit (VteTerminal *vteterminal, gpointer user_data);
+
+void
+notebook_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
+                     guint page_num, gpointer user_data);

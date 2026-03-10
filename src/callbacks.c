@@ -699,3 +699,37 @@ void on_commit (VteTerminal *vteterminal, gpointer user_data)
 {
 	printf("Commit; %s\n", vteterminal->icon_title);fflush(stdout);
 }
+
+void
+notebook_switch_page(GtkNotebook *notebook, GtkNotebookPage *page,
+                     guint page_num, gpointer user_data)
+{
+	GtkWidget *hbox;
+	GtkWidget *window;
+	GList *children, *iter;
+	VteTerminal *terminal = NULL;
+
+	/* Get the hbox container for this page */
+	hbox = gtk_notebook_get_nth_page(notebook, page_num);
+	if (!GTK_IS_CONTAINER(hbox))
+		return;
+
+	/* Find the VTE terminal widget in the hbox */
+	children = gtk_container_get_children(GTK_CONTAINER(hbox));
+	for (iter = children; iter != NULL; iter = iter->next) {
+		if (VTE_IS_TERMINAL(iter->data)) {
+			terminal = VTE_TERMINAL(iter->data);
+			break;
+		}
+	}
+	g_list_free(children);
+
+	if (terminal == NULL)
+		return;
+
+	/* Update the window title */
+	window = lookup_widget(GTK_WIDGET(notebook), "window");
+	if (GTK_IS_WINDOW(window) && terminal->window_title != NULL) {
+		gtk_window_set_title(GTK_WINDOW(window), terminal->window_title);
+	}
+}
