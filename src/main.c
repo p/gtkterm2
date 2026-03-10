@@ -169,18 +169,20 @@ main (int argc, char *argv[])
 			case 'X':
 			{
 				int val;
-				if (safe_atoi(optarg, 1, 1000, &val) == 0)
+				if (safe_atoi(optarg, 1, 1000, &val) == 0) {
 					pref->termX = val;
-				else
+					pref->term_size_user_set = TRUE;
+				} else
 					g_warning("Invalid value for -X (must be 1-1000): %s", optarg);
 			}
 			break;
 			case 'Y':
 			{
 				int val;
-				if (safe_atoi(optarg, 1, 1000, &val) == 0)
+				if (safe_atoi(optarg, 1, 1000, &val) == 0) {
 					pref->termY = val;
-				else
+					pref->term_size_user_set = TRUE;
+				} else
 					g_warning("Invalid value for -Y (must be 1-1000): %s", optarg);
 			}
 			break;

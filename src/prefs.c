@@ -52,6 +52,7 @@ gtkTermPref* gtkTermPref_init(void)
 	pref->beep = TRUE;
 	pref->termX = 160;
 	pref->termY = 50;
+	pref->term_size_user_set = FALSE;
 	pref->winPosX = -1;
 	pref->winPosY = -1;
 	pref->opacity = 0;
@@ -529,8 +530,10 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 					sscanf(val, "%d", blink);
 				else if ((val = get_config_value(tmp, "beep")))
 					sscanf(val, "%d", beep);
-				else if ((val = get_config_value(tmp, "terminalSize")))
+				else if ((val = get_config_value(tmp, "terminalSize"))) {
 					sscanf(val, "%d %d", (int *) &pref->termX, (int *) &pref->termY);
+					pref->term_size_user_set = TRUE;
+				}
 			}
 			if(strncmp(tmp, "red=", 4) == 0)
 			{

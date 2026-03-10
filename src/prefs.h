@@ -35,6 +35,7 @@ struct _PREF
 	int beep;
 	int termX;
 	int termY;
+	int term_size_user_set;
 	int login_shell;
 	int fullscreen;
 	int winPosX;

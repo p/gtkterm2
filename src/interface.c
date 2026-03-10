@@ -539,7 +539,22 @@ GtkWidget* create_terminal (GtkWidget *notebook, GtkWidget *window, gtkTermPref 
 	vte_terminal_set_scrollback_lines(VTE_TERMINAL(widget), pref->maxScrollbackBuffer);
 	vte_terminal_set_mouse_autohide(VTE_TERMINAL(widget), TRUE);
 	vte_terminal_set_word_chars (VTE_TERMINAL(widget), pref->worldClass);
-	vte_terminal_set_size (VTE_TERMINAL(widget), pref->termX, pref->termY);
+
+	/* Clamp terminal size to 80% of screen dimensions (only for default size) */
+	if (pref->term_size_user_set) {
+		vte_terminal_set_size (VTE_TERMINAL(widget), pref->termX, pref->termY);
+	} else {
+		GdkScreen *screen = gdk_screen_get_default();
+		int screen_width = gdk_screen_get_width(screen);
+		int screen_height = gdk_screen_get_height(screen);
+		int char_width = VTE_TERMINAL(widget)->char_width;
+		int char_height = VTE_TERMINAL(widget)->char_height;
+		int max_cols = (screen_width * 80 / 100) / char_width;
+		int max_rows = (screen_height * 80 / 100) / char_height;
+		int termX = pref->termX > max_cols ? max_cols : pref->termX;
+		int termY = pref->termY > max_rows ? max_rows : pref->termY;
+		vte_terminal_set_size (VTE_TERMINAL(widget), termX, termY);
+	}
 	// OF if (background != NULL) {
 	// OF 	vte_terminal_set_background_image_file(VTE_TERMINAL(widget),
 	// OF 					       background);
