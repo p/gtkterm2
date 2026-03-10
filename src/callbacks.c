@@ -277,17 +277,25 @@ window_title_changed(GtkWidget *widget, gpointer pref)
 {
 	GtkWidget *win;
 	GtkWindow *window;
+	const char *title;
+
+	g_return_if_fail(widget != NULL);
+	g_return_if_fail(VTE_IS_TERMINAL(widget));
 
 	win = lookup_widget(GTK_WIDGET(widget), "window");
-
-	g_return_if_fail(VTE_TERMINAL(widget));
-	g_return_if_fail(GTK_IS_WINDOW(win));
-	g_return_if_fail(VTE_TERMINAL(widget)->window_title != NULL);
+	if (win == NULL || !GTK_IS_WINDOW(win)) {
+		g_warning("window_title_changed: could not find window widget");
+		return;
+	}
 	window = GTK_WINDOW(win);
 
-	gtkTermSetMPref(widget, pref, gtkTermFindMPref(VTE_TERMINAL(widget)->window_title, pref));
+	title = VTE_TERMINAL(widget)->window_title;
+	if (title == NULL) {
+		return;
+	}
 
-	gtk_window_set_title(window, VTE_TERMINAL (widget)->window_title);
+	gtkTermSetMPref(widget, pref, gtkTermFindMPref(title, pref));
+	gtk_window_set_title(window, title);
 }
 
 void
@@ -593,8 +601,16 @@ take_xconsole_ownership(GtkWidget *widget, gpointer data)
 	};
 
 	memset(hostname, '\0', sizeof(hostname));
-	gethostname(hostname, sizeof(hostname) - 1);
+	if (gethostname(hostname, sizeof(hostname) - 1) != 0) {
+		g_warning("take_xconsole_ownership: gethostname() failed");
+		return;
+	}
+
 	display = gdk_display_get_default();
+	if (display == NULL) {
+		g_warning("take_xconsole_ownership: no display available");
+		return;
+	}
 
 	name = g_strdup_printf("MIT_CONSOLE_%s", hostname);
 	xatom = gdk_x11_get_xatom_by_name_for_display(display, name);
