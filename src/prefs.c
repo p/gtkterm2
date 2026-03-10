@@ -5,6 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <pwd.h>
+#include <unistd.h>
 
 #include <glib.h>
 #include <gtk/gtk.h>
@@ -434,15 +436,24 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 
 	gtktermrc_file = g_string_new("");
 	home = getenv("HOME");
-	if (home == NULL) {
-		home = "";
+	if (home == NULL || home[0] == '\0') {
+		/* Fall back to password database if HOME is not set or empty */
+		struct passwd *pw = getpwuid(getuid());
+		if (pw != NULL && pw->pw_dir != NULL) {
+			home = pw->pw_dir;
+		} else {
+			g_warning("Could not determine home directory");
+			gtkTermPref_free(pref);
+			g_string_free(gtktermrc_file, TRUE);
+			return NULL;
+		}
 	}
 	g_string_printf(gtktermrc_file, "%s/.gtkterm2rc", home);
 
 	gtkTermRC = fopen (gtktermrc_file->str, "r");
 	if(!gtkTermRC)
 	{
-		g_warning("gtkterm2rc File dose not exists: %s\n", gtktermrc_file->str);
+		g_warning("gtkterm2rc file does not exist: %s\n", gtktermrc_file->str);
 		if(gtkTermPref_save(pref, gtktermrc_file) == FALSE)
 		{
 			gtkTermPref_free(pref);
@@ -451,7 +462,7 @@ gtkTermPref* gtkTermPref_get (int rc_write)
 		}
 		else if(!(gtkTermRC = fopen (gtktermrc_file->str, "r")))
 		{
-			g_warning("gtkterm2rc File dose not exists: %s\n", gtktermrc_file->str);
+			g_warning("gtkterm2rc file does not exist: %s\n", gtktermrc_file->str);
 			exit(-1);
 		}
 	}
