@@ -49,6 +49,11 @@ void
 on_window_about_close_button_activate  (GtkButton       *button,
                                         gpointer         user_data);
 
+gboolean
+on_window_about_key_press              (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data);
+
 /*void
 window_title_changed				   (GtkWidget *widget,
 										gpointer win);*/

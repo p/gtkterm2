@@ -259,6 +259,18 @@ on_window_about_close_button_activate  (GtkButton       *button,
 	gtk_widget_hide(lookup_widget(GTK_WIDGET(button), "window_about"));
 }
 
+gboolean
+on_window_about_key_press              (GtkWidget       *widget,
+                                        GdkEventKey     *event,
+                                        gpointer         user_data)
+{
+	if (event->keyval == GDK_Escape) {
+		gtk_widget_hide(widget);
+		return TRUE;
+	}
+	return FALSE;
+}
+
 
 void
 window_title_changed(GtkWidget *widget, gpointer pref)

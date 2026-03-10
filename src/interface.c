@@ -398,6 +398,12 @@ create_window_about (void)
   g_signal_connect ((gpointer) window_about_close_button, "clicked",
                     G_CALLBACK (on_window_about_close_button_activate),
                     NULL);
+  g_signal_connect ((gpointer) window_about, "key-press-event",
+                    G_CALLBACK (on_window_about_key_press),
+                    NULL);
+  g_signal_connect ((gpointer) window_about, "delete-event",
+                    G_CALLBACK (gtk_widget_hide_on_delete),
+                    NULL);
 
   /* Store pointers to all widgets, for use by lookup_widget(). */
   GLADE_HOOKUP_OBJECT_NO_REF (window_about, window_about, "window_about");
