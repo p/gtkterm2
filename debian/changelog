@@ -1,3 +1,9 @@
+gtkterm2 (0.3.3-1) unstable; urgency=medium
+
+  * Clamp default terminal size to 80% of screen
+
+ -- Claude Assistant <noreply@anthropic.com>  Thu, 30 Apr 2026 23:14:28 -0400
+
 gtkterm2 (0.3.2-1) unstable; urgency=medium
 
   * Remove unused xconsole ownership feature
