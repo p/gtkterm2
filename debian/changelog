@@ -1,3 +1,14 @@
+gtkterm2 (0.3.4-1) unstable; urgency=medium
+
+  * Make build robust against newer autotools/gettext (commit a5fa983):
+    - Switch to debhelper-compat 13 so dh runs autoreconf automatically
+      at build time, regenerating configure/Makefile.in against the host
+      toolchain instead of the committed 1.16-era files.
+    - Lower AM_GNU_GETTEXT_VERSION to 0.19 so autopoint accepts current
+      gettext (>=0.22) instead of failing to find an exact 0.21 archive.
+
+ -- Claude Assistant <noreply@anthropic.com>  Fri, 01 May 2026 10:03:38 -0400
+
 gtkterm2 (0.3.3-1) unstable; urgency=medium
 
   * Clamp default terminal size to 80% of screen
