@@ -2,8 +2,9 @@ Source: gtkterm2
 Section: x11
 Priority: optional
 Maintainer: Oleg Pudeyev <oleg@bsdpower.com>
-Build-Depends: debhelper (>=9),
- autotools-dev,
+Build-Depends: debhelper-compat (= 13),
+ dh-autoreconf,
+ autopoint,
  gettext,
  libvte-dev
 Standards-Version: 3.9.8
